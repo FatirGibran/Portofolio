@@ -31,15 +31,24 @@ function ClickRipple() {
   return (
     <div className="fixed inset-0 pointer-events-none z-[9995] overflow-hidden">
       {ripples.map((r) => (
-        <span
-          key={r.id}
-          style={{
-            left: `${r.x}px`,
-            top: `${r.y}px`,
-            transform: 'translate(-50%, -50%)',
-          }}
-          className="absolute w-12 h-12 rounded-full border-2 border-pastel-yellow dark:border-amber-400/80 bg-pastel-blue/20 dark:bg-sky-400/20 animate-ping duration-700 pointer-events-none"
-        />
+        <React.Fragment key={r.id}>
+          <span
+            style={{
+              left: `${r.x}px`,
+              top: `${r.y}px`,
+              transform: 'translate(-50%, -50%)',
+            }}
+            className="absolute w-12 h-12 rounded-full border-2 border-pastel-yellow dark:border-amber-400/80 bg-pastel-blue/20 dark:bg-sky-400/20 animate-ping duration-700 pointer-events-none"
+          />
+          <span
+            style={{
+              left: `${r.x}px`,
+              top: `${r.y}px`,
+              transform: 'translate(-50%, -50%)',
+            }}
+            className="absolute w-6 h-6 rounded-full border border-pastel-blue-dark dark:border-sky-300 bg-transparent animate-ping duration-500 pointer-events-none"
+          />
+        </React.Fragment>
       ))}
     </div>
   );
