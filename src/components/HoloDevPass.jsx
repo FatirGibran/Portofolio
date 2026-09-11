@@ -112,6 +112,15 @@ function HoloDevPass({ isModal = false }) {
         >
           <div
             ref={cardRef}
+            tabIndex={0}
+            role="button"
+            aria-label="3D Holographic Developer Pass - Tekan Enter atau Spasi untuk membalik kartu"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleFlip();
+              }
+            }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{
@@ -119,7 +128,7 @@ function HoloDevPass({ isModal = false }) {
               transformStyle: 'preserve-3d',
               transition: 'transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1)',
             }}
-            className="w-72 sm:w-80 h-[430px] sm:h-[450px] relative rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.18)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.6)] cursor-grab active:cursor-grabbing transform-gpu"
+            className="w-72 sm:w-80 h-[430px] sm:h-[450px] relative rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.18)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.6)] cursor-grab active:cursor-grabbing focus:outline-none focus:ring-2 focus:ring-pastel-blue-dark dark:focus:ring-sky-400 transform-gpu"
           >
             {/* Holographic Prismatic Foil Glare Overlay */}
             <div
