@@ -370,6 +370,17 @@ const ElGesturDemo = memo(({ lang, playChime, triggerGlobalEffect }) => {
             onTouchEnd={handleMouseUp}
             className="w-full h-44 sm:h-48 border-2 border-dashed border-pastel-blue/40 dark:border-slate-700 rounded-2xl bg-white/60 dark:bg-slate-800/60 cursor-crosshair touch-none"
           />
+          {trails.length > 0 && (
+            <button
+              onClick={() => {
+                setTrails([]);
+                addLog('Kanvas gestur dibersihkan.', 'info');
+              }}
+              className="absolute top-3 right-3 px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-white/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 shadow-sm hover:scale-105 active:scale-95 transition-all"
+            >
+              Reset Kanvas
+            </button>
+          )}
           {!isDrawing && trails.length === 0 && (
             <div className="absolute pointer-events-none text-center flex flex-col items-center gap-1.5 max-w-[85%]">
               <Hand className="w-7 h-7 text-pastel-blue-dark dark:text-sky-400 animate-bounce-soft" />
