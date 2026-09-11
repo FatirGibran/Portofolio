@@ -7,6 +7,8 @@ import Sandbox from './components/Sandbox';
 import Keterampilan from './components/Keterampilan';
 import Footer from './components/Footer';
 import SpatialStage3D from './components/SpatialStage3D';
+import CommandPalette from './components/CommandPalette';
+import ProjectModal from './components/ProjectModal';
 import { Sparkles, Power } from 'lucide-react';
 import { PortfolioProvider } from './context/PortfolioContext';
 
@@ -260,6 +262,12 @@ function PortfolioApp() {
         <Keterampilan />
         <Footer />
       </div>
+
+      {/* Global Interactive Cyber Command Palette & Terminal (Cmd + K) */}
+      <CommandPalette />
+
+      {/* Project Architectural Case Study Deep-Dive Modal */}
+      <ProjectModal />
     </div>
   );
 }

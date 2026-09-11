@@ -3,7 +3,7 @@ import { ArrowRight, Play, Award, ShieldCheck, Code2 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 
 function Hero() {
-  const { t } = usePortfolio();
+  const { t, playSound } = usePortfolio();
   const roles = t.hero.roles;
   const [roleIndex, setRoleIndex] = useState(0);
   const [typedText, setTypedText] = useState('');
@@ -78,6 +78,7 @@ function Hero() {
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start mb-8 sm:mb-10 w-full sm:w-auto">
           <a
             href="#simulator"
+            onClick={() => playSound('tab')}
             className="inline-flex items-center justify-center gap-2.5 bg-pastel-yellow dark:bg-amber-400 hover:bg-pastel-yellow-hover text-pastel-navy font-extrabold py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl shadow-pastel-md hover:shadow-pastel-lg transition-all duration-200 transform hover:-translate-y-0.5 text-sm sm:text-base group min-h-[48px]"
           >
             <Play className="w-4 h-4 fill-pastel-navy group-hover:scale-110 transition-transform flex-shrink-0" />
@@ -85,6 +86,7 @@ function Hero() {
           </a>
           <a
             href="#proyek"
+            onClick={() => playSound('click')}
             className="inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-800 border-2 border-pastel-blue dark:border-sky-500/40 text-pastel-navy dark:text-slate-100 font-bold py-3.5 sm:py-4 px-6 sm:px-7 rounded-2xl shadow-pastel-sm hover:bg-pastel-blue/30 dark:hover:bg-slate-700 transition-all duration-200 transform hover:-translate-y-0.5 text-sm sm:text-base min-h-[48px]"
           >
             <span>{t.hero.ctaProjects}</span>

@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback, memo } from 'react';
-import { ExternalLink, Play, Search, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, Play, Search, Sparkles, CheckCircle2, Layers } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { ALL_PROJECTS } from '../data/projectsData';
 
@@ -10,7 +10,7 @@ const GithubIcon = memo((props) => (
   </svg>
 ));
 
-const ProjectCard = memo(({ project, onOpenSandboxDemo, btnTryDemo, btnVisit, btnGitHub, lang }) => {
+const ProjectCard = memo(({ project, onOpenSandboxDemo, onOpenCaseStudy, btnTryDemo, btnVisit, btnGitHub, lang }) => {
   const [transform, setTransform] = useState('');
   const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
 
@@ -92,6 +92,15 @@ const ProjectCard = memo(({ project, onOpenSandboxDemo, btnTryDemo, btnVisit, bt
 
       {/* Card Action Buttons */}
       <div className="flex flex-wrap items-center gap-2 pt-3.5 border-t border-pastel-peach/30 dark:border-slate-700/60 mt-auto">
+        <button
+          onClick={() => onOpenCaseStudy(project)}
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-pastel-blue-dark dark:text-sky-300 bg-pastel-blue/40 dark:bg-sky-950/60 hover:bg-pastel-blue/70 dark:hover:bg-sky-900 border border-pastel-blue-dark/30 dark:border-sky-800 py-2 px-3 sm:px-3.5 rounded-xl transition-all hover:scale-105 min-h-[40px]"
+          title="Lihat Diagram Arsitektur & Case Study"
+        >
+          <Layers className="w-3.5 h-3.5 flex-shrink-0" />
+          <span>{lang === 'en' ? 'Architecture' : 'Arsitektur'}</span>
+        </button>
+
         {project.demoTab && (
           <button
             onClick={() => onOpenSandboxDemo(project.demoTab)}
@@ -131,7 +140,7 @@ const ProjectCard = memo(({ project, onOpenSandboxDemo, btnTryDemo, btnVisit, bt
 });
 
 function Projects({ onSelectSandboxTab }) {
-  const { t, lang } = usePortfolio();
+  const { t, lang, setSelectedProjectForModal, playSound } = usePortfolio();
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -206,7 +215,10 @@ function Projects({ onSelectSandboxTab }) {
         {categories.map((cat) => (
           <button
             key={cat.id}
-            onClick={() => setActiveCategory(cat.id)}
+            onClick={() => {
+              setActiveCategory(cat.id);
+              playSound('tab');
+            }}
             className={`flex items-center gap-1.5 sm:gap-2 py-2 px-3.5 sm:px-4 rounded-xl text-xs sm:text-sm font-bold font-space transition-all duration-200 border-2 min-h-[40px] ${
               activeCategory === cat.id
                 ? 'bg-pastel-yellow dark:bg-amber-400 text-pastel-navy border-pastel-yellow-hover shadow-pastel-sm scale-105'
@@ -230,6 +242,10 @@ function Projects({ onSelectSandboxTab }) {
             <ProjectCard
               project={project}
               onOpenSandboxDemo={handleOpenSandbox}
+              onOpenCaseStudy={(proj) => {
+                playSound('modal');
+                setSelectedProjectForModal(proj);
+              }}
               btnTryDemo={t.projects.btnTryDemo}
               btnVisit={t.projects.btnVisit}
               btnGitHub={t.projects.btnGitHub}
