@@ -2,6 +2,7 @@ import React, { useState, useMemo, useCallback, memo } from 'react';
 import { ExternalLink, Play, Search, Sparkles, CheckCircle2, Layers } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { ALL_PROJECTS } from '../data/projectsData';
+import { getCategoryCounts } from '../data/categoryConstants';
 
 // Custom inline SVG icon for GitHub
 const GithubIcon = memo((props) => (
@@ -145,13 +146,14 @@ function Projects({ onSelectSandboxTab }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Category counts and definitions memoized
+  const counts = useMemo(() => getCategoryCounts(ALL_PROJECTS), []);
   const categories = useMemo(() => [
-    { id: 'all', label: t.projects.categories.all, count: ALL_PROJECTS.length },
-    { id: 'ai', label: t.projects.categories.ai, count: ALL_PROJECTS.filter(p => p.category === 'ai').length },
-    { id: 'fullstack', label: t.projects.categories.fullstack, count: ALL_PROJECTS.filter(p => p.category === 'fullstack').length },
-    { id: 'cybersec', label: t.projects.categories.cybersec, count: ALL_PROJECTS.filter(p => p.category === 'cybersec').length },
-    { id: 'org', label: t.projects.categories.org, count: ALL_PROJECTS.filter(p => p.category === 'org').length },
-  ], [t.projects.categories]);
+    { id: 'all', label: t.projects.categories.all, count: counts.all },
+    { id: 'ai', label: t.projects.categories.ai, count: counts.ai },
+    { id: 'fullstack', label: t.projects.categories.fullstack, count: counts.fullstack },
+    { id: 'cybersec', label: t.projects.categories.cybersec, count: counts.cybersec },
+    { id: 'org', label: t.projects.categories.org, count: counts.org },
+  ], [t.projects.categories, counts]);
 
   // Filtered projects computed efficiently via useMemo
   const filteredProjects = useMemo(() => {
