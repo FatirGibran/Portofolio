@@ -3,8 +3,16 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
-    @apply font-sans bg-pastel-bg text-pastel-navy;
+    @apply font-sans bg-pastel-bg text-pastel-navy dark:bg-slate-900 dark:text-slate-100;
+    overflow-x: hidden;
+    touch-action: manipulation;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -19,6 +27,19 @@
   
   .spring-transition-fast {
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* GPU Acceleration utility */
+  .transform-gpu-safe {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Content visibility for offscreen performance */
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
   }
 }
 
@@ -45,7 +66,25 @@
     90deg, 
     rgba(255, 0, 0, 0.02), 
     rgba(0, 255, 0, 0.01), 
-    rgba(0, 0, 255, 0.02)
+    rgba(0, 255, 0, 0.01)
   );
   background-size: 100% 4px, 4px 100%;
+}
+
+/* Accessibility: Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-bounce-soft,
+  .animate-pulse,
+  .animate-spin {
+    animation: none !important;
+  }
 }
