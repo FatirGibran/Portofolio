@@ -105,13 +105,23 @@ function CommandPalette({ triggerGlobalEffect }) {
       action: () => { toggleSound(); }
     },
     {
+      id: 'pass',
+      title: lang === 'id' ? 'Buka 3D Holographic Developer Pass' : 'Open 3D Holographic Developer Pass',
+      category: 'Aksi Sistem',
+      icon: <Sparkles className="w-4 h-4 text-amber-500" />,
+      action: () => {
+        setIsCommandPaletteOpen(false);
+        scrollTo('hero');
+      }
+    },
+    {
       id: 'lang',
       title: lang === 'id' ? 'Switch to English Language' : 'Ganti ke Bahasa Indonesia',
       category: 'Aksi Sistem',
       icon: <Globe className="w-4 h-4 text-sky-400" />,
       action: () => { toggleLang(); }
     },
-  ], [isDark, lang, soundEnabled, toggleTheme, toggleSound, toggleLang, setIsCommandPaletteOpen]);
+  ], [isDark, lang, soundEnabled, toggleTheme, toggleSound, toggleLang, setIsCommandPaletteOpen, scrollTo]);
 
   const projectItems = useMemo(() => {
     return ALL_PROJECTS.map((p) => ({
