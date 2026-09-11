@@ -2,6 +2,7 @@ import React, { useState, useEffect, memo } from 'react';
 import { ArrowRight, Play, Award, ShieldCheck, Code2, Sparkles } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import HoloDevPass from './HoloDevPass';
+import { STATS_CONFIG } from '../data/statsData';
 
 function Hero() {
   const { t, playSound } = usePortfolio();
@@ -53,21 +54,22 @@ function Hero() {
   const [coverageVal, setCoverageVal] = useState('0.0');
 
   useEffect(() => {
-    const duration = 1400;
+    const { projects, coverage } = STATS_CONFIG;
+    const duration = projects.duration || 1400;
     const startTime = performance.now();
 
     const animateCount = (now) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const ease = 1 - Math.pow(1 - progress, 3);
-      setProjectCount(Math.floor(ease * 20));
-      setCoverageVal((ease * 95.8).toFixed(1));
+      setProjectCount(Math.floor(ease * projects.target));
+      setCoverageVal((ease * coverage.target).toFixed(1));
 
       if (progress < 1) {
         requestAnimationFrame(animateCount);
       } else {
-        setProjectCount(20);
-        setCoverageVal('95.8');
+        setProjectCount(projects.target);
+        setCoverageVal(coverage.target.toFixed(1));
       }
     };
 
