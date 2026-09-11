@@ -171,6 +171,14 @@ function PortfolioApp() {
 
   return (
     <div className="relative min-h-screen bg-pastel-bg/80 dark:bg-slate-900/85 text-pastel-navy dark:text-slate-100 selection:bg-pastel-yellow selection:text-pastel-navy font-sans transition-colors duration-300">
+      {/* Accessibility: Skip to main content */}
+      <a
+        href="#hero"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:px-4 focus:py-2 focus:bg-pastel-yellow dark:focus:bg-amber-400 focus:text-pastel-navy focus:font-space focus:font-bold focus:rounded-xl focus:shadow-pastel-md focus:outline-none"
+      >
+        Lewati ke Konten Utama
+      </a>
+
       {/* 3D WebGL Persistent Spatial Canvas */}
       <SpatialStage3D
         isLaserActive={isLaserActive}
