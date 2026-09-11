@@ -48,9 +48,7 @@ export function playSynthesizedChime(type = 'success') {
         gain.disconnect();
       } catch {}
     }, 350);
-  } catch {}
-}
-
+  } catch {
     // Autoplay policy or unsupported audio
   }
 }
