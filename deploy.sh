@@ -15,7 +15,7 @@ git add .
 
 # 3. Commit changes
 echo "💾 Committing changes to Git..."
-git commit -m "perf: complete performance audit, mobile-first refactor, memory cleanup, and zero CLS optimization" || echo "⚠️ Nothing to commit or commit failed, proceeding..."
+git commit -m "fix(hero): fix avatar image cropping with object-top and clean border styling" || echo "⚠️ Nothing to commit or commit failed, proceeding..."
 
 # 4. Push to remote repository
 echo "📤 Pushing to GitHub remote main branch..."

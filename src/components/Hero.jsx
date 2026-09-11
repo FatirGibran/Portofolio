@@ -122,7 +122,8 @@ function Hero() {
             height="320"
             loading="eager"
             decoding="async"
-            className="w-full h-full aspect-square object-cover rounded-full border-4 border-pastel-bg dark:border-slate-900 group-hover:scale-95 transition-transform duration-500"
+            className="w-full h-full aspect-square object-cover object-top rounded-full border-4 border-white dark:border-slate-800 shadow-inner group-hover:scale-95 transition-transform duration-500"
+            style={{ objectPosition: 'center top' }}
             onError={(e) => {
               e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80';
             }}
