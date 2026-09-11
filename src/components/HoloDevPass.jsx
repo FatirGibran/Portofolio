@@ -4,6 +4,7 @@ import {
   Cpu, Sparkles, ExternalLink, X
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
+import { FOIL_GRADIENTS, DEVPASS_SPECS } from '../utils/holoTheme';
 
 function HoloDevPass({ isModal = false }) {
   const { playSound } = usePortfolio();
@@ -70,13 +71,6 @@ function HoloDevPass({ isModal = false }) {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  // Holographic Foil Gradients
-  const foilGradients = {
-    prism: 'linear-gradient(115deg, transparent 15%, rgba(255,255,255,0.6) 35%, rgba(56,189,248,0.5) 48%, rgba(236,72,153,0.5) 55%, rgba(250,204,21,0.5) 62%, transparent 85%)',
-    gold: 'linear-gradient(115deg, transparent 15%, rgba(254,240,138,0.7) 35%, rgba(234,179,8,0.6) 50%, rgba(254,240,138,0.8) 65%, transparent 85%)',
-    matrix: 'linear-gradient(115deg, transparent 15%, rgba(110,231,183,0.6) 35%, rgba(16,185,129,0.7) 50%, rgba(52,211,153,0.6) 65%, transparent 85%)',
-  };
-
   return (
     <>
       <div className="relative flex flex-col items-center">
@@ -130,7 +124,7 @@ function HoloDevPass({ isModal = false }) {
             {/* Holographic Prismatic Foil Glare Overlay */}
             <div
               style={{
-                backgroundImage: foilGradients[foilStyle],
+                backgroundImage: FOIL_GRADIENTS[foilStyle] || FOIL_GRADIENTS.prism,
                 backgroundPosition: `${glare.x}% ${glare.y}%`,
                 backgroundSize: '250% 250%',
                 opacity: glare.opacity,
