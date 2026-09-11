@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { translations } from '../data/translations';
 
 import { playSynthesizedChime } from '../utils/audio';
 
-const PortfolioContext = createContext();
+export const PortfolioContext = createContext();
 
 export function PortfolioProvider({ children }) {
   // 1. Theme State (light / dark)
@@ -119,10 +119,4 @@ export function PortfolioProvider({ children }) {
   );
 }
 
-export function usePortfolio() {
-  const context = useContext(PortfolioContext);
-  if (!context) {
-    throw new Error('usePortfolio must be used within a PortfolioProvider');
-  }
-  return context;
-}
+export { usePortfolio } from './usePortfolio';

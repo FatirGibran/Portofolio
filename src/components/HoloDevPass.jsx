@@ -227,7 +227,7 @@ function HoloDevPass({ isModal = false }) {
                   Core Engineering Stack
                 </span>
                 <div className="flex flex-wrap gap-1">
-                  {['React 19', 'Edge AI', 'MediaPipe', 'FastAPI', 'AES-128', 'WASM'].map((tech) => (
+                  {DEVPASS_SPECS.coreStack.map((tech) => (
                     <span
                       key={tech}
                       className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-lg bg-pastel-blue/30 dark:bg-sky-950 border border-pastel-blue-dark/20 dark:border-sky-800 text-pastel-navy dark:text-sky-300"
@@ -246,7 +246,7 @@ function HoloDevPass({ isModal = false }) {
                       ID Number
                     </span>
                     <span className="text-xs font-mono font-bold text-pastel-navy dark:text-white">
-                      FG-2024-TELKOM-IF
+                      {DEVPASS_SPECS.idNumber}
                     </span>
                   </div>
                 </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo, useCallback, memo } from '
 import {
   Search, Terminal, CornerDownLeft, X,
   Moon, Sun, Volume2, VolumeX, Globe, FolderGit2, Play, ExternalLink,
-  Cpu, User
+  Cpu, User, Sparkles
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { ALL_PROJECTS } from '../data/projectsData';
