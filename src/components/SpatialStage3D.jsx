@@ -473,14 +473,14 @@ export default function SpatialStage3D({
     };
 
     // 7. Animation & Render Loop
-    let clock = new THREE.Clock();
+    const startTime = performance.now();
     let animId;
     let codeScrollOffset = 0;
     let lastConfettiTriggerState = false;
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
-      const elapsed = clock.getElapsedTime();
+      const elapsed = (performance.now() - startTime) / 1000;
 
       // A. Smooth Inertial Damping for Scroll and Mouse
       smoothScrollFraction += (targetScrollFraction - smoothScrollFraction) * 0.06;
