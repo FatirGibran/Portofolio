@@ -6,6 +6,7 @@ import Projects from './components/Projects';
 import Sandbox from './components/Sandbox';
 import Keterampilan from './components/Keterampilan';
 import Footer from './components/Footer';
+import SpatialStage3D from './components/SpatialStage3D';
 import { Sparkles, Power } from 'lucide-react';
 import { PortfolioProvider } from './context/PortfolioContext';
 
@@ -164,7 +165,14 @@ function PortfolioApp() {
   };
 
   return (
-    <div className="relative min-h-screen bg-pastel-bg dark:bg-slate-900 text-pastel-navy dark:text-slate-100 selection:bg-pastel-yellow selection:text-pastel-navy font-sans transition-colors duration-300">
+    <div className="relative min-h-screen bg-pastel-bg/80 dark:bg-slate-900/85 text-pastel-navy dark:text-slate-100 selection:bg-pastel-yellow selection:text-pastel-navy font-sans transition-colors duration-300">
+      {/* 3D WebGL Persistent Spatial Canvas */}
+      <SpatialStage3D
+        isLaserActive={isLaserActive}
+        laserPos={laserPos}
+        isConfettiActive={isConfettiActive}
+      />
+
       {/* Laser Pointer Cursor follow dot */}
       {isLaserActive && (
         <div
@@ -226,30 +234,32 @@ function PortfolioApp() {
         <Sparkles className="w-16 h-16 text-pastel-yellow dark:text-amber-400" />
       </div>
 
-      {/* Site Structure */}
-      <Navbar />
-      <Hero />
-      <About />
+      {/* Site Structure Layer */}
+      <div className="relative z-10">
+        <Navbar />
+        <Hero />
+        <About />
 
-      {/* Projects Gallery */}
-      <div
-        style={{
-          transform: isZoomActive ? 'scale(1.03)' : 'scale(1)',
-          transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-        }}
-      >
-        <Projects onSelectSandboxTab={setSandboxTab} />
+        {/* Projects Gallery */}
+        <div
+          style={{
+            transform: isZoomActive ? 'scale(1.03)' : 'scale(1)',
+            transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+          }}
+        >
+          <Projects onSelectSandboxTab={setSandboxTab} />
+        </div>
+
+        {/* Interactive Testing Sandbox (6 Demos) */}
+        <Sandbox
+          activeTab={sandboxTab}
+          setActiveTab={setSandboxTab}
+          triggerGlobalEffect={triggerGlobalEffect}
+        />
+
+        <Keterampilan />
+        <Footer />
       </div>
-
-      {/* Interactive Testing Sandbox (6 Demos) */}
-      <Sandbox
-        activeTab={sandboxTab}
-        setActiveTab={setSandboxTab}
-        triggerGlobalEffect={triggerGlobalEffect}
-      />
-
-      <Keterampilan />
-      <Footer />
     </div>
   );
 }

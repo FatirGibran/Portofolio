@@ -12,6 +12,7 @@ const GithubIcon = memo((props) => (
 
 const ProjectCard = memo(({ project, onOpenSandboxDemo, btnTryDemo, btnVisit, btnGitHub, lang }) => {
   const [transform, setTransform] = useState('');
+  const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
 
   const handleMouseMove = useCallback((e) => {
     const card = e.currentTarget;
@@ -26,10 +27,16 @@ const ProjectCard = memo(({ project, onOpenSandboxDemo, btnTryDemo, btnVisit, bt
     const rotateY = ((x - centerX) / centerX) * 7;
     
     setTransform(`perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`);
+    setGlare({
+      x: (x / rect.width) * 100,
+      y: (y / rect.height) * 100,
+      opacity: 1,
+    });
   }, []);
 
   const handleMouseLeave = useCallback(() => {
     setTransform('');
+    setGlare(prev => ({ ...prev, opacity: 0 }));
   }, []);
 
   const description = (lang === 'en' && project.descEn) ? project.descEn : project.desc;
@@ -39,8 +46,16 @@ const ProjectCard = memo(({ project, onOpenSandboxDemo, btnTryDemo, btnVisit, bt
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ transform, transition: transform ? 'transform 0.05s ease-out' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}
-      className="bg-white dark:bg-slate-800 border-2 border-pastel-peach/50 dark:border-slate-700/80 hover:border-pastel-blue dark:hover:border-sky-500 rounded-3xl p-5 sm:p-6 md:p-7 flex flex-col justify-between h-full relative overflow-hidden transition-all duration-300 shadow-pastel-sm hover:shadow-pastel-md group transform-gpu-safe"
+      className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border-2 border-pastel-peach/50 dark:border-slate-700/80 hover:border-pastel-blue dark:hover:border-sky-500 rounded-3xl p-5 sm:p-6 md:p-7 flex flex-col justify-between h-full relative overflow-hidden transition-all duration-300 shadow-pastel-sm hover:shadow-pastel-md group transform-gpu-safe"
     >
+      {/* Holographic Glare Sheen Overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-3xl transition-opacity duration-300 z-10"
+        style={{
+          opacity: glare.opacity,
+          background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(56, 189, 248, 0.18) 0%, rgba(254, 240, 138, 0.1) 40%, transparent 75%)`,
+        }}
+      />
       <div>
         <div className="flex justify-between items-start gap-2 mb-3">
           <span className="text-[10px] sm:text-[11px] font-bold font-space uppercase tracking-wider text-pastel-blue-dark dark:text-sky-300 bg-pastel-blue/60 dark:bg-sky-950/60 py-1 px-2.5 sm:px-3 rounded-full border border-pastel-blue/80 dark:border-sky-800">
