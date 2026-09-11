@@ -39,7 +39,7 @@ export default function Footer() {
           Mari Berkolaborasi!
           <span className="absolute bottom-1 left-0 w-1/2 h-2 bg-pastel-pink/60 -z-10 rounded-full"></span>
         </h2>
-        
+
         <p className="text-base md:text-lg text-pastel-navy/70 max-w-lg leading-relaxed mb-10">
           Saya selalu terbuka untuk berdiskusi mengenai proyek kolaborasi rekayasa web, arsitektur jaringan komputer, kustomisasi AI, atau sekadar bertukar ide inovatif!
         </p>
@@ -66,9 +66,6 @@ export default function Footer() {
             <span>Dibuat dengan</span>
             <Heart className="w-4 h-4 text-pastel-pink fill-pastel-pink animate-pulse" />
             <span>oleh Fatir Gibran &copy; {new Date().getFullYear()}</span>
-          </div>
-          <div className="font-space uppercase tracking-wider text-[10px]">
-            Secured & Powered by Antigravity Core
           </div>
         </div>
       </div>

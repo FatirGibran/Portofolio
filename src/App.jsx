@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Projects from './components/Projects';
 import Sandbox from './components/Sandbox';
 import Keterampilan from './components/Keterampilan';
-import Projects from './components/Projects';
 import Footer from './components/Footer';
 import { Sparkles, Power } from 'lucide-react';
 
 export default function App() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const [sandboxTab, setSandboxTab] = useState('posturelens');
 
   // Global Simulator states
   const [isLaserActive, setIsLaserActive] = useState(false);
@@ -107,46 +108,46 @@ export default function App() {
     switch (effect) {
       case 'pena':
         setIsLaserActive(true);
-        addLog('Pointer Laser aktif. Gerakkan kursor! (Mati otomatis dalam 10s)', 'success');
+        if (addLog) addLog('Pointer Laser aktif. Gerakkan kursor! (Mati otomatis dalam 10s)', 'success');
         
         setTimeout(() => {
           setIsLaserActive(false);
-          addLog('Pointer Laser dinonaktifkan (timeout 10s).', 'info');
+          if (addLog) addLog('Pointer Laser dinonaktifkan (timeout 10s).', 'info');
         }, 10000);
         break;
 
       case 'konfeti':
         setIsConfettiActive(true);
-        addLog('Memicu ledakan partikel konfeti...', 'success');
+        if (addLog) addLog('Memicu ledakan partikel konfeti...', 'success');
         
         setTimeout(() => {
           setIsConfettiActive(false);
-          addLog('Animasi konfeti selesai.', 'info');
+          if (addLog) addLog('Animasi konfeti selesai.', 'info');
         }, 6000);
         break;
 
       case 'hitam':
         setIsBlackoutActive(true);
-        addLog('Layar gelap diaktifkan. Klik "Kembalikan Layar" untuk memulihkan.', 'warning');
+        if (addLog) addLog('Layar gelap diaktifkan. Klik "Kembalikan Layar" untuk memulihkan.', 'warning');
         break;
 
       case 'tirai':
         setIsCurtainActive(true);
-        addLog('Menutup tirai sistem...', 'info');
+        if (addLog) addLog('Menutup tirai sistem...', 'info');
         
         setTimeout(() => {
           setIsCurtainActive(false);
-          addLog('Membuka tirai siber kembali...', 'success');
+          if (addLog) addLog('Membuka tirai siber kembali...', 'success');
         }, 2200);
         break;
 
       case 'zoom':
         setIsZoomActive(true);
-        addLog('Memfokuskan layout proyek utama (Zoom Fit)...', 'success');
+        if (addLog) addLog('Memfokuskan layout proyek utama (Zoom Fit)...', 'success');
         
         setTimeout(() => {
           setIsZoomActive(false);
-          addLog('Fokus dikembalikan ke ukuran normal.', 'info');
+          if (addLog) addLog('Fokus dikembalikan ke ukuran normal.', 'info');
         }, 2500);
         break;
 
@@ -156,7 +157,7 @@ export default function App() {
         setIsBlackoutActive(false);
         setIsCurtainActive(false);
         setIsZoomActive(false);
-        addLog('Seluruh simulator efek dan gestur berhasil di-reset!', 'success');
+        if (addLog) addLog('Seluruh simulator efek dan gestur berhasil di-reset!', 'success');
         break;
 
       default:
@@ -165,7 +166,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen bg-pastel-bg text-pastel-navy selection:bg-pastel-yellow selection:text-pastel-navy font-sans">
       {/* Laser Pointer Cursor follow dot */}
       {isLaserActive && (
         <div
@@ -174,7 +175,7 @@ export default function App() {
             top: `${laserPos.y}px`,
             transform: 'translate(-50%, -50%)',
           }}
-          className="fixed w-6 h-6 rounded-full bg-red-500/80 pointer-events-none z-[9999] shadow-[0_0_15px_rgba(239,68,68,0.8),0_0_30px_rgba(239,68,68,0.6)] mix-blend-screen"
+          className="fixed w-6 h-6 rounded-full bg-red-500/90 pointer-events-none z-[9999] shadow-[0_0_20px_rgba(239,68,68,0.9),0_0_40px_rgba(239,68,68,0.6)] mix-blend-screen"
         ></div>
       )}
 
@@ -199,58 +200,57 @@ export default function App() {
             onClick={() => {
               setIsBlackoutActive(false);
             }}
-            className="inline-flex items-center gap-2 bg-pastel-blue border-2 border-pastel-blue-dark text-pastel-navy font-bold py-2.5 px-6 rounded-xl hover:bg-pastel-blue/80 transition-colors"
+            className="inline-flex items-center gap-2 bg-pastel-blue border-2 border-pastel-blue-dark text-pastel-navy font-bold py-2.5 px-6 rounded-xl hover:bg-pastel-blue/80 transition-colors shadow-pastel-sm"
           >
             <Power className="w-4 h-4" /> Kembalikan Layar
           </button>
         </div>
       </div>
 
-      {/* Curtain split-panels overlay (Dot removed completely) */}
+      {/* Curtain split-panels overlay (No dot, clean FATIR GIBRAN) */}
       <div
         className={`fixed top-0 left-0 w-1/2 h-screen bg-[#FAF6EE] border-r-4 border-pastel-blue-dark z-[9980] transition-transform duration-700 ease-in-out flex items-center justify-end pr-8 pointer-events-none ${
           isCurtainActive ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <span className="text-4xl font-bold font-space text-pastel-navy">FATIR</span>
+        <span className="text-4xl md:text-5xl font-extrabold font-space text-pastel-navy">FATIR</span>
       </div>
       <div
         className={`fixed top-0 right-0 w-1/2 h-screen bg-[#FAF6EE] border-l-4 border-pastel-yellow z-[9980] transition-transform duration-700 ease-in-out flex items-center justify-start pl-8 pointer-events-none ${
           isCurtainActive ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <span className="text-4xl font-bold font-space text-pastel-blue-dark">GIBRAN</span>
+        <span className="text-4xl md:text-5xl font-extrabold font-space text-pastel-blue-dark">GIBRAN</span>
       </div>
 
-      {/* Floating Sparkles decoration */}
-      <div className="absolute top-10 right-10 pointer-events-none opacity-40 animate-pulse-soft">
-        <Sparkles className="w-12 h-12 text-pastel-yellow" />
+      {/* Floating Sparkles decorative accent */}
+      <div className="absolute top-12 right-12 pointer-events-none opacity-30 animate-pulse-soft">
+        <Sparkles className="w-16 h-16 text-pastel-yellow" />
       </div>
 
-      {/* React Site structure */}
+      {/* Site Sections */}
       <Navbar />
       <Hero />
       <About />
-      
-      {/* Sandbox Component replaces Simulator */}
+
+      {/* Projects Gallery */}
+      <div
+        style={{
+          transform: isZoomActive ? 'scale(1.03)' : 'scale(1)',
+          transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+        }}
+      >
+        <Projects onSelectSandboxTab={setSandboxTab} />
+      </div>
+
+      {/* Interactive Testing Sandbox (6 Demos) */}
       <Sandbox
-        activeProjectIndex={activeProjectIndex}
-        setActiveProjectIndex={setActiveProjectIndex}
+        activeTab={sandboxTab}
+        setActiveTab={setSandboxTab}
         triggerGlobalEffect={triggerGlobalEffect}
       />
 
       <Keterampilan />
-      
-      {/* Elastic spring zoom on projects layout */}
-      <div
-        style={{
-          transform: isZoomActive ? 'scale(1.04)' : 'scale(1)',
-          transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-        }}
-      >
-        <Projects activeProjectIndex={activeProjectIndex} />
-      </div>
-      
       <Footer />
     </div>
   );

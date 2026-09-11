@@ -3,7 +3,7 @@
 # Exit immediately if any command exits with a non-zero status
 set -e
 
-echo "🚀 Starting portfolio refactoring deployment sequence..."
+echo "🚀 Starting portfolio deployment sequence..."
 
 # 1. Build Vite production assets
 echo "📦 Building production assets with Vite..."
@@ -15,7 +15,7 @@ git add .
 
 # 3. Commit changes
 echo "💾 Committing changes to Git..."
-git commit -m "feat: complete cheerful UI portfolio overhaul with full repo datasets and testing sandbox" || echo "⚠️ Nothing to commit or commit failed, proceeding..."
+git commit -m "feat: add all recent antigravity projects, HMIF chairman branding, and 6 interactive live sandbox demos" || echo "⚠️ Nothing to commit or commit failed, proceeding..."
 
 # 4. Push to remote repository
 echo "📤 Pushing to GitHub remote main branch..."
@@ -25,4 +25,4 @@ git push origin main
 echo "🔥 Deploying to Firebase Hosting..."
 firebase deploy --only hosting:main
 
-echo "✅ Portfolio deployment complete and live!"
+echo "✅ Portfolio deployment complete and live at https://portofolio-fatir.web.app!"
