@@ -15,7 +15,7 @@ git add .
 
 # 3. Commit changes
 echo "💾 Committing changes to Git..."
-git commit -m "feat: add all recent antigravity projects, HMIF chairman branding, and 6 interactive live sandbox demos" || echo "⚠️ Nothing to commit or commit failed, proceeding..."
+git commit -m "feat: full portfolio overhaul with dark/light mode toggle, bilingual ID/EN, 20 projects, HMIF chairman branding, and 6 interactive live sandbox demos" || echo "⚠️ Nothing to commit or commit failed, proceeding..."
 
 # 4. Push to remote repository
 echo "📤 Pushing to GitHub remote main branch..."

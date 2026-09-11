@@ -7,9 +7,9 @@ import Sandbox from './components/Sandbox';
 import Keterampilan from './components/Keterampilan';
 import Footer from './components/Footer';
 import { Sparkles, Power } from 'lucide-react';
+import { PortfolioProvider } from './context/PortfolioContext';
 
-export default function App() {
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+function PortfolioApp() {
   const [sandboxTab, setSandboxTab] = useState('posturelens');
 
   // Global Simulator states
@@ -52,7 +52,6 @@ export default function App() {
       resize();
       window.addEventListener('resize', resize);
 
-      // Generate particles
       const colors = ['#BAE6FD', '#FEF08A', '#FBCFE8', '#BBF7D0', '#E9D5FF'];
       const particles = [];
       for (let i = 0; i < 120; i++) {
@@ -103,7 +102,6 @@ export default function App() {
     }
   }, [isConfettiActive]);
 
-  // Global Trigger Handler
   const triggerGlobalEffect = (effect, addLog) => {
     switch (effect) {
       case 'pena':
@@ -166,7 +164,7 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-pastel-bg text-pastel-navy selection:bg-pastel-yellow selection:text-pastel-navy font-sans">
+    <div className="relative min-h-screen bg-pastel-bg dark:bg-slate-900 text-pastel-navy dark:text-slate-100 selection:bg-pastel-yellow selection:text-pastel-navy font-sans transition-colors duration-300">
       {/* Laser Pointer Cursor follow dot */}
       {isLaserActive && (
         <div
@@ -191,44 +189,44 @@ export default function App() {
           isBlackoutActive ? 'opacity-100 pointer-events-all' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className="text-center p-6 bg-white border-4 border-pastel-yellow rounded-3xl max-w-sm shadow-pastel-lg">
-          <h3 className="text-2xl font-space text-pastel-navy mb-2">[ LAYAR MATI ]</h3>
-          <p className="text-sm font-bold text-pastel-navy/60 mb-6 font-mono">
+        <div className="text-center p-6 bg-white dark:bg-slate-800 border-4 border-pastel-yellow dark:border-amber-400 rounded-3xl max-w-sm shadow-pastel-lg">
+          <h3 className="text-2xl font-space text-pastel-navy dark:text-white mb-2">[ LAYAR MATI ]</h3>
+          <p className="text-sm font-bold text-pastel-navy/60 dark:text-slate-400 mb-6 font-mono">
             Perintah suara: "layar hitam" sukses dieksekusi.
           </p>
           <button
             onClick={() => {
               setIsBlackoutActive(false);
             }}
-            className="inline-flex items-center gap-2 bg-pastel-blue border-2 border-pastel-blue-dark text-pastel-navy font-bold py-2.5 px-6 rounded-xl hover:bg-pastel-blue/80 transition-colors shadow-pastel-sm"
+            className="inline-flex items-center gap-2 bg-pastel-blue dark:bg-sky-500 border-2 border-pastel-blue-dark text-pastel-navy font-bold py-2.5 px-6 rounded-xl hover:bg-pastel-blue/80 transition-colors shadow-pastel-sm"
           >
             <Power className="w-4 h-4" /> Kembalikan Layar
           </button>
         </div>
       </div>
 
-      {/* Curtain split-panels overlay (No dot, clean FATIR GIBRAN) */}
+      {/* Curtain split-panels overlay */}
       <div
-        className={`fixed top-0 left-0 w-1/2 h-screen bg-[#FAF6EE] border-r-4 border-pastel-blue-dark z-[9980] transition-transform duration-700 ease-in-out flex items-center justify-end pr-8 pointer-events-none ${
+        className={`fixed top-0 left-0 w-1/2 h-screen bg-[#FAF6EE] dark:bg-slate-950 border-r-4 border-pastel-blue-dark dark:border-sky-500 z-[9980] transition-transform duration-700 ease-in-out flex items-center justify-end pr-8 pointer-events-none ${
           isCurtainActive ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <span className="text-4xl md:text-5xl font-extrabold font-space text-pastel-navy">FATIR</span>
+        <span className="text-4xl md:text-5xl font-extrabold font-space text-pastel-navy dark:text-white">FATIR</span>
       </div>
       <div
-        className={`fixed top-0 right-0 w-1/2 h-screen bg-[#FAF6EE] border-l-4 border-pastel-yellow z-[9980] transition-transform duration-700 ease-in-out flex items-center justify-start pl-8 pointer-events-none ${
+        className={`fixed top-0 right-0 w-1/2 h-screen bg-[#FAF6EE] dark:bg-slate-950 border-l-4 border-pastel-yellow dark:border-amber-400 z-[9980] transition-transform duration-700 ease-in-out flex items-center justify-start pl-8 pointer-events-none ${
           isCurtainActive ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <span className="text-4xl md:text-5xl font-extrabold font-space text-pastel-blue-dark">GIBRAN</span>
+        <span className="text-4xl md:text-5xl font-extrabold font-space text-pastel-blue-dark dark:text-sky-400">GIBRAN</span>
       </div>
 
       {/* Floating Sparkles decorative accent */}
       <div className="absolute top-12 right-12 pointer-events-none opacity-30 animate-pulse-soft">
-        <Sparkles className="w-16 h-16 text-pastel-yellow" />
+        <Sparkles className="w-16 h-16 text-pastel-yellow dark:text-amber-400" />
       </div>
 
-      {/* Site Sections */}
+      {/* Site Structure */}
       <Navbar />
       <Hero />
       <About />
@@ -253,5 +251,13 @@ export default function App() {
       <Keterampilan />
       <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <PortfolioProvider>
+      <PortfolioApp />
+    </PortfolioProvider>
   );
 }
