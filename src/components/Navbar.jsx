@@ -152,7 +152,9 @@ function Navbar() {
 
             {/* Sound FX Toggle Button */}
             <button
-              onClick={toggleSound}
+              onClick={() => {
+                toggleSound();
+              }}
               title={soundEnabled ? 'Matikan Efek Suara' : 'Aktifkan Efek Suara'}
               className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-pastel-navy/15 dark:border-slate-700 bg-white/70 dark:bg-slate-800 text-pastel-navy dark:text-slate-200 hover:bg-pastel-peach/30 dark:hover:bg-slate-700 transition-all shadow-pastel-sm"
               aria-label="Toggle Sound Effects"
@@ -166,7 +168,10 @@ function Navbar() {
 
             {/* Language Switcher */}
             <button
-              onClick={toggleLang}
+              onClick={() => {
+                playSound('tab');
+                toggleLang();
+              }}
               title={lang === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
               className="flex items-center justify-center gap-1 h-9 sm:h-10 px-2.5 rounded-full border border-pastel-navy/15 dark:border-slate-700 bg-white/70 dark:bg-slate-800 text-xs font-bold font-space text-pastel-navy dark:text-slate-200 hover:bg-pastel-peach/30 dark:hover:bg-slate-700 transition-colors shadow-pastel-sm"
             >
@@ -176,7 +181,10 @@ function Navbar() {
 
             {/* Theme Toggle (Light / Dark) */}
             <button
-              onClick={toggleTheme}
+              onClick={() => {
+                playSound('toggle');
+                toggleTheme();
+              }}
               title={isDark ? 'Mode Terang' : 'Mode Gelap'}
               className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-pastel-navy/15 dark:border-slate-700 bg-white/70 dark:bg-slate-800 text-pastel-navy dark:text-amber-400 hover:bg-pastel-peach/30 dark:hover:bg-slate-700 transition-all shadow-pastel-sm"
               aria-label="Toggle Theme"
