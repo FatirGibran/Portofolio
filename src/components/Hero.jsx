@@ -94,10 +94,14 @@ function Hero() {
           </span>
         </h1>
         
-        <div className="text-base sm:text-xl md:text-2xl font-semibold text-pastel-navy/75 dark:text-slate-300 mb-5 min-h-[2rem] sm:min-h-[2.2rem] flex items-center justify-center md:justify-start gap-1">
-          <span className="text-pastel-navy/40 dark:text-slate-500 font-mono font-normal">&gt;</span>
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          className="text-base sm:text-xl md:text-2xl font-semibold text-pastel-navy/75 dark:text-slate-300 mb-5 min-h-[2rem] sm:min-h-[2.2rem] flex items-center justify-center md:justify-start gap-1"
+        >
+          <span className="text-pastel-navy/40 dark:text-slate-500 font-mono font-normal" aria-hidden="true">&gt;</span>
           <span className="text-pastel-blue-dark dark:text-sky-400 font-space font-bold">{typedText}</span>
-          <span className="animate-pulse text-pastel-blue-dark dark:text-sky-400">|</span>
+          <span className="animate-pulse text-pastel-blue-dark dark:text-sky-400" aria-hidden="true">|</span>
         </div>
         
         <p className="text-pastel-navy/80 dark:text-slate-300 leading-relaxed mb-7 max-w-lg mx-auto md:mx-0 text-sm sm:text-base md:text-lg">
