@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import {
-  Cpu, Hand, Play, RotateCcw, Sparkles, Columns, ZoomIn, EyeOff, Edit3,
+  Cpu, Hand, RotateCcw, Sparkles, Columns, ZoomIn, EyeOff, Edit3,
   ShoppingBag, BookOpen, ShieldCheck, MapPin, Search, Check, X,
   Activity, Eye, Volume2, VolumeX, Download, FileText, Lock, RefreshCw,
   Zap
@@ -360,7 +360,6 @@ const ElGesturDemo = memo(({ lang, playChime, triggerGlobalEffect }) => {
             onTouchStart={(e) => {
               const touch = e.touches[0];
               const canvas = canvasRef.current;
-              const rect = canvas.getBoundingClientRect();
               handleMouseDown({ clientX: touch.clientX, clientY: touch.clientY, currentTarget: canvas });
             }}
             onTouchMove={(e) => {
@@ -1171,9 +1170,11 @@ function Sandbox({ activeTab, setActiveTab, triggerGlobalEffect }) {
     <section id="simulator" className="py-16 sm:py-20 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto scroll-mt-12 content-auto">
       {/* Header */}
       <div className="text-center md:text-left mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pastel-yellow/80 dark:bg-amber-400/20 border border-pastel-yellow-hover dark:border-amber-400/40 text-pastel-navy dark:text-amber-300 font-bold text-xs uppercase tracking-wider mb-2">
-          <Zap className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 fill-amber-600 flex-shrink-0" />
-          <span>{t.sandbox.badge}</span>
+        <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-pastel-yellow/80 dark:bg-amber-400/20 border border-pastel-yellow-hover dark:border-amber-400/40 text-pastel-navy dark:text-amber-300 font-bold text-[11px] uppercase tracking-wider">
+            <Zap className="w-3 h-3 text-amber-600 dark:text-amber-400 fill-amber-600 flex-shrink-0" />
+            <span>{t.sandbox.badge}</span>
+          </div>
         </div>
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-space text-pastel-navy dark:text-white inline-block relative">
           {t.sandbox.title}

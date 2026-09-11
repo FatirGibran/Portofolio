@@ -7,7 +7,7 @@ import {
 import { usePortfolio } from '../context/PortfolioContext';
 import { ALL_PROJECTS } from '../data/projectsData';
 
-function CommandPalette() {
+function CommandPalette({ triggerGlobalEffect }) {
   const {
     isCommandPaletteOpen,
     setIsCommandPaletteOpen,
@@ -182,6 +182,11 @@ function CommandPalette() {
           { type: 'output', text: '  projects     - Daftar portofolio proyek unggulan' },
           { type: 'output', text: '  ping         - Cek status latensi edge node' },
           { type: 'output', text: '  contact      - Informasi kontak & media sosial resmi' },
+          { type: 'output', text: '  confetti     - [VISUAL] Ledakan partikel konfeti di layar' },
+          { type: 'output', text: '  laser        - [VISUAL] Aktifkan pointer laser merah kursor' },
+          { type: 'output', text: '  curtain      - [VISUAL] Tutup & buka tirai siber' },
+          { type: 'output', text: '  blackout     - [VISUAL] Simulasi layar padam' },
+          { type: 'output', text: '  reset        - Reset semua efek visual simulator' },
           { type: 'output', text: '  sudo hire    - [RECRUITER] Buka jalur prioritas recruitment' },
           { type: 'output', text: '  theme        - Toggle antara Dark Mode / Light Mode' },
           { type: 'output', text: '  clear        - Bersihkan riwayat layar terminal' }
@@ -233,6 +238,47 @@ function CommandPalette() {
           { type: 'output', text: 'GitHub    : github.com/Fatirrr08' },
           { type: 'output', text: 'Instagram : @spicytir' }
         );
+        break;
+
+      case 'confetti':
+      case 'konfeti':
+        if (triggerGlobalEffect) triggerGlobalEffect('konfeti');
+        playSound('success');
+        newHistory.push({ type: 'output-highlight', text: '🎊 Confetti particle burst triggered across page!' });
+        break;
+
+      case 'laser':
+      case 'pena':
+        if (triggerGlobalEffect) triggerGlobalEffect('pena');
+        playSound('success');
+        newHistory.push({ type: 'output-highlight', text: '🔴 Red Laser Pointer active! Move your mouse (10s timer).' });
+        break;
+
+      case 'curtain':
+      case 'tirai':
+        if (triggerGlobalEffect) triggerGlobalEffect('tirai');
+        playSound('tab');
+        newHistory.push({ type: 'output-highlight', text: '🎭 FATIR GIBRAN system curtain initiated.' });
+        break;
+
+      case 'blackout':
+      case 'hitam':
+        if (triggerGlobalEffect) triggerGlobalEffect('hitam');
+        playSound('warn');
+        newHistory.push({ type: 'output-highlight', text: '🌑 Blackout mode active. Click "Kembalikan Layar" to restore.' });
+        break;
+
+      case 'zoom':
+        if (triggerGlobalEffect) triggerGlobalEffect('zoom');
+        playSound('tab');
+        newHistory.push({ type: 'output-highlight', text: '🔍 Focused zoom fit triggered on projects gallery.' });
+        break;
+
+      case 'reset':
+      case 'normal':
+        if (triggerGlobalEffect) triggerGlobalEffect('normal');
+        playSound('click');
+        newHistory.push({ type: 'output', text: '🔄 All visual simulator effects reset to default.' });
         break;
 
       case 'sudo hire':

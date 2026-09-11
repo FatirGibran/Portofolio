@@ -1,6 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
-import { ArrowRight, Play, Award, ShieldCheck, Code2 } from 'lucide-react';
+import { ArrowRight, Play, Award, ShieldCheck, Code2, Sparkles } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
+import HoloDevPass from './HoloDevPass';
 
 function Hero() {
   const { t, playSound } = usePortfolio();
@@ -10,6 +11,7 @@ function Hero() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [charIndex, setCharIndex] = useState(0);
   const [speed, setSpeed] = useState(80);
+  const [heroView, setHeroView] = useState('photo'); // 'photo' | 'badge'
 
   useEffect(() => {
     setRoleIndex(0);
@@ -46,6 +48,32 @@ function Hero() {
 
     return () => clearTimeout(timer);
   }, [charIndex, isDeleting, roleIndex, speed, roles]);
+
+  const [projectCount, setProjectCount] = useState(0);
+  const [coverageVal, setCoverageVal] = useState('0.0');
+
+  useEffect(() => {
+    const duration = 1400;
+    const startTime = performance.now();
+
+    const animateCount = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      setProjectCount(Math.floor(ease * 20));
+      setCoverageVal((ease * 95.8).toFixed(1));
+
+      if (progress < 1) {
+        requestAnimationFrame(animateCount);
+      } else {
+        setProjectCount(20);
+        setCoverageVal('95.8');
+      }
+    };
+
+    const animId = requestAnimationFrame(animateCount);
+    return () => cancelAnimationFrame(animId);
+  }, []);
 
   return (
     <header id="hero" className="min-h-screen flex flex-col-reverse md:flex-row justify-center items-center gap-10 md:gap-14 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto pt-28 sm:pt-32 pb-14">
@@ -94,52 +122,109 @@ function Hero() {
           </a>
         </div>
 
-        {/* Quick Stats Banner */}
+        {/* Quick Stats Banner with Animated Count-Up */}
         <div className="grid grid-cols-3 gap-2.5 sm:gap-3 max-w-md mx-auto md:mx-0 pt-4 border-t border-pastel-navy/10 dark:border-slate-800">
-          <div className="bg-white/80 dark:bg-slate-800/80 p-2 sm:p-2.5 rounded-2xl border border-pastel-peach/60 dark:border-slate-700 text-center">
-            <span className="block font-space font-extrabold text-lg sm:text-xl text-pastel-blue-dark dark:text-sky-400">20</span>
+          <div className="bg-white/80 dark:bg-slate-800/80 p-2 sm:p-2.5 rounded-2xl border border-pastel-peach/60 dark:border-slate-700 text-center transition-transform hover:scale-105">
+            <span className="block font-space font-extrabold text-lg sm:text-xl text-pastel-blue-dark dark:text-sky-400">{projectCount}</span>
             <span className="text-[10px] sm:text-[11px] font-bold text-pastel-navy/60 dark:text-slate-400 uppercase tracking-tight">{t.hero.statProjects}</span>
           </div>
-          <div className="bg-white/80 dark:bg-slate-800/80 p-2 sm:p-2.5 rounded-2xl border border-pastel-yellow/80 dark:border-amber-400/40 text-center">
+          <div className="bg-white/80 dark:bg-slate-800/80 p-2 sm:p-2.5 rounded-2xl border border-pastel-yellow/80 dark:border-amber-400/40 text-center transition-transform hover:scale-105">
             <span className="block font-space font-extrabold text-lg sm:text-xl text-amber-600 dark:text-amber-400">6 Demo</span>
             <span className="text-[10px] sm:text-[11px] font-bold text-pastel-navy/60 dark:text-slate-400 uppercase tracking-tight">{t.hero.statDemos}</span>
           </div>
-          <div className="bg-white/80 dark:bg-slate-800/80 p-2 sm:p-2.5 rounded-2xl border border-pastel-green/80 dark:border-emerald-500/40 text-center">
-            <span className="block font-space font-extrabold text-lg sm:text-xl text-emerald-600 dark:text-emerald-400">95.8%</span>
+          <div className="bg-white/80 dark:bg-slate-800/80 p-2 sm:p-2.5 rounded-2xl border border-pastel-green/80 dark:border-emerald-500/40 text-center transition-transform hover:scale-105">
+            <span className="block font-space font-extrabold text-lg sm:text-xl text-emerald-600 dark:text-emerald-400">{coverageVal}%</span>
             <span className="text-[10px] sm:text-[11px] font-bold text-pastel-navy/60 dark:text-slate-400 uppercase tracking-tight">{t.hero.statCoverage}</span>
           </div>
         </div>
       </div>
       
-      {/* Profile Photo with CLS Prevention (Explicit Aspect Ratio & Dimensions) */}
-      <div className="flex-1 flex justify-center items-center w-full">
-        <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 p-2.5 sm:p-3 rounded-full bg-white dark:bg-slate-800 shadow-pastel-lg group transform-gpu-safe">
-          <div className="absolute inset-0 rounded-full border-2 border-dashed border-pastel-blue dark:border-sky-500/50 animate-[spin_20s_linear_infinite] group-hover:scale-105 transition-transform duration-500"></div>
-          <div className="absolute -inset-2 rounded-full border border-pastel-yellow/70 dark:border-amber-400/50 animate-[spin_32s_linear_infinite_reverse]"></div>
-          
-          <img
-            src="Image/fotomuka.jpg"
-            alt="Foto Profil Fatir Gibran"
-            width="320"
-            height="320"
-            loading="eager"
-            decoding="async"
-            className="w-full h-full aspect-square object-cover object-top rounded-full border-4 border-white dark:border-slate-800 shadow-inner group-hover:scale-95 transition-transform duration-500"
-            style={{ objectPosition: 'center top' }}
-            onError={(e) => {
-              e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80';
+      {/* Profile Area: Interactive Toggle between Photo and 3D Holographic Developer Pass */}
+      <div className="flex-1 flex flex-col justify-center items-center w-full">
+        {/* Interactive View Switcher Pill */}
+        <div className="inline-flex items-center gap-1.5 p-1 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md rounded-full border border-pastel-peach/60 dark:border-slate-700 mb-4 shadow-pastel-sm">
+          <button
+            onClick={() => {
+              playSound('click');
+              setHeroView('photo');
             }}
-          />
-
-          <div className="absolute -bottom-2 -left-2 bg-white dark:bg-slate-800 border-2 border-pastel-green dark:border-emerald-500/50 py-1 px-2.5 sm:px-3 rounded-full shadow-pastel-md flex items-center gap-1.5 text-[11px] sm:text-xs font-extrabold text-emerald-700 dark:text-emerald-400 animate-bounce-soft">
-            <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
-            <span>{t.hero.floatingPrivacy}</span>
-          </div>
-          <div className="absolute -top-2 -right-2 bg-white dark:bg-slate-800 border-2 border-pastel-blue dark:border-sky-500/50 py-1 px-2.5 sm:px-3 rounded-full shadow-pastel-md flex items-center gap-1.5 text-[11px] sm:text-xs font-extrabold text-pastel-blue-dark dark:text-sky-400">
-            <Code2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-            <span>{t.hero.floatingStack}</span>
-          </div>
+            className={`px-3.5 py-1 rounded-full text-xs font-space font-bold transition-all ${
+              heroView === 'photo'
+                ? 'bg-pastel-yellow dark:bg-amber-400 text-pastel-navy shadow-sm'
+                : 'text-pastel-navy/60 dark:text-slate-400 hover:text-pastel-navy dark:hover:text-white'
+            }`}
+          >
+            📷 Foto Profil
+          </button>
+          <button
+            onClick={() => {
+              playSound('tab');
+              setHeroView('badge');
+            }}
+            className={`px-3.5 py-1 rounded-full text-xs font-space font-bold transition-all flex items-center gap-1.5 ${
+              heroView === 'badge'
+                ? 'bg-pastel-blue dark:bg-sky-500 text-pastel-navy dark:text-white shadow-sm'
+                : 'text-pastel-navy/60 dark:text-slate-400 hover:text-pastel-navy dark:hover:text-white'
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <span>🪪 3D Developer Pass</span>
+          </button>
         </div>
+
+        {heroView === 'badge' ? (
+          <div className="animate-fade-in">
+            <HoloDevPass />
+          </div>
+        ) : (
+          <div className="relative flex flex-col items-center">
+            <div
+              onClick={() => {
+                playSound('tab');
+                setHeroView('badge');
+              }}
+              title="Klik untuk membuka 3D Developer Pass"
+              className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 p-2.5 sm:p-3 rounded-full bg-white dark:bg-slate-800 shadow-pastel-lg group transform-gpu-safe cursor-pointer"
+            >
+              <div className="absolute inset-0 rounded-full border-2 border-dashed border-pastel-blue dark:border-sky-500/50 animate-[spin_20s_linear_infinite] group-hover:scale-105 transition-transform duration-500"></div>
+              <div className="absolute -inset-2 rounded-full border border-pastel-yellow/70 dark:border-amber-400/50 animate-[spin_32s_linear_infinite_reverse]"></div>
+              
+              <img
+                src="Image/fotomuka.jpg"
+                alt="Foto Profil Fatir Gibran"
+                width="320"
+                height="320"
+                loading="eager"
+                decoding="async"
+                className="w-full h-full aspect-square object-cover object-top rounded-full border-4 border-white dark:border-slate-800 shadow-inner group-hover:scale-95 transition-transform duration-500"
+                style={{ objectPosition: 'center top' }}
+                onError={(e) => {
+                  e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80';
+                }}
+              />
+
+              <div className="absolute -bottom-2 -left-2 bg-white dark:bg-slate-800 border-2 border-pastel-green dark:border-emerald-500/50 py-1 px-2.5 sm:px-3 rounded-full shadow-pastel-md flex items-center gap-1.5 text-[11px] sm:text-xs font-extrabold text-emerald-700 dark:text-emerald-400 animate-bounce-soft">
+                <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                <span>{t.hero.floatingPrivacy}</span>
+              </div>
+              <div className="absolute -top-2 -right-2 bg-white dark:bg-slate-800 border-2 border-pastel-blue dark:border-sky-500/50 py-1 px-2.5 sm:px-3 rounded-full shadow-pastel-md flex items-center gap-1.5 text-[11px] sm:text-xs font-extrabold text-pastel-blue-dark dark:text-sky-400">
+                <Code2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                <span>{t.hero.floatingStack}</span>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                playSound('tab');
+                setHeroView('badge');
+              }}
+              className="mt-4 inline-flex items-center gap-1.5 text-xs font-mono font-bold text-pastel-blue-dark dark:text-sky-400 hover:underline cursor-pointer group"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-500 group-hover:rotate-12 transition-transform" />
+              <span>Coba Interaktif 3D Developer Pass ✨</span>
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

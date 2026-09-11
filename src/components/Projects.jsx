@@ -184,9 +184,11 @@ function Projects({ onSelectSandboxTab }) {
     <section id="proyek" className="py-16 sm:py-20 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto scroll-mt-12 content-auto">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 border-b-2 border-pastel-peach/30 dark:border-slate-800 pb-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pastel-yellow/80 dark:bg-amber-400/20 border border-pastel-yellow-hover dark:border-amber-400/40 text-pastel-navy dark:text-amber-300 font-bold text-xs uppercase tracking-wider mb-2">
-            <CheckCircle2 className="w-3.5 h-3.5 text-pastel-blue-dark dark:text-amber-400" />
-            <span>{t.projects.badgeVerified}</span>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-pastel-yellow/80 dark:bg-amber-400/20 border border-pastel-yellow-hover dark:border-amber-400/40 text-pastel-navy dark:text-amber-300 font-bold text-[11px] uppercase tracking-wider">
+              <CheckCircle2 className="w-3 h-3 text-pastel-blue-dark dark:text-amber-400" />
+              <span>{t.projects.badgeVerified}</span>
+            </div>
           </div>
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-space text-pastel-navy dark:text-white inline-block relative">
             {t.projects.title}

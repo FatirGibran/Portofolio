@@ -9,6 +9,9 @@ import Footer from './components/Footer';
 import SpatialStage3D from './components/SpatialStage3D';
 import CommandPalette from './components/CommandPalette';
 import ProjectModal from './components/ProjectModal';
+import StoryTicker from './components/StoryTicker';
+import BackToTop from './components/BackToTop';
+import ClickRipple from './components/ClickRipple';
 import { Sparkles, Power } from 'lucide-react';
 import { PortfolioProvider } from './context/PortfolioContext';
 
@@ -240,6 +243,7 @@ function PortfolioApp() {
       <div className="relative z-10">
         <Navbar />
         <Hero />
+        <StoryTicker />
         <About />
 
         {/* Projects Gallery */}
@@ -264,10 +268,16 @@ function PortfolioApp() {
       </div>
 
       {/* Global Interactive Cyber Command Palette & Terminal (Cmd + K) */}
-      <CommandPalette />
+      <CommandPalette triggerGlobalEffect={triggerGlobalEffect} />
 
       {/* Project Architectural Case Study Deep-Dive Modal */}
       <ProjectModal />
+
+      {/* Smooth Scroll Back To Top Button */}
+      <BackToTop />
+
+      {/* Subtle Interactive Click Ripple Wave */}
+      <ClickRipple />
     </div>
   );
 }

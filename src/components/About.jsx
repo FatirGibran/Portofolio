@@ -95,6 +95,94 @@ function About() {
           </div>
         </div>
       </div>
+
+      {/* Interactive Career Timeline & Evolution */}
+      <div className="mt-14 pt-10 border-t-2 border-pastel-peach/40 dark:border-slate-800">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 mb-8">
+          <div>
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-pastel-blue-dark dark:text-sky-400">
+              Chronicle // Engineering Odyssey
+            </span>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-space font-extrabold text-pastel-navy dark:text-white mt-1">
+              Evolusi Rekayasa & Kepemimpinan
+            </h3>
+          </div>
+          <span className="text-xs font-mono font-bold text-pastel-navy/50 dark:text-slate-400 bg-white dark:bg-slate-800 px-3 py-1 rounded-full border border-pastel-navy/10 dark:border-slate-700">
+            2023 ➔ 2026 (Present)
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 relative">
+          {/* Milestone 1 */}
+          <div className="bg-white/80 dark:bg-slate-800/80 border-2 border-pastel-peach dark:border-slate-700 rounded-3xl p-5 sm:p-6 shadow-pastel-sm hover:shadow-pastel-md transition-all duration-200 transform hover:-translate-y-1 relative group">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-mono font-extrabold text-pastel-blue-dark dark:text-sky-400 bg-pastel-blue/60 dark:bg-sky-950/60 py-1 px-2.5 rounded-xl border border-pastel-blue-dark/20 dark:border-sky-800">
+                2023
+              </span>
+              <span className="text-[10px] font-bold uppercase text-pastel-navy/40 dark:text-slate-500 font-mono">
+                Phase 01
+              </span>
+            </div>
+            <h4 className="text-base font-space font-bold text-pastel-navy dark:text-white mb-1.5 group-hover:text-pastel-blue-dark dark:group-hover:text-sky-400 transition-colors">
+              The Genesis & Full-Stack
+            </h4>
+            <p className="text-xs text-pastel-navy/70 dark:text-slate-300 leading-relaxed mb-3">
+              Membangun fondasi komputasi kuat di Telkom University Purwokerto. Eksplorasi arsitektur RESTful API, React, dan algoritma Python dasar.
+            </p>
+            <div className="flex flex-wrap gap-1">
+              <span className="text-[10px] font-mono font-bold text-pastel-navy/60 dark:text-slate-400 bg-pastel-bg dark:bg-slate-900 px-2 py-0.5 rounded-md">Python</span>
+              <span className="text-[10px] font-mono font-bold text-pastel-navy/60 dark:text-slate-400 bg-pastel-bg dark:bg-slate-900 px-2 py-0.5 rounded-md">React</span>
+              <span className="text-[10px] font-mono font-bold text-pastel-navy/60 dark:text-slate-400 bg-pastel-bg dark:bg-slate-900 px-2 py-0.5 rounded-md">Networking</span>
+            </div>
+          </div>
+
+          {/* Milestone 2 */}
+          <div className="bg-white/80 dark:bg-slate-800/80 border-2 border-pastel-yellow dark:border-amber-400/40 rounded-3xl p-5 sm:p-6 shadow-pastel-sm hover:shadow-pastel-md transition-all duration-200 transform hover:-translate-y-1 relative group">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-mono font-extrabold text-amber-700 dark:text-amber-300 bg-pastel-yellow/90 dark:bg-amber-950/60 py-1 px-2.5 rounded-xl border border-pastel-yellow-hover dark:border-amber-800">
+                2024
+              </span>
+              <span className="text-[10px] font-bold uppercase text-pastel-navy/40 dark:text-slate-500 font-mono">
+                Phase 02
+              </span>
+            </div>
+            <h4 className="text-base font-space font-bold text-pastel-navy dark:text-white mb-1.5 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+              The Edge AI Breakthrough
+            </h4>
+            <p className="text-xs text-pastel-navy/70 dark:text-slate-300 leading-relaxed mb-3">
+              Terjun mendalam ke On-Device Edge AI, Computer Vision tanpa server (MediaPipe WASM, YOLOv8), dan enkripsi offline (VaultSentinel 95.8% coverage).
+            </p>
+            <div className="flex flex-wrap gap-1">
+              <span className="text-[10px] font-mono font-bold text-pastel-navy/60 dark:text-slate-400 bg-pastel-bg dark:bg-slate-900 px-2 py-0.5 rounded-md">YOLOv8</span>
+              <span className="text-[10px] font-mono font-bold text-pastel-navy/60 dark:text-slate-400 bg-pastel-bg dark:bg-slate-900 px-2 py-0.5 rounded-md">WASM</span>
+              <span className="text-[10px] font-mono font-bold text-pastel-navy/60 dark:text-slate-400 bg-pastel-bg dark:bg-slate-900 px-2 py-0.5 rounded-md">AES-128</span>
+            </div>
+          </div>
+
+          {/* Milestone 3 */}
+          <div className="bg-white/80 dark:bg-slate-800/80 border-2 border-pastel-green dark:border-emerald-500/40 rounded-3xl p-5 sm:p-6 shadow-pastel-sm hover:shadow-pastel-md transition-all duration-200 transform hover:-translate-y-1 relative group">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-mono font-extrabold text-emerald-700 dark:text-emerald-300 bg-pastel-green/70 dark:bg-emerald-950/60 py-1 px-2.5 rounded-xl border border-emerald-500/30 dark:border-emerald-800">
+                2025 - Present
+              </span>
+              <span className="text-[10px] font-bold uppercase text-emerald-600 dark:text-emerald-400 font-mono">
+                Current Era
+              </span>
+            </div>
+            <h4 className="text-base font-space font-bold text-pastel-navy dark:text-white mb-1.5 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+              Chairman HMIF & Systems
+            </h4>
+            <p className="text-xs text-pastel-navy/70 dark:text-slate-300 leading-relaxed mb-3">
+              Terpilih memimpin Himpunan Mahasiswa Informatika (HMIF), membimbing ratusan mahasiswa, dan merilis 20+ sistem nyata di Web & Edge.
+            </p>
+            <div className="flex flex-wrap gap-1">
+              <span className="text-[10px] font-mono font-bold text-pastel-navy/60 dark:text-slate-400 bg-pastel-bg dark:bg-slate-900 px-2 py-0.5 rounded-md">Leadership</span>
+              <span className="text-[10px] font-mono font-bold text-pastel-navy/60 dark:text-slate-400 bg-pastel-bg dark:bg-slate-900 px-2 py-0.5 rounded-md">20 Projects</span>
+              <span className="text-[10px] font-mono font-bold text-pastel-navy/60 dark:text-slate-400 bg-pastel-bg dark:bg-slate-900 px-2 py-0.5 rounded-md">HMIF Board</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
