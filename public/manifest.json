@@ -1,0 +1,22 @@
+{
+  "name": "Fatir Gibran | Full-Stack & Edge AI Engineer",
+  "short_name": "Fatir Gibran",
+  "description": "Portfolio of Fatir Gibran - Chairman of HMIF, Full-Stack Engineer & Edge AI Practitioner",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFBF7",
+  "theme_color": "#FDFBF7",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/Image/fotomuka.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
