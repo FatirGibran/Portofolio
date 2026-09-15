@@ -18,10 +18,10 @@ export const SKILL_ITEMS = Object.freeze([
     themeBg: 'bg-pastel-yellow/35 dark:bg-amber-950/40 border-pastel-yellow-hover dark:border-amber-800',
     iconColor: 'text-amber-700 dark:text-amber-400',
     skills: [
-      { name: 'Next.js 14/15 (App Router, Server Actions) & React 19', val: 92 },
+      { name: 'Next.js 15 (App Router, Server Actions) & React 19', val: 94 },
       { name: 'TypeScript & Modern Tailwind CSS (v3 / v4)', val: 95 },
-      { name: 'Backend Engineering (FastAPI, Flask, Java MVC)', val: 88 },
-      { name: 'Database & Realtime (Supabase, Firebase, MySQL)', val: 90 },
+      { name: 'Backend & Concurrency (Go / Golang, FastAPI, Java MVC)', val: 90 },
+      { name: 'Database & Realtime (Supabase, Firebase RTDB, MySQL)', val: 91 },
     ]
   },
   {
@@ -31,8 +31,8 @@ export const SKILL_ITEMS = Object.freeze([
     skills: [
       { name: 'Offline-First Cryptography (AES-128 Fernet, PBKDF2)', val: 90 },
       { name: 'SHA-256 Incremental File Hashing & Integrity', val: 92 },
-      { name: 'Docker, Containerization & CI/CD Pipelines', val: 84 },
-      { name: 'Computer Networks & TCP/IP Socket Programming', val: 85 },
+      { name: 'Docker, Cloud Deployment & CI/CD Pipelines', val: 88 },
+      { name: 'Computer Networks & TCP/IP Socket Programming', val: 86 },
     ]
   },
   {
