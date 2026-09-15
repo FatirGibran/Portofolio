@@ -66,7 +66,7 @@ function HoloDevPass({ isModal = false }) {
   const copyVCard = (e) => {
     if (e) e.stopPropagation();
     playSound('click');
-    navigator.clipboard.writeText('fatirgibran08@gmail.com');
+    navigator.clipboard.writeText('fatirgibrann@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
