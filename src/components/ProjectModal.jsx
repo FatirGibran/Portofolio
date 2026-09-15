@@ -29,20 +29,49 @@ function ProjectModal() {
   if (!selectedProjectForModal) return null;
 
   const project = selectedProjectForModal;
-  const caseStudy = CASE_STUDIES[project.id] || {
-    pipeline: [
-      { step: 'Input Layer', desc: 'Data Collection & UI Triggers' },
-      { step: 'Core Processing', desc: 'State Management & Logic Flow' },
-      { step: 'Integration', desc: 'API / Database Synchronization' },
-      { step: 'UI Presentation', desc: 'Reactive Component Render' }
-    ],
-    challenges: 'Mengoptimalkan performa rendering dan efisiensi query agar latensi tetap rendah pada berbagai perangkat.',
-    solution: 'Penerapan arsitektur modular, caching lokal cerdas, dan component memoization untuk memastikan 60 FPS fluid UI.',
-    metrics: [
-      { label: 'Quality Score', val: 'A+' },
-      { label: 'Responsive', val: 'Mobile-First' },
-      { label: 'Architecture', val: 'Modular Clean' },
-    ]
+  const rawCaseStudy = CASE_STUDIES[project.id];
+
+  const pipeline = (lang === 'en' && rawCaseStudy?.pipelineEn)
+    ? rawCaseStudy.pipelineEn
+    : (rawCaseStudy?.pipeline || [
+      { step: 'Pipeline Ingestion', desc: 'Input stream and initial parameter parsing' },
+      { step: 'Core Processing', desc: 'Algorithmic business execution' },
+      { step: 'State & Storage', desc: 'Data persistence and state sync' },
+      { step: 'Output Delivery', desc: 'Result presentation and visualization' }
+    ]);
+
+  const challenges = (lang === 'en' && rawCaseStudy?.challengesEn)
+    ? rawCaseStudy.challengesEn
+    : (rawCaseStudy?.challenges || 'Optimasi performa dan integritas data pada pemrosesan sistem.');
+
+  const solution = (lang === 'en' && rawCaseStudy?.solutionEn)
+    ? rawCaseStudy.solutionEn
+    : (rawCaseStudy?.solution || 'Penerapan arsitektur komputasi terstruktur dan isolasi modul.');
+
+  const metrics = rawCaseStudy?.metrics || [
+    { label: 'Quality', val: 'A+' },
+    { label: 'Latency', val: '<50ms' },
+    { label: 'Reliability', val: '100%' },
+  ];
+
+  const labels = lang === 'en' ? {
+    pipelineTitle: 'Architecture & Data Pipeline Flow',
+    step: 'STEP',
+    challengesTitle: 'Engineering Challenges',
+    solutionTitle: 'Solution & Outcomes',
+    techTitle: 'Technologies Used',
+    viewGithub: 'View Code on GitHub',
+    tryDemo: 'Try in Sandbox Demo',
+    visitLive: 'Visit Live Site',
+  } : {
+    pipelineTitle: 'Arsitektur & Alur Data (System Pipeline)',
+    step: 'STEP',
+    challengesTitle: 'Tantangan Rekayasa',
+    solutionTitle: 'Solusi & Hasil',
+    techTitle: 'Teknologi yang Digunakan',
+    viewGithub: 'Lihat Kode di GitHub',
+    tryDemo: 'Uji di Sandbox Demo',
+    visitLive: 'Kunjungi Web Live',
   };
 
   const description = (lang === 'en' && project.descEn) ? project.descEn : project.desc;
@@ -110,18 +139,18 @@ function ProjectModal() {
             <div className="flex items-center gap-2 mb-3">
               <Layers className="w-4 h-4 text-pastel-blue-dark dark:text-sky-400" />
               <h4 className="text-xs font-bold font-space uppercase tracking-wider text-pastel-navy dark:text-slate-300">
-                Arsitektur & Alur Data (System Pipeline)
+                {labels.pipelineTitle}
               </h4>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-2.5">
-              {caseStudy.pipeline.map((item, idx) => (
+              {pipeline.map((item, idx) => (
                 <div
                   key={idx}
                   className="bg-white dark:bg-slate-800 p-3 rounded-xl border border-pastel-navy/10 dark:border-slate-700 relative flex flex-col justify-between"
                 >
                   <div className="text-[10px] font-mono font-bold text-pastel-blue-dark dark:text-sky-400 mb-1">
-                    0{idx + 1}. STEP
+                    0{idx + 1}. {labels.step}
                   </div>
                   <div className="text-xs font-bold font-space text-pastel-navy dark:text-white leading-tight">
                     {item.step}
@@ -139,7 +168,7 @@ function ProjectModal() {
 
           {/* Key Metrics */}
           <div className="grid grid-cols-3 gap-3">
-            {caseStudy.metrics.map((m, idx) => (
+            {metrics.map((m, idx) => (
               <div
                 key={idx}
                 className="bg-pastel-yellow/30 dark:bg-amber-950/20 p-3.5 rounded-2xl border border-pastel-yellow dark:border-amber-900/50 text-center"
@@ -159,20 +188,20 @@ function ProjectModal() {
             <div className="bg-rose-50/70 dark:bg-rose-950/20 p-4 rounded-2xl border border-rose-200 dark:border-rose-900/40">
               <div className="font-bold font-space text-rose-700 dark:text-rose-300 mb-1 flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4" />
-                <span>Tantangan Rekayasa</span>
+                <span>{labels.challengesTitle}</span>
               </div>
               <p className="text-pastel-navy/70 dark:text-slate-300 leading-relaxed">
-                {caseStudy.challenges}
+                {challenges}
               </p>
             </div>
 
             <div className="bg-emerald-50/70 dark:bg-emerald-950/20 p-4 rounded-2xl border border-emerald-200 dark:border-emerald-900/40">
               <div className="font-bold font-space text-emerald-700 dark:text-emerald-300 mb-1 flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4" />
-                <span>Solusi & Hasil</span>
+                <span>{labels.solutionTitle}</span>
               </div>
               <p className="text-pastel-navy/70 dark:text-slate-300 leading-relaxed">
-                {caseStudy.solution}
+                {solution}
               </p>
             </div>
           </div>
@@ -180,7 +209,7 @@ function ProjectModal() {
           {/* Tech Stack List */}
           <div>
             <div className="text-xs font-bold font-space uppercase tracking-wider text-pastel-navy/60 dark:text-slate-400 mb-2">
-              Teknologi yang Digunakan
+              {labels.techTitle}
             </div>
             <div className="flex flex-wrap gap-1.5">
               {project.tech.map((tItem, idx) => (
@@ -207,7 +236,7 @@ function ProjectModal() {
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-pastel-navy dark:text-slate-200 hover:text-pastel-blue-dark dark:hover:text-sky-400 transition-colors"
               >
                 <GitBranch className="w-4 h-4" />
-                <span>Lihat Kode di GitHub</span>
+                <span>{labels.viewGithub}</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
             )}
@@ -220,7 +249,7 @@ function ProjectModal() {
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-pastel-navy bg-pastel-yellow hover:bg-pastel-yellow-hover border border-pastel-yellow-hover py-2 px-4 rounded-xl shadow-pastel-sm transition-transform hover:scale-105"
               >
                 <Play className="w-3 h-3 fill-pastel-navy" />
-                <span>Uji di Sandbox Demo</span>
+                <span>{labels.tryDemo}</span>
               </button>
             )}
 
@@ -232,7 +261,7 @@ function ProjectModal() {
                 onClick={() => playSound('click')}
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-pastel-blue-dark dark:text-sky-400 bg-pastel-blue/60 dark:bg-sky-950/70 border border-pastel-blue-dark/40 py-2 px-4 rounded-xl shadow-pastel-sm transition-transform hover:scale-105"
               >
-                <span>Kunjungi Web Live</span>
+                <span>{labels.visitLive}</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             )}
