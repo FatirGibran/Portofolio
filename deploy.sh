@@ -25,4 +25,4 @@ git push origin main
 echo "🔥 Deploying to Firebase Hosting..."
 firebase deploy --only hosting:main
 
-echo "✅ Portfolio deployment complete and live at https://portofolio-fatir.web.app!"
+echo "✅ Portfolio deployment complete and live at https://fatirgibran.my.id!"

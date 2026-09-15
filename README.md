@@ -1,7 +1,7 @@
 # Fatir Gibran — Portfolio & Interactive Developer Odyssey
 
 [![Production](https://img.shields.io/badge/Production-fatirgibran.my.id-0284c7?style=for-the-badge&logo=google-chrome&logoColor=white)](https://fatirgibran.my.id/)
-[![Firebase Hosting](https://img.shields.io/badge/Hosted%20On-Firebase%20Hosting-ffca28?style=for-the-badge&logo=firebase&logoColor=black)](https://portofolio-fatir.web.app/)
+[![Firebase Hosting](https://img.shields.io/badge/Hosted%20On-Firebase%20Hosting-ffca28?style=for-the-badge&logo=firebase&logoColor=black)](https://fatirgibran.my.id/)
 [![React 19](https://img.shields.io/badge/React-19.0-61dafb?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Three.js](https://img.shields.io/badge/3D%20WebGL-Three.js-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
