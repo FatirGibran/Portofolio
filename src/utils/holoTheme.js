@@ -14,5 +14,5 @@ export const DEVPASS_SPECS = {
   clearanceLevel: 'CLEARANCE: ROOT LV.5',
   shaSignature: 'SHA256: 7F4A-99B1-FATIR-GIBRAN-OK',
   barcodeWidths: [3,1,4,2,1,3,1,2,4,1,2,3,1,4,2,1,3,2,1,3,4,1,2,1],
-  coreStack: ['React 19', 'Edge AI', 'MediaPipe', 'FastAPI', 'AES-128', 'WASM'],
+  coreStack: ['React 19', 'Go / Golang', 'Edge AI', 'FastAPI', 'AES-128', 'WASM'],
 };
