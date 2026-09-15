@@ -231,6 +231,6 @@ export const ALL_PROJECTS = Object.freeze([
     descEn: 'Interactive casual personal portfolio website built on React + Vite + Tailwind CSS featuring 6 integrated playable Sandbox testing modules.',
     tech: ['React 19', 'Vite', 'Tailwind CSS', 'Firebase Hosting'],
     repoLink: 'https://github.com/Fatirrr08/Portofolio',
-    liveLink: 'https://portofolio-fatir.web.app/'
+    liveLink: 'https://fatirgibran.my.id/'
   }
 ]);
