@@ -50,9 +50,16 @@ function Keterampilan() {
                     <span className="font-mono text-pastel-blue-dark dark:text-sky-400 flex-shrink-0">{skill.val}%</span>
                   </div>
 
-                  <div className="h-2.5 sm:h-3 w-full bg-pastel-bg dark:bg-slate-900 rounded-full border border-pastel-navy/5 dark:border-slate-700 overflow-hidden">
+                  <div
+                    role="progressbar"
+                    aria-valuenow={skill.val}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={`${skill.name}: ${skill.val}%`}
+                    className="h-2.5 sm:h-3 w-full bg-pastel-bg dark:bg-slate-900 rounded-full border border-pastel-navy/5 dark:border-slate-700 overflow-hidden"
+                  >
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-pastel-blue-dark via-amber-400 to-emerald-500 shadow-pastel-sm transition-all duration-1000 ease-out will-change-transform"
+                      className="h-full rounded-full bg-pastel-blue-dark dark:bg-sky-500 transition-all duration-1000 ease-out will-change-transform"
                       style={{ width: animate ? `${skill.val}%` : '0%' }}
                     ></div>
                   </div>
