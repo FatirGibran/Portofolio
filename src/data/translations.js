@@ -30,7 +30,7 @@ export const translations = {
     },
     about: {
       title: 'Tentang & Kepemimpinan',
-      subtitle: 'Kombinasi antara kompetensi teknis rekayasa perangkat lunak dan kepemimpinan organisasi kemahasiswaan.',
+      subtitle: 'Teknik, kepemimpinan, dan sedikit gila-gilaan — begitu cara aku jalanin semester ini.',
       badgeIdentity: 'Identitas & Organisasi',
       badgeStatus: 'AKTIF (Semester 5)',
       p1: 'Saya adalah mahasiswa S1 Teknik Informatika di <strong>Telkom University Purwokerto</strong> yang saat ini dipercaya sebagai <strong>Chairman (Ketua Himpunan) HMIF Telkom University Purwokerto (Periode 2025/2026)</strong>.',
@@ -125,7 +125,7 @@ export const translations = {
     },
     about: {
       title: 'About & Leadership',
-      subtitle: 'Blending rigorous software engineering craftsmanship with student organization leadership.',
+      subtitle: 'Engineering, leadership, and a bit of chaos — that sums up my semester.',
       badgeIdentity: 'Identity & Leadership',
       badgeStatus: 'ACTIVE (5th Semester)',
       p1: 'I am an Informatics Engineering student at <strong>Telkom University Purwokerto</strong>, currently serving as the <strong>Chairman of HMIF Telkom University Purwokerto (Executive Board 2025/2026)</strong>.',
