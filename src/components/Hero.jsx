@@ -132,15 +132,15 @@ function Hero() {
         <div className="grid grid-cols-3 gap-2.5 sm:gap-3 max-w-md mx-auto md:mx-0 pt-4 border-t border-pastel-navy/10 dark:border-slate-800">
           <div className="bg-white/80 dark:bg-slate-800/80 p-2 sm:p-2.5 rounded-2xl border border-pastel-peach/60 dark:border-slate-700 text-center transition-transform hover:scale-105">
             <span className="block font-space font-extrabold text-lg sm:text-xl text-pastel-blue-dark dark:text-sky-400">{projectCount}</span>
-            <span className="text-[10px] sm:text-[11px] font-bold text-pastel-navy/60 dark:text-slate-400 uppercase tracking-tight">{t.hero.statProjects}</span>
+            <span className="text-xs font-bold text-pastel-navy/60 dark:text-slate-400 uppercase tracking-tight">{t.hero.statProjects}</span>
           </div>
           <div className="bg-white/80 dark:bg-slate-800/80 p-2 sm:p-2.5 rounded-2xl border border-pastel-yellow/80 dark:border-amber-400/40 text-center transition-transform hover:scale-105">
             <span className="block font-space font-extrabold text-lg sm:text-xl text-amber-600 dark:text-amber-400">6 Demo</span>
-            <span className="text-[10px] sm:text-[11px] font-bold text-pastel-navy/60 dark:text-slate-400 uppercase tracking-tight">{t.hero.statDemos}</span>
+            <span className="text-xs font-bold text-pastel-navy/60 dark:text-slate-400 uppercase tracking-tight">{t.hero.statDemos}</span>
           </div>
           <div className="bg-white/80 dark:bg-slate-800/80 p-2 sm:p-2.5 rounded-2xl border border-pastel-green/80 dark:border-emerald-500/40 text-center transition-transform hover:scale-105">
             <span className="block font-space font-extrabold text-lg sm:text-xl text-emerald-600 dark:text-emerald-400">{coverageVal}%</span>
-            <span className="text-[10px] sm:text-[11px] font-bold text-pastel-navy/60 dark:text-slate-400 uppercase tracking-tight">{t.hero.statCoverage}</span>
+            <span className="text-xs font-bold text-pastel-navy/60 dark:text-slate-400 uppercase tracking-tight">{t.hero.statCoverage}</span>
           </div>
         </div>
       </div>
