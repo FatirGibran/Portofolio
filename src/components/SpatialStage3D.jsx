@@ -640,9 +640,52 @@ export default function SpatialStage3D({
 
     animate();
 
+    // 8b. Pause/resume on visibility change (battery & CPU saving)
+    let animId = null;
+    const animIdRef = { current: null };
+
+    const pauseAnimation = () => {
+      if (animIdRef.current) {
+        cancelAnimationFrame(animIdRef.current);
+        animIdRef.current = null;
+      }
+    };
+
+    const resumeAnimation = () => {
+      if (!animIdRef.current) {
+        animIdRef.current = requestAnimationFrame(animate);
+      }
+    };
+
+    // Page Visibility API — pause when tab is hidden
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        pauseAnimation();
+      } else {
+        resumeAnimation();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // IntersectionObserver — pause when canvas scrolled fully out of view
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          resumeAnimation();
+        } else {
+          pauseAnimation();
+        }
+      },
+      { threshold: 0, rootMargin: '200px' }
+    );
+    if (canvasRef.current) observer.observe(canvasRef.current);
+
     // 8. Cleanup on Component Unmount
     return () => {
+      pauseAnimation();
       cancelAnimationFrame(animId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', updateScrollTarget);
       window.removeEventListener('resize', handleResize);
