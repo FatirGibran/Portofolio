@@ -206,11 +206,11 @@ function Hero() {
                 }}
               />
 
-              <div className="absolute -bottom-2 -left-2 bg-white dark:bg-slate-800 border-2 border-pastel-green dark:border-emerald-500/50 py-1 px-2.5 sm:px-3 rounded-full shadow-pastel-md flex items-center gap-1.5 text-[11px] sm:text-xs font-extrabold text-emerald-700 dark:text-emerald-400 animate-bounce-soft">
+              <div className="absolute -bottom-2 -left-2 bg-white dark:bg-slate-800 border-2 border-pastel-green dark:border-emerald-500/50 py-1 px-2.5 sm:px-3 rounded-full shadow-pastel-md flex items-center gap-1.5 text-xs font-extrabold text-emerald-700 dark:text-emerald-400">
                 <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
                 <span>{t.hero.floatingPrivacy}</span>
               </div>
-              <div className="absolute -top-2 -right-2 bg-white dark:bg-slate-800 border-2 border-pastel-blue dark:border-sky-500/50 py-1 px-2.5 sm:px-3 rounded-full shadow-pastel-md flex items-center gap-1.5 text-[11px] sm:text-xs font-extrabold text-pastel-blue-dark dark:text-sky-400">
+              <div className="absolute -top-2 -right-2 bg-white dark:bg-slate-800 border-2 border-pastel-blue dark:border-sky-500/50 py-1 px-2.5 sm:px-3 rounded-full shadow-pastel-md flex items-center gap-1.5 text-xs font-extrabold text-pastel-blue-dark dark:text-sky-400">
                 <Code2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
                 <span>{t.hero.floatingStack}</span>
               </div>
