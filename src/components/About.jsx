@@ -101,7 +101,7 @@ function About() {
       <div className="mt-14 pt-10 border-t-2 border-pastel-peach/40 dark:border-slate-800">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 mb-8">
           <div>
-            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-pastel-blue-dark dark:text-sky-400">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-pastel-blue-dark dark:text-sky-400">
               Perjalanan Belajar
             </span>
             <h3 className="text-xl sm:text-2xl md:text-3xl font-space font-extrabold text-pastel-navy dark:text-white mt-1">
@@ -109,7 +109,7 @@ function About() {
             </h3>
           </div>
           <span className="text-xs font-mono font-bold text-pastel-navy/50 dark:text-slate-400 bg-white dark:bg-slate-800 px-3 py-1 rounded-full border border-pastel-navy/10 dark:border-slate-700">
-            2023 ➔ 2026 (Present)
+            2023 → 2026
           </span>
         </div>
 
