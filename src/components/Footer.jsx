@@ -64,13 +64,13 @@ function Footer() {
         </div>
 
         {/* Bottom Credits */}
-        <div className="w-full pt-6 sm:pt-8 border-t border-pastel-peach/40 dark:border-slate-800 text-[11px] sm:text-xs font-semibold text-pastel-navy/40 dark:text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+        <div className="w-full pt-6 sm:pt-8 border-t border-pastel-peach/40 dark:border-slate-800 text-xs font-semibold text-pastel-navy/40 dark:text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
           <div className="flex items-center gap-1.5 justify-center">
             <span>{t.footer.madeWith}</span>
-            <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pastel-pink fill-pastel-pink animate-pulse" />
+            <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-400 fill-rose-400" />
             <span>{t.footer.by} &copy; {new Date().getFullYear()}</span>
           </div>
-          <div className="font-space uppercase tracking-wider text-[9px] sm:text-[10px]">
+          <div className="font-space uppercase tracking-wider text-xs opacity-70">
             Telkom University Purwokerto • Informatics Engineering
           </div>
         </div>
