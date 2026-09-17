@@ -83,7 +83,7 @@ function Navbar() {
     <>
       {/* Top Scroll Progress Indicator */}
       <div
-        className="fixed top-0 left-0 h-1 z-[100] bg-gradient-to-r from-pastel-blue via-pastel-yellow to-pastel-pink dark:from-sky-500 dark:via-amber-400 dark:to-rose-400 shadow-[0_0_10px_rgba(56,189,248,0.6)] transition-all duration-75 ease-out pointer-events-none"
+        className="fixed top-0 left-0 h-0.5 z-[100] bg-pastel-blue-dark dark:bg-sky-400 transition-all duration-75 ease-out pointer-events-none"
         style={{ width: `${scrollProgress}%` }}
       />
 
