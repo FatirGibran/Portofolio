@@ -12,7 +12,7 @@ import ProjectModal from './components/ProjectModal';
 import StoryTicker from './components/StoryTicker';
 import BackToTop from './components/BackToTop';
 import ClickRipple from './components/ClickRipple';
-import { Sparkles, Power } from 'lucide-react';
+import { Power } from 'lucide-react';
 import { PortfolioProvider } from './context/PortfolioContext';
 
 function PortfolioApp() {
@@ -240,11 +240,6 @@ function PortfolioApp() {
         }`}
       >
         <span className="text-4xl md:text-5xl font-extrabold font-space text-pastel-blue-dark dark:text-sky-400">GIBRAN</span>
-      </div>
-
-      {/* Floating Sparkles decorative accent */}
-      <div className="absolute top-12 right-12 pointer-events-none opacity-30 animate-pulse-soft">
-        <Sparkles className="w-16 h-16 text-pastel-yellow dark:text-amber-400" />
       </div>
 
       {/* Site Structure Layer */}
