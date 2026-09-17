@@ -19,7 +19,7 @@ export const translations = {
         'Cybersecurity & Systems',
         'Product & Architecture Dev'
       ],
-      bio: 'Mahasiswa S1 Teknik Informatika yang memadukan rekayasa sistem Full-Stack modern, On-Device Edge AI, dan arsitektur keamanan data terenkripsi dalam balutan antarmuka yang ramah pengguna.',
+      bio: 'Mahasiswa TI di Telkom University Purwokerto, lagi sibuk ngurusin HMIF sambil nyemplung ke AI yang jalan langsung di kamera, sistem enkripsi offline, dan Full-Stack web. Suka nge-build hal-hal yang beneran kepake.',
       ctaDemos: 'Coba 6 Demo Interaktif',
       ctaProjects: 'Jelajahi 20 Proyek',
       statProjects: 'Proyek & Kode',
@@ -114,7 +114,7 @@ export const translations = {
         'Cybersecurity & Systems',
         'Product & Architecture Dev'
       ],
-      bio: 'Informatics Engineering student unifying modern Full-Stack engineering, On-Device Edge AI, and offline-first cryptographic security into intuitive, friendly user interfaces.',
+      bio: "CS student at Telkom University Purwokerto, running HMIF while building AI that runs directly on your laptop camera, offline encryption systems, and Full-Stack web. I like building things that actually get used.",
       ctaDemos: 'Try 6 Live Demos',
       ctaProjects: 'Explore 20 Projects',
       statProjects: 'Projects & Repos',
