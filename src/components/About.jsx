@@ -48,7 +48,7 @@ function About() {
                   {stat.icon}
                 </div>
                 <div>
-                  <span className="block text-[10px] sm:text-[11px] font-bold text-pastel-navy/40 dark:text-slate-400 uppercase tracking-wider">{stat.label}</span>
+                  <span className="block text-xs font-bold text-pastel-navy/50 dark:text-slate-400 uppercase tracking-wider">{stat.label}</span>
                   <span className="text-xs sm:text-sm font-bold text-pastel-navy dark:text-slate-200 leading-snug">{stat.val}</span>
                 </div>
               </li>
@@ -58,8 +58,8 @@ function About() {
                 <CheckCircle className="w-4 sm:w-5 h-4 sm:h-5 text-emerald-600 dark:text-emerald-400" />
               </div>
               <div>
-                <span className="block text-[10px] sm:text-[11px] font-bold text-pastel-navy/40 dark:text-slate-400 uppercase tracking-wider">{t.about.statStatus}</span>
-                <span className="text-[11px] sm:text-xs font-bold text-emerald-700 dark:text-emerald-300 font-space bg-pastel-green/70 dark:bg-emerald-950/70 border border-emerald-500/30 py-0.5 sm:py-1 px-2.5 sm:px-3 rounded-full inline-block mt-0.5">
+                <span className="block text-xs font-bold text-pastel-navy/50 dark:text-slate-400 uppercase tracking-wider">{t.about.statStatus}</span>
+                <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300 font-space bg-pastel-green/70 dark:bg-emerald-950/70 border border-emerald-500/30 py-0.5 sm:py-1 px-2.5 sm:px-3 rounded-full inline-block mt-0.5">
                   {t.about.badgeStatus}
                 </span>
               </div>
@@ -102,10 +102,10 @@ function About() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 mb-8">
           <div>
             <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-pastel-blue-dark dark:text-sky-400">
-              Chronicle // Engineering Odyssey
+              Perjalanan Belajar
             </span>
             <h3 className="text-xl sm:text-2xl md:text-3xl font-space font-extrabold text-pastel-navy dark:text-white mt-1">
-              Evolusi Rekayasa & Kepemimpinan
+              Dari Semester 1 sampai Sekarang
             </h3>
           </div>
           <span className="text-xs font-mono font-bold text-pastel-navy/50 dark:text-slate-400 bg-white dark:bg-slate-800 px-3 py-1 rounded-full border border-pastel-navy/10 dark:border-slate-700">
