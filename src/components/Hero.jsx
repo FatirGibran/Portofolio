@@ -81,7 +81,7 @@ function Hero() {
     <header id="hero" className="min-h-screen flex flex-col-reverse md:flex-row justify-center items-center gap-10 md:gap-14 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto pt-28 sm:pt-32 pb-14">
       <div className="flex-1 text-center md:text-left w-full">
         {/* Leadership & Status Badge */}
-        <div className="inline-flex flex-wrap items-center justify-center md:justify-start gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-pastel-yellow dark:bg-amber-400/20 border border-pastel-yellow-hover dark:border-amber-400/40 text-pastel-navy dark:text-amber-300 font-bold text-xs uppercase tracking-wider mb-5 shadow-pastel-sm animate-bounce-soft">
+        <div className="inline-flex flex-wrap items-center justify-center md:justify-start gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-pastel-yellow dark:bg-amber-400/20 border border-pastel-yellow-hover dark:border-amber-400/40 text-pastel-navy dark:text-amber-300 font-bold text-xs uppercase tracking-wider mb-5 shadow-pastel-sm">
           <Award className="w-4 h-4 text-pastel-blue-dark dark:text-amber-400 flex-shrink-0" />
           <span className="text-[11px] sm:text-xs leading-tight">{t.hero.statusBadge}</span>
         </div>
@@ -160,7 +160,7 @@ function Hero() {
                 : 'text-pastel-navy/60 dark:text-slate-400 hover:text-pastel-navy dark:hover:text-white'
             }`}
           >
-            📷 Foto Profil
+            Foto Profil
           </button>
           <button
             onClick={() => {
@@ -174,7 +174,7 @@ function Hero() {
             }`}
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-            <span>🪪 3D Developer Pass</span>
+            <span>Dev Pass 3D</span>
           </button>
         </div>
 
@@ -192,9 +192,6 @@ function Hero() {
               title="Klik untuk membuka 3D Developer Pass"
               className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 p-2.5 sm:p-3 rounded-full bg-white dark:bg-slate-800 shadow-pastel-lg group transform-gpu-safe cursor-pointer"
             >
-              <div className="absolute inset-0 rounded-full border-2 border-dashed border-pastel-blue dark:border-sky-500/50 animate-[spin_20s_linear_infinite] group-hover:scale-105 transition-transform duration-500"></div>
-              <div className="absolute -inset-2 rounded-full border border-pastel-yellow/70 dark:border-amber-400/50 animate-[spin_32s_linear_infinite_reverse]"></div>
-              
               <img
                 src="Image/fotomuka.jpg"
                 alt="Foto Profil Fatir Gibran"
@@ -227,7 +224,7 @@ function Hero() {
               className="mt-4 inline-flex items-center gap-1.5 text-xs font-mono font-bold text-pastel-blue-dark dark:text-sky-400 hover:underline cursor-pointer group"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-500 group-hover:rotate-12 transition-transform" />
-              <span>Coba Interaktif 3D Developer Pass ✨</span>
+              <span>Lihat Dev Pass 3D Interaktif</span>
             </button>
           </div>
         )}
