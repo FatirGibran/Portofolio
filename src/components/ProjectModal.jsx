@@ -104,7 +104,7 @@ function ProjectModal() {
               {project.role}
             </span>
             {project.badge && (
-              <span className="text-[11px] font-bold font-space uppercase tracking-wider text-amber-700 dark:text-amber-300 bg-pastel-yellow/90 dark:bg-amber-950/60 py-1 px-2.5 rounded-full border border-pastel-yellow-hover dark:border-amber-800 shadow-pastel-sm flex items-center gap-1">
+              <span className="text-xs font-bold font-space uppercase tracking-wider text-amber-700 dark:text-amber-300 bg-pastel-yellow/90 dark:bg-amber-950/60 py-1 px-2.5 rounded-full border border-pastel-yellow-hover dark:border-amber-800 shadow-pastel-sm flex items-center gap-1">
                 <Sparkles className="w-3 h-3 text-amber-600 dark:text-amber-400" />
                 {project.badge}
               </span>
@@ -149,13 +149,13 @@ function ProjectModal() {
                   key={idx}
                   className="bg-white dark:bg-slate-800 p-3 rounded-xl border border-pastel-navy/10 dark:border-slate-700 relative flex flex-col justify-between"
                 >
-                  <div className="text-[10px] font-mono font-bold text-pastel-blue-dark dark:text-sky-400 mb-1">
+                  <div className="text-xs font-mono font-bold text-pastel-blue-dark dark:text-sky-400 mb-1">
                     0{idx + 1}. {labels.step}
                   </div>
                   <div className="text-xs font-bold font-space text-pastel-navy dark:text-white leading-tight">
                     {item.step}
                   </div>
-                  <div className="text-[10px] text-pastel-navy/60 dark:text-slate-400 mt-1">
+                  <div className="text-xs text-pastel-navy/70 dark:text-slate-300 mt-1 leading-normal">
                     {item.desc}
                   </div>
                   {idx < 3 && (
@@ -176,7 +176,7 @@ function ProjectModal() {
                 <div className="text-lg sm:text-xl font-space font-extrabold text-pastel-navy dark:text-amber-300">
                   {m.val}
                 </div>
-                <div className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-pastel-navy/60 dark:text-slate-400">
+                <div className="text-xs font-bold uppercase tracking-wider text-pastel-navy/60 dark:text-slate-400">
                   {m.label}
                 </div>
               </div>
