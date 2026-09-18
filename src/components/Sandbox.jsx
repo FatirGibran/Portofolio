@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import {
   Cpu, Hand, RotateCcw, Sparkles, Columns, ZoomIn, EyeOff, Edit3,
   ShoppingBag, BookOpen, ShieldCheck, MapPin, Search, Check, X,
-  Activity, Eye, Volume2, VolumeX, Download, FileText, Lock, RefreshCw,
-  Zap
+  Activity, Eye, Volume2, VolumeX, Download, FileText, Lock, RefreshCw
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { playSynthesizedChime } from '../utils/audio';
