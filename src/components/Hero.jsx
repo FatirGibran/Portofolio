@@ -80,31 +80,31 @@ function Hero() {
   return (
     <header id="hero" className="min-h-screen flex flex-col-reverse md:flex-row justify-center items-center gap-10 md:gap-14 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto pt-28 sm:pt-32 pb-14">
       <div className="flex-1 text-center md:text-left w-full">
-        {/* Leadership & Status Badge */}
+        {/* Engineering Identity & Status Badge */}
         <div className="inline-flex flex-wrap items-center justify-center md:justify-start gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-pastel-yellow dark:bg-amber-400/20 border border-pastel-yellow-hover dark:border-amber-400/40 text-pastel-navy dark:text-amber-300 font-bold text-xs uppercase tracking-wider mb-5 shadow-pastel-sm">
-          <Award className="w-4 h-4 text-pastel-blue-dark dark:text-amber-400 flex-shrink-0" />
+          <Code2 className="w-4 h-4 text-pastel-blue-dark dark:text-amber-400 flex-shrink-0" />
           <span className="text-xs leading-tight">{t.hero.statusBadge}</span>
         </div>
         
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-space text-pastel-navy dark:text-white leading-[1.15] sm:leading-[1.1] mb-4">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-space font-extrabold text-pastel-navy dark:text-white leading-[1.12] sm:leading-[1.08] tracking-tight mb-4">
           {t.hero.greeting} <br />
           <span className="relative inline-block text-pastel-blue-dark dark:text-sky-400">
             {t.hero.name}
-            <span className="absolute bottom-1 sm:bottom-1.5 left-0 w-full h-3 sm:h-3.5 bg-pastel-yellow/70 dark:bg-amber-400/30 -z-10 rounded-full"></span>
+            <span className="absolute bottom-1 sm:bottom-1.5 left-0 w-full h-2.5 sm:h-3 bg-pastel-yellow/70 dark:bg-amber-400/30 -z-10 rounded-full"></span>
           </span>
         </h1>
         
         <div
           aria-live="polite"
           aria-atomic="true"
-          className="text-base sm:text-xl md:text-2xl font-semibold text-pastel-navy/75 dark:text-slate-300 mb-5 min-h-[2rem] sm:min-h-[2.2rem] flex items-center justify-center md:justify-start gap-1"
+          className="text-base sm:text-xl md:text-2xl font-semibold text-pastel-navy/75 dark:text-slate-300 mb-5 min-h-[2rem] sm:min-h-[2.2rem] flex items-center justify-center md:justify-start gap-1.5"
         >
-          <span className="text-pastel-navy/40 dark:text-slate-500 font-mono font-normal" aria-hidden="true">&gt;</span>
+          <span className="text-pastel-blue-dark dark:text-sky-400 font-mono font-bold" aria-hidden="true">&gt;</span>
           <span className="text-pastel-blue-dark dark:text-sky-400 font-space font-bold">{typedText}</span>
           <span className="animate-pulse text-pastel-blue-dark dark:text-sky-400" aria-hidden="true">|</span>
         </div>
         
-        <p className="text-pastel-navy/80 dark:text-slate-300 leading-relaxed mb-7 max-w-lg mx-auto md:mx-0 text-sm sm:text-base md:text-lg">
+        <p className="text-pastel-navy/85 dark:text-slate-200 leading-relaxed mb-8 max-w-xl mx-auto md:mx-0 text-base sm:text-lg">
           {t.hero.bio}
         </p>
         
