@@ -7,49 +7,7 @@ import { STATS_CONFIG } from '../data/statsData';
 function Hero() {
   const { t, playSound } = usePortfolio();
   const roles = t.hero.roles;
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [typedText, setTypedText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [charIndex, setCharIndex] = useState(0);
-  const [speed, setSpeed] = useState(80);
   const [heroView, setHeroView] = useState('photo'); // 'photo' | 'badge'
-
-  useEffect(() => {
-    setRoleIndex(0);
-    setCharIndex(0);
-    setIsDeleting(false);
-  }, [t]);
-
-  useEffect(() => {
-    const currentRole = roles[roleIndex % roles.length];
-    let timer;
-
-    if (isDeleting) {
-      timer = setTimeout(() => {
-        setTypedText(currentRole.substring(0, charIndex - 1));
-        setCharIndex(prev => prev - 1);
-        setSpeed(35);
-      }, speed);
-    } else {
-      timer = setTimeout(() => {
-        setTypedText(currentRole.substring(0, charIndex + 1));
-        setCharIndex(prev => prev + 1);
-        setSpeed(75);
-      }, speed);
-    }
-
-    if (!isDeleting && charIndex === currentRole.length) {
-      setIsDeleting(true);
-      setSpeed(1600);
-    } else if (isDeleting && charIndex === 0) {
-      setIsDeleting(false);
-      setRoleIndex(prev => (prev + 1) % roles.length);
-      setSpeed(450);
-    }
-
-    return () => clearTimeout(timer);
-  }, [charIndex, isDeleting, roleIndex, speed, roles]);
-
   const [projectCount, setProjectCount] = useState(0);
   const [coverageVal, setCoverageVal] = useState('0.0');
 
@@ -93,14 +51,21 @@ function Hero() {
           </span>
         </h1>
         
-        <div
-          aria-live="polite"
-          aria-atomic="true"
-          className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-700 dark:text-slate-300 mb-6 min-h-[2rem] sm:min-h-[2.2rem] flex items-center justify-center md:justify-start gap-2 font-space"
-        >
-          <span className="text-blue-600 dark:text-blue-400 font-mono font-bold" aria-hidden="true">&gt;</span>
-          <span className="font-space font-bold text-slate-900 dark:text-white">{typedText}</span>
-          <span className="w-2 h-5 bg-blue-600 dark:bg-blue-400 inline-block animate-pulse" aria-hidden="true"></span>
+        <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-6">
+          {roles.slice(0, 3).map((role, rIdx) => (
+            <span
+              key={rIdx}
+              className={`text-xs font-mono font-bold uppercase tracking-wider py-1 px-3 rounded-lg border ${
+                rIdx === 0
+                  ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 border-blue-200 dark:border-blue-900/60'
+                  : rIdx === 1
+                  ? 'text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-950/60 border-sky-200 dark:border-sky-900/60'
+                  : 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-900/60'
+              }`}
+            >
+              {role}
+            </span>
+          ))}
         </div>
         
         <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-8 max-w-xl mx-auto md:mx-0 text-base sm:text-lg font-normal">
