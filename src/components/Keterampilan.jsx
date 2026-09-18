@@ -17,7 +17,7 @@ function Keterampilan() {
     <section id="keterampilan" className="py-20 sm:py-24 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto scroll-mt-12 content-auto">
       <div className="text-center md:text-left mb-10 sm:mb-14">
         <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 block mb-1">
-          // Technical Stack & Capability Matrix
+          Technical Stack & Capability Matrix
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-space font-extrabold text-slate-900 dark:text-white tracking-tight">
           {t.skills.title}
