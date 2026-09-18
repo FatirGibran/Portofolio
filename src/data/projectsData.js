@@ -6,7 +6,7 @@
 export const ALL_PROJECTS = Object.freeze([
   {
     id: 'posturelens',
-    title: 'PostureLens 👁️⚡',
+    title: 'PostureLens',
     role: 'Edge AI & Lead Dev',
     badge: 'On-Device AI',
     category: 'ai',
@@ -30,7 +30,7 @@ export const ALL_PROJECTS = Object.freeze([
   },
   {
     id: 'vibedoc',
-    title: 'VibeDoc 📝⚡',
+    title: 'VibeDoc',
     role: 'Full-Stack & AI Arch',
     badge: 'Gemini 2.5 Flash',
     category: 'fullstack',
@@ -42,7 +42,7 @@ export const ALL_PROJECTS = Object.freeze([
   },
   {
     id: 'vaultsentinel',
-    title: 'VaultSentinel 🛡️',
+    title: 'VaultSentinel',
     role: 'DevOps & CyberSec',
     badge: '95.8% Coverage',
     category: 'cybersec',
@@ -54,7 +54,7 @@ export const ALL_PROJECTS = Object.freeze([
   },
   {
     id: 'focusync',
-    title: 'FocuSync 🎯',
+    title: 'FocuSync',
     role: 'Product & Full-Stack',
     badge: 'Deep Work PWA',
     category: 'fullstack',
@@ -78,7 +78,7 @@ export const ALL_PROJECTS = Object.freeze([
   },
   {
     id: 'perintis',
-    title: 'Perintis AI Validator 🚀',
+    title: 'Perintis AI Validator',
     role: 'Full Stack Dev',
     badge: 'UMKM Platform',
     category: 'fullstack',
@@ -89,7 +89,7 @@ export const ALL_PROJECTS = Object.freeze([
   },
   {
     id: 'fittrack',
-    title: 'FitTrack AI Telegram 🍱',
+    title: 'FitTrack AI Telegram',
     role: 'AI & Backend Bot',
     badge: 'Telegram Bot 24/7',
     category: 'ai',
@@ -100,7 +100,7 @@ export const ALL_PROJECTS = Object.freeze([
   },
   {
     id: 'space_unbound',
-    title: 'A Space for the Unbound 🎮',
+    title: 'A Space for the Unbound',
     role: 'Frontend Creative',
     badge: 'Lomba IT FEST 2026',
     category: 'org',
@@ -111,7 +111,7 @@ export const ALL_PROJECTS = Object.freeze([
   },
   {
     id: 'gumam',
-    title: 'Gumam (Voice Journal PWA) 🎙️',
+    title: 'Gumam (Voice Journal PWA)',
     role: 'Frontend & AI Dev',
     badge: 'BitsMikro VibeCode 2026',
     category: 'fullstack',
@@ -122,7 +122,7 @@ export const ALL_PROJECTS = Object.freeze([
   },
   {
     id: 'hmif_eval',
-    title: 'HMIF Executive Portal & Eval 🏛️',
+    title: 'HMIF Executive Portal & Eval',
     role: 'Chairman & Arch',
     badge: 'HMIF 2025/2026',
     category: 'org',
@@ -133,7 +133,7 @@ export const ALL_PROJECTS = Object.freeze([
   },
   {
     id: 'librarypro',
-    title: 'LibraryPro Management System 📚',
+    title: 'LibraryPro Management System',
     role: 'Backend & Arch',
     badge: 'MVC Java Web',
     category: 'cybersec',
@@ -146,7 +146,7 @@ export const ALL_PROJECTS = Object.freeze([
   },
   {
     id: 'fotokitablur',
-    title: 'Foto Kita Blur 📷',
+    title: 'Foto Kita Blur',
     role: 'Vision & Frontend',
     badge: 'AI Gesture Filter',
     category: 'ai',
@@ -168,7 +168,7 @@ export const ALL_PROJECTS = Object.freeze([
   },
   {
     id: 'smart_finance',
-    title: 'smart-student-finance 🪙',
+    title: 'smart-student-finance',
     role: 'Lead Developer',
     badge: 'Finance Tracking',
     category: 'cybersec',
