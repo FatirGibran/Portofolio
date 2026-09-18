@@ -9,17 +9,17 @@ export const translations = {
       ctaDemos: 'Coba 6 Demo',
     },
     hero: {
-      statusBadge: 'Chairman HMIF Telkom University Purwokerto • Sem. 5',
+      statusBadge: 'S1 Teknik Informatika • Software & Edge AI',
       greeting: 'Halo, Saya',
       name: 'Fatir Gibran',
       roles: [
         'Full-Stack Engineer',
         'Edge AI & Computer Vision',
-        'Chairman of HMIF (2025/2026)',
         'Cybersecurity & Systems',
+        'Chairman of HMIF (2025/2026)',
         'Product & Architecture Dev'
       ],
-      bio: 'Mahasiswa TI di Telkom University Purwokerto, lagi sibuk ngurusin HMIF sambil nyemplung ke AI yang jalan langsung di kamera, sistem enkripsi offline, dan Full-Stack web. Suka nge-build hal-hal yang beneran kepake.',
+      bio: 'Mahasiswa S1 Teknik Informatika yang memadukan rekayasa sistem Full-Stack modern, On-Device Edge AI, dan arsitektur keamanan terenkripsi ke dalam aplikasi web berkinerja tinggi.',
       ctaDemos: 'Lihat 6 Demo Langsung',
       ctaProjects: 'Semua 20 Proyek',
       statProjects: 'Proyek & Kode',
@@ -30,7 +30,7 @@ export const translations = {
     },
     about: {
       title: 'Tentang & Kepemimpinan',
-      subtitle: 'Teknik, kepemimpinan, dan sedikit gila-gilaan — begitu cara aku jalanin semester ini.',
+      subtitle: 'Eksplorasi mendalam dalam rekayasa perangkat lunak, sistem cerdas on-device, dan kepemimpinan organisasi.',
       badgeIdentity: 'Identitas & Organisasi',
       badgeStatus: 'AKTIF (Semester 5)',
       p1: 'Saya adalah mahasiswa S1 Teknik Informatika di <strong>Telkom University Purwokerto</strong> yang saat ini dipercaya sebagai <strong>Chairman (Ketua Himpunan) HMIF Telkom University Purwokerto (Periode 2025/2026)</strong>.',
@@ -50,7 +50,7 @@ export const translations = {
     projects: {
       badgeVerified: 'Rekam Jejak Terverifikasi',
       title: 'Yang Sudah Aku Bangun',
-      subtitle: '20 proyek software yang aku kerjakan sendiri: dari AI yang jalan di kamera laptop, sistem enkripsi offline, platform e-commerce, hingga tools internal HMIF.',
+      subtitle: '20 karya software engineering yang saya rancang dan bangun: On-Device AI, sistem enkripsi offline, platform web skalabel, hingga otomasi organisasi.',
       searchPlaceholder: "Cari e.g. 'Next.js', 'AI', 'Docker'...",
       categories: {
         all: 'Semua',
@@ -69,7 +69,7 @@ export const translations = {
     sandbox: {
       badge: 'Playable Showcase Environment',
       title: 'Testing Sandbox (6 Demo Interaktif)',
-      subtitle: 'Eksplorasi langsung logika sistem, visualisasi AI, otomasi pencadangan, dan antarmuka interaktif yang telah saya bangun. Pilih salah satu tab demo di bawah!',
+      subtitle: 'Uji langsung logika sistem, visualisasi AI di browser tanpa server, simulasi enkripsi, dan portal interaktif secara realtime. Pilih salah satu tab demo di bawah!',
       tabs: {
         posturelens: '1. PostureLens (AI Posture)',
         el_gestur: '2. el_gestur_v2 (CV & Voice)',
@@ -81,7 +81,7 @@ export const translations = {
     },
     skills: {
       title: 'Keahlian & Tech Stack',
-      subtitle: 'Kombinasi teknologi mutakhir yang telah saya terapkan pada proyek riil, riset mandiri, dan lomba nasional.',
+      subtitle: 'Kombinasi teknologi mutakhir yang diterapkan pada sistem produksi, riset mandiri, dan kompetisi rekayasa nasional.',
       groupAI: 'AI, Computer Vision & Edge',
       groupWeb: 'Modern Web Engineering',
       groupSec: 'Cybersecurity & DevOps Systems',
@@ -89,7 +89,7 @@ export const translations = {
     },
     footer: {
       title: 'Ngobrol Yuk!',
-      pitch: 'Mau kolaborasi, diskusi soal AI, cybersecurity, atau sekadar tanya-tanya soal project? Hit me up — aku selalu terbuka untuk ngobrol hal-hal teknis maupun non-teknis.',
+      pitch: 'Terbuka untuk diskusi teknis seputar arsitektur web modern, riset Edge AI, sistem keamanan komputer, maupun peluang kolaborasi proyek.',
       madeWith: 'Dibuat dengan',
       by: 'oleh Fatir Gibran',
     }
@@ -104,17 +104,17 @@ export const translations = {
       ctaDemos: 'Try 6 Demos',
     },
     hero: {
-      statusBadge: 'Chairman HMIF Telkom University Purwokerto • 5th Sem.',
+      statusBadge: 'Informatics Engineering • Software & Edge AI',
       greeting: 'Hi, I am',
       name: 'Fatir Gibran',
       roles: [
         'Full-Stack Engineer',
         'Edge AI & Computer Vision',
-        'Chairman of HMIF (2025/2026)',
         'Cybersecurity & Systems',
+        'Chairman of HMIF (2025/2026)',
         'Product & Architecture Dev'
       ],
-      bio: "CS student at Telkom University Purwokerto, running HMIF while building AI that runs directly on your laptop camera, offline encryption systems, and Full-Stack web. I like building things that actually get used.",
+      bio: 'Informatics Engineering student unifying modern Full-Stack engineering, On-Device Edge AI, and encrypted security architectures into high-performance web applications.',
       ctaDemos: 'Watch 6 Live Demos',
       ctaProjects: 'All 20 Projects',
       statProjects: 'Projects & Repos',
@@ -125,7 +125,7 @@ export const translations = {
     },
     about: {
       title: 'About & Leadership',
-      subtitle: 'Engineering, leadership, and a bit of chaos — that sums up my semester.',
+      subtitle: 'Deep-dive into software engineering, on-device intelligent systems, and student organization leadership.',
       badgeIdentity: 'Identity & Leadership',
       badgeStatus: 'ACTIVE (5th Semester)',
       p1: 'I am an Informatics Engineering student at <strong>Telkom University Purwokerto</strong>, currently serving as the <strong>Chairman of HMIF Telkom University Purwokerto (Executive Board 2025/2026)</strong>.',
@@ -145,7 +145,7 @@ export const translations = {
     projects: {
       badgeVerified: 'Verified Track Record',
       title: "Things I've Built",
-      subtitle: '20 software projects I built myself: on-device AI running on a laptop camera, offline encryption systems, e-commerce platforms, and internal HMIF tooling.',
+      subtitle: '20 software engineering projects I designed and built: On-Device AI, offline encryption systems, scalable web platforms, and organizational automation.',
       searchPlaceholder: "Search e.g. 'Next.js', 'AI', 'Docker'...",
       categories: {
         all: 'All',
@@ -164,7 +164,7 @@ export const translations = {
     sandbox: {
       badge: 'Playable Showcase Environment',
       title: 'Testing Sandbox (6 Interactive Demos)',
-      subtitle: 'Interact directly with real system logic, AI visualizations, backup automation, and user interfaces. Pick a demo tab below to get started!',
+      subtitle: 'Test real system logic, serverless in-browser AI vision, cryptographic simulations, and interactive portals in real time.',
       tabs: {
         posturelens: '1. PostureLens (AI Posture)',
         el_gestur: '2. el_gestur_v2 (CV & Voice)',
@@ -176,7 +176,7 @@ export const translations = {
     },
     skills: {
       title: 'Skills & Tech Stack',
-      subtitle: 'Modern technologies applied in real-world deployments, self-directed research, and national competitions.',
+      subtitle: 'Modern tech stack applied across production systems, independent research, and national engineering competitions.',
       groupAI: 'AI, Computer Vision & Edge',
       groupWeb: 'Modern Web Engineering',
       groupSec: 'Cybersecurity & DevOps Systems',
@@ -184,7 +184,7 @@ export const translations = {
     },
     footer: {
       title: "Let's Talk!",
-      pitch: "Want to collaborate, discuss AI, cybersecurity, or just geek out about a cool idea? Reach out — I'm always down for a good technical conversation.",
+      pitch: 'Open to technical discussions regarding modern web architectures, Edge AI research, computer security, or project collaboration opportunities.',
       madeWith: 'Crafted with',
       by: 'by Fatir Gibran',
     }
