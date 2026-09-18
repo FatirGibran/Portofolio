@@ -32,11 +32,11 @@ function About() {
           <div className="flex items-center justify-between pb-3.5 mb-5 border-b-2 border-pastel-peach/40 dark:border-slate-700">
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-pastel-yellow dark:bg-amber-400 border border-pastel-yellow-hover"></span>
-              <span className="text-[11px] sm:text-xs font-bold font-space uppercase text-pastel-navy/60 dark:text-slate-400 tracking-wider">
+              <span className="text-xs font-bold font-space uppercase text-pastel-navy/60 dark:text-slate-400 tracking-wider">
                 {t.about.badgeIdentity}
               </span>
             </div>
-            <span className="text-[10px] font-bold bg-pastel-yellow/80 dark:bg-amber-400/20 border border-pastel-yellow-hover dark:border-amber-400/40 text-pastel-navy dark:text-amber-300 py-0.5 px-2.5 rounded-full">
+            <span className="text-xs font-bold bg-pastel-yellow/80 dark:bg-amber-400/20 border border-pastel-yellow-hover dark:border-amber-400/40 text-pastel-navy dark:text-amber-300 py-0.5 px-2.5 rounded-full">
               Executive Board
             </span>
           </div>
@@ -79,19 +79,19 @@ function About() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
             <div className="bg-pastel-blue/40 dark:bg-sky-950/40 border border-pastel-blue/80 dark:border-sky-800 rounded-2xl p-3 text-center shadow-pastel-sm">
               <Cpu className="w-5 sm:w-6 h-5 sm:h-6 text-pastel-blue-dark dark:text-sky-400 mx-auto mb-1" />
-              <span className="block font-bold text-[11px] sm:text-xs text-pastel-navy dark:text-slate-200">{t.about.pillarAI}</span>
+              <span className="block font-bold text-xs sm:text-sm text-pastel-navy dark:text-slate-200">{t.about.pillarAI}</span>
             </div>
             <div className="bg-pastel-yellow/50 dark:bg-amber-950/40 border border-pastel-yellow/80 dark:border-amber-800 rounded-2xl p-3 text-center shadow-pastel-sm">
               <Shield className="w-5 sm:w-6 h-5 sm:h-6 text-amber-700 dark:text-amber-400 mx-auto mb-1" />
-              <span className="block font-bold text-[11px] sm:text-xs text-pastel-navy dark:text-slate-200">{t.about.pillarSec}</span>
+              <span className="block font-bold text-xs sm:text-sm text-pastel-navy dark:text-slate-200">{t.about.pillarSec}</span>
             </div>
             <div className="bg-pastel-green/50 dark:bg-emerald-950/40 border border-pastel-green/80 dark:border-emerald-800 rounded-2xl p-3 text-center shadow-pastel-sm">
               <Terminal className="w-5 sm:w-6 h-5 sm:h-6 text-emerald-700 dark:text-emerald-400 mx-auto mb-1" />
-              <span className="block font-bold text-[11px] sm:text-xs text-pastel-navy dark:text-slate-200">{t.about.pillarFull}</span>
+              <span className="block font-bold text-xs sm:text-sm text-pastel-navy dark:text-slate-200">{t.about.pillarFull}</span>
             </div>
             <div className="bg-pastel-purple/50 dark:bg-purple-950/40 border border-pastel-purple/80 dark:border-purple-800 rounded-2xl p-3 text-center shadow-pastel-sm">
               <Users className="w-5 sm:w-6 h-5 sm:h-6 text-indigo-700 dark:text-purple-400 mx-auto mb-1" />
-              <span className="block font-bold text-[11px] sm:text-xs text-pastel-navy dark:text-slate-200">{t.about.pillarLead}</span>
+              <span className="block font-bold text-xs sm:text-sm text-pastel-navy dark:text-slate-200">{t.about.pillarLead}</span>
             </div>
           </div>
         </div>
