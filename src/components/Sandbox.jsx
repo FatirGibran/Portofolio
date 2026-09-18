@@ -1181,17 +1181,13 @@ function Sandbox({ activeTab, setActiveTab, triggerGlobalEffect }) {
     <section id="simulator" className="py-16 sm:py-20 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto scroll-mt-12 content-auto">
       {/* Header */}
       <div className="text-center md:text-left mb-8">
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-2">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-pastel-yellow/80 dark:bg-amber-400/20 border border-pastel-yellow-hover dark:border-amber-400/40 text-pastel-navy dark:text-amber-300 font-bold text-[11px] uppercase tracking-wider">
-            <Zap className="w-3 h-3 text-amber-600 dark:text-amber-400 fill-amber-600 flex-shrink-0" />
-            <span>{t.sandbox.badge}</span>
-          </div>
-        </div>
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-space text-pastel-navy dark:text-white inline-block relative">
+        <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 block mb-2">
+          // Interactive Architecture & Live Lab
+        </span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-space font-extrabold text-slate-900 dark:text-white tracking-tight">
           {t.sandbox.title}
-          <span className="absolute bottom-1 sm:bottom-1.5 left-0 w-1/2 h-2.5 sm:h-3 bg-pastel-yellow/60 dark:bg-amber-400/30 -z-10 rounded-full"></span>
         </h2>
-        <p className="text-xs sm:text-sm md:text-base text-pastel-navy/70 dark:text-slate-300 mt-2 max-w-2xl leading-relaxed">
+        <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 mt-2 max-w-2xl leading-relaxed">
           {t.sandbox.subtitle}
         </p>
       </div>
@@ -1202,10 +1198,10 @@ function Sandbox({ activeTab, setActiveTab, triggerGlobalEffect }) {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 py-2 sm:py-2.5 px-3.5 sm:px-4 rounded-2xl font-bold font-space text-xs sm:text-sm border-2 transition-all duration-150 min-h-[44px] ${
+            className={`flex items-center gap-2 py-2 sm:py-2.5 px-3.5 sm:px-4 rounded-xl font-bold font-space text-xs sm:text-sm border transition-all duration-150 min-h-[44px] ${
               activeTab === tab.id
-                ? 'bg-pastel-yellow dark:bg-amber-400 text-pastel-navy border-pastel-yellow-hover shadow-pastel-sm scale-105'
-                : 'bg-white dark:bg-slate-800 border-pastel-peach/50 dark:border-slate-700 text-pastel-navy/70 dark:text-slate-300 hover:bg-pastel-peach/20 dark:hover:bg-slate-750 hover:text-pastel-navy dark:hover:text-white'
+                ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-950 border-slate-900 dark:border-white shadow-sm'
+                : 'bg-white dark:bg-slate-900/80 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
             {tab.icon}
@@ -1215,7 +1211,7 @@ function Sandbox({ activeTab, setActiveTab, triggerGlobalEffect }) {
       </div>
 
       {/* Main Sandbox Card Frame */}
-      <div className="bg-white dark:bg-slate-800 border-2 border-pastel-blue dark:border-slate-700 rounded-3xl overflow-hidden shadow-pastel-lg min-h-[460px] flex flex-col justify-between">
+      <div className="bg-white dark:bg-[#111624] border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm min-h-[460px] flex flex-col justify-between">
         {activeTab === 'posturelens' && <PostureLensDemo lang={lang} playChime={playChime} />}
         {activeTab === 'el_gestur' && <ElGesturDemo lang={lang} playChime={playChime} triggerGlobalEffect={triggerGlobalEffect} />}
         {activeTab === 'vibedoc' && <VibeDocDemo lang={lang} playChime={playChime} />}
