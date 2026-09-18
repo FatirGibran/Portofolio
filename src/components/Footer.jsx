@@ -29,33 +29,35 @@ function Footer() {
   const { t } = usePortfolio();
 
   const socialLinks = [
-    { icon: <Mail className="w-5 h-5 flex-shrink-0" />, label: 'Email', href: 'mailto:fatirgibrann@gmail.com', bg: 'hover:bg-pastel-pink hover:border-pastel-pink dark:hover:bg-rose-950' },
-    { icon: <LinkedinIcon className="w-5 h-5 flex-shrink-0" />, label: 'LinkedIn', href: 'http://www.linkedin.com/in/FatirGibran', bg: 'hover:bg-pastel-blue hover:border-pastel-blue dark:hover:bg-sky-950' },
-    { icon: <GithubIcon className="w-5 h-5 flex-shrink-0" />, label: 'GitHub', href: 'https://github.com/Fatirrr08', bg: 'hover:bg-pastel-yellow hover:border-pastel-yellow-hover dark:hover:bg-amber-950' },
-    { icon: <InstagramIcon className="w-5 h-5 flex-shrink-0" />, label: 'Instagram', href: 'https://instagram.com/spicytir', bg: 'hover:bg-pastel-peach hover:border-pastel-peach dark:hover:bg-orange-950' }
+    { icon: <Mail className="w-4 h-4 flex-shrink-0 text-blue-600 dark:text-blue-400" />, label: 'Email', href: 'mailto:fatirgibrann@gmail.com' },
+    { icon: <LinkedinIcon className="w-4 h-4 flex-shrink-0 text-sky-600 dark:text-sky-400" />, label: 'LinkedIn', href: 'http://www.linkedin.com/in/FatirGibran' },
+    { icon: <GithubIcon className="w-4 h-4 flex-shrink-0 text-slate-800 dark:text-white" />, label: 'GitHub', href: 'https://github.com/Fatirrr08' },
+    { icon: <InstagramIcon className="w-4 h-4 flex-shrink-0 text-rose-600 dark:text-rose-400" />, label: 'Instagram', href: 'https://instagram.com/spicytir' }
   ];
 
   return (
-    <footer id="kontak" className="bg-white dark:bg-slate-900 border-t-2 border-pastel-peach/60 dark:border-slate-800 py-14 sm:py-16 px-4 sm:px-8 md:px-12 text-center mt-16 sm:mt-20 relative z-20 content-auto">
+    <footer id="kontak" className="bg-white dark:bg-[#0E131F] border-t border-slate-200 dark:border-slate-800 py-16 sm:py-20 px-4 sm:px-8 md:px-12 text-center mt-20 relative z-20 content-auto">
       <div className="max-w-4xl mx-auto flex flex-col items-center">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-space text-pastel-navy dark:text-white mb-3 sm:mb-4 inline-block relative">
+        <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 block mb-2">
+          // Contact & Open Collaborations
+        </span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-space font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
           {t.footer.title}
-          <span className="absolute bottom-1 left-0 w-1/2 h-2 bg-pastel-pink/60 dark:bg-rose-500/30 -z-10 rounded-full"></span>
         </h2>
 
-        <p className="text-sm sm:text-base md:text-lg text-pastel-navy/70 dark:text-slate-300 max-w-lg leading-relaxed mb-8 sm:mb-10">
+        <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed mb-10">
           {t.footer.pitch}
         </p>
 
-        {/* Social Grid with minimum 44px touch targets */}
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12 sm:mb-16">
+        {/* Social Grid with accessible 44px touch targets */}
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-14 sm:mb-16">
           {socialLinks.map((link, idx) => (
             <a
               key={idx}
               href={link.href}
               target={link.label !== 'Email' ? '_blank' : undefined}
               rel={link.label !== 'Email' ? 'noopener noreferrer' : undefined}
-              className={`flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 border-2 border-pastel-navy/10 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-2xl font-bold font-space text-xs sm:text-sm text-pastel-navy dark:text-slate-200 shadow-pastel-sm transition-all duration-200 transform hover:-translate-y-0.5 min-h-[44px] ${link.bg}`}
+              className="flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 rounded-xl font-bold font-space text-xs sm:text-sm text-slate-800 dark:text-slate-200 shadow-sm transition-all duration-150 transform hover:-translate-y-0.5 min-h-[44px]"
             >
               {link.icon}
               <span>{link.label}</span>
@@ -64,13 +66,13 @@ function Footer() {
         </div>
 
         {/* Bottom Credits */}
-        <div className="w-full pt-6 sm:pt-8 border-t border-pastel-peach/40 dark:border-slate-800 text-xs font-semibold text-pastel-navy/40 dark:text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+        <div className="w-full pt-8 border-t border-slate-100 dark:border-slate-800/80 text-xs font-mono text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-3">
           <div className="flex items-center gap-1.5 justify-center">
             <span>{t.footer.madeWith}</span>
-            <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-400 fill-rose-400" />
+            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
             <span>{t.footer.by} &copy; {new Date().getFullYear()}</span>
           </div>
-          <div className="font-space uppercase tracking-wider text-xs opacity-70">
+          <div className="uppercase tracking-wider text-xs opacity-75">
             Telkom University Purwokerto • Informatics Engineering
           </div>
         </div>
