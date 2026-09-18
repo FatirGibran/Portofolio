@@ -1,32 +1,28 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { memo } from 'react';
 import { Brain, Globe, Shield, Users } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { SKILL_ITEMS } from '../data/skillsData';
 
 function Keterampilan() {
   const { t } = usePortfolio();
-  const [animate, setAnimate] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setAnimate(true), 250);
-    return () => clearTimeout(timer);
-  }, []);
 
   const iconMap = {
-    groupAI: <Brain className="w-5 h-5 text-pastel-blue-dark dark:text-sky-400" />,
-    groupWeb: <Globe className="w-5 h-5 text-amber-700 dark:text-amber-400" />,
-    groupSec: <Shield className="w-5 h-5 text-emerald-700 dark:text-emerald-400" />,
-    groupLead: <Users className="w-5 h-5 text-indigo-700 dark:text-purple-400" />,
+    groupAI: <Brain className="w-5 h-5 text-blue-600 dark:text-blue-400" />,
+    groupWeb: <Globe className="w-5 h-5 text-sky-600 dark:text-sky-400" />,
+    groupSec: <Shield className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />,
+    groupLead: <Users className="w-5 h-5 text-purple-600 dark:text-purple-400" />,
   };
 
   return (
-    <section id="keterampilan" className="py-16 sm:py-20 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto scroll-mt-12 content-auto">
-      <div className="text-center md:text-left mb-8 sm:mb-12">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-space text-pastel-navy dark:text-white inline-block relative">
+    <section id="keterampilan" className="py-20 sm:py-24 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto scroll-mt-12 content-auto">
+      <div className="text-center md:text-left mb-10 sm:mb-14">
+        <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 block mb-1">
+          // Technical Stack & Capability Matrix
+        </span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-space font-extrabold text-slate-900 dark:text-white tracking-tight">
           {t.skills.title}
-          <span className="absolute bottom-1 left-0 w-1/2 h-2 bg-pastel-green/60 dark:bg-emerald-500/30 -z-10 rounded-full"></span>
         </h2>
-        <p className="text-xs sm:text-sm md:text-base text-pastel-navy/60 dark:text-slate-400 mt-2">
+        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-2 max-w-2xl">
           {t.skills.subtitle}
         </p>
       </div>
@@ -35,34 +31,27 @@ function Keterampilan() {
         {SKILL_ITEMS.map((group, gIdx) => (
           <div
             key={gIdx}
-            className={`border-2 rounded-3xl p-5 sm:p-6 md:p-7 bg-white dark:bg-slate-800 shadow-pastel-sm hover:shadow-pastel-md transition-all duration-200 transform hover:-translate-y-0.5 ${group.themeBg}`}
+            className="border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-7 bg-white dark:bg-slate-900/80 shadow-sm hover:border-blue-500/50 dark:hover:border-blue-500/50 transition-all duration-200"
           >
-            <h3 className="text-base sm:text-lg font-bold font-space text-pastel-navy dark:text-white flex items-center gap-2.5 pb-3.5 mb-5 sm:mb-6 border-b border-pastel-navy/10 dark:border-slate-700">
+            <h3 className="text-base sm:text-lg font-bold font-space text-slate-900 dark:text-white flex items-center gap-2.5 pb-4 mb-5 border-b border-slate-100 dark:border-slate-800">
               {iconMap[group.groupKey]}
               {t.skills[group.groupKey]}
             </h3>
 
-            <div className="flex flex-col gap-3.5 sm:gap-4">
+            <div className="flex flex-col gap-4">
               {group.skills.map((skill, sIdx) => (
-                <div key={sIdx} className="flex flex-col gap-1.5">
-                  <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-pastel-navy/80 dark:text-slate-300">
-                    <span className="truncate pr-2">{skill.name}</span>
-                    <span className="font-mono text-pastel-blue-dark dark:text-sky-400 flex-shrink-0">{skill.val}%</span>
+                <div key={sIdx} className="flex flex-col gap-1 pb-3 border-b border-slate-50 dark:border-slate-800/60 last:border-0 last:pb-0">
+                  <div className="flex justify-between items-start gap-2">
+                    <span className="text-sm font-bold font-space text-slate-900 dark:text-white">
+                      {skill.name}
+                    </span>
+                    <span className="text-[11px] font-mono font-semibold py-0.5 px-2 rounded bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400 border border-slate-200/80 dark:border-slate-700/80 flex-shrink-0">
+                      {skill.badge}
+                    </span>
                   </div>
-
-                  <div
-                    role="progressbar"
-                    aria-valuenow={skill.val}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-label={`${skill.name}: ${skill.val}%`}
-                    className="h-2.5 sm:h-3 w-full bg-pastel-bg dark:bg-slate-900 rounded-full border border-pastel-navy/5 dark:border-slate-700 overflow-hidden"
-                  >
-                    <div
-                      className="h-full rounded-full bg-pastel-blue-dark dark:bg-sky-500 transition-all duration-1000 ease-out will-change-transform"
-                      style={{ width: animate ? `${skill.val}%` : '0%' }}
-                    ></div>
-                  </div>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {skill.context}
+                  </p>
                 </div>
               ))}
             </div>
