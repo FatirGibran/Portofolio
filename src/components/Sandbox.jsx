@@ -187,7 +187,7 @@ const PostureLensDemo = memo(({ lang, playChime }) => {
 
       <div className="mt-6 p-3 rounded-xl bg-pastel-bg dark:bg-slate-900 border border-pastel-navy/10 dark:border-slate-700 text-xs font-bold text-pastel-navy/80 dark:text-slate-300 flex items-center justify-between">
         <span className="truncate mr-2">{postureLog}</span>
-        <span className="text-[10px] font-mono uppercase text-pastel-navy/40 dark:text-slate-500 flex-shrink-0">// IndexedDB Persistent Engine</span>
+        <span className="text-xs font-mono uppercase text-slate-400 dark:text-slate-500 flex-shrink-0">IndexedDB Persistent Engine</span>
       </div>
     </div>
   );
@@ -332,7 +332,7 @@ const ElGesturDemo = memo(({ lang, playChime, triggerGlobalEffect }) => {
   return (
     <div className="flex flex-col h-full justify-between flex-grow">
       <div className="bg-pastel-blue/30 dark:bg-slate-900 border-b-2 border-pastel-blue dark:border-slate-700 px-5 sm:px-6 py-3.5 flex justify-between items-center">
-        <span className="text-pastel-navy dark:text-slate-200 font-bold font-space text-xs sm:text-sm">el_gestur_v2 // Computer Vision & Voice Engine</span>
+        <span className="text-slate-900 dark:text-slate-200 font-bold font-space text-xs sm:text-sm">el_gestur_v2 • Computer Vision & Voice Engine</span>
         <span className="text-[10px] sm:text-xs font-bold text-pastel-blue-dark dark:text-sky-400 bg-pastel-blue/80 dark:bg-sky-950 py-1 px-2.5 rounded-full border border-pastel-blue dark:border-sky-800">One Euro Filter: ACTIVE</span>
       </div>
 
@@ -556,7 +556,7 @@ CREATE TABLE transactions (
         {generatedDoc && (
           <div className="bg-[#121622] rounded-2xl p-4 sm:p-5 border border-purple-400/30 text-emerald-300 font-mono text-xs max-h-64 sm:max-h-72 overflow-y-auto relative">
             <div className="flex justify-between items-center pb-2 mb-3 border-b border-white/10">
-              <span className="text-[10px] sm:text-[11px] text-sky-300 font-bold uppercase tracking-wider">// SPEC PREVIEW (READY FOR CURSOR/ANTIGRAVITY)</span>
+              <span className="text-xs text-sky-300 font-bold uppercase tracking-wider">SPEC PREVIEW (READY FOR CURSOR / ANTIGRAVITY)</span>
               <button
                 onClick={handleCopyDoc}
                 className="bg-purple-500/30 hover:bg-purple-500/50 border border-purple-400/50 text-purple-200 text-xs font-bold py-1 px-2.5 rounded-lg flex items-center gap-1.5 transition-colors min-h-[32px]"
@@ -717,7 +717,7 @@ Code Coverage: 95.84% (83 Passing Unit Tests)
 
         {backupManifest && (
           <div className="mt-4 p-3.5 sm:p-4 rounded-xl bg-[#121622] text-emerald-400 font-mono text-xs leading-relaxed">
-            <div className="text-sky-300 font-bold mb-1">// BACKUP RECORDED TO .vault_manifest.json</div>
+            <div className="text-sky-300 font-bold mb-1">BACKUP RECORDED TO .vault_manifest.json</div>
             <div>Status: <span className="text-emerald-300 font-bold">{backupManifest.status}</span></div>
             <div>Files Scanned: {backupManifest.filesScanned} | Encrypted: {backupManifest.filesEncrypted}</div>
             <div className="truncate text-gray-400">SHA-256 Digest: {backupManifest.hashDigest}</div>
@@ -848,7 +848,7 @@ const SalinGayaDemo = memo(({ lang, playChime }) => {
 
         <div className="flex-1 bg-pastel-bg dark:bg-slate-900 border-2 border-pastel-peach/60 dark:border-slate-700 rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
           <div>
-            <span className="block text-[10px] font-bold text-pastel-navy/40 dark:text-slate-500 uppercase tracking-wider mb-2.5">// ORDER SUMMARY</span>
+            <span className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2.5">ORDER SUMMARY</span>
             <div className="flex justify-between items-center text-xs sm:text-sm font-semibold mb-2 dark:text-slate-200">
               <span>1x Custom Flannel Grade A</span>
               <span>Rp{itemPrice.toLocaleString('id-ID')}</span>
@@ -1036,7 +1036,7 @@ const LibraryProDemo = memo(({ lang, playChime }) => {
               </button>
             </div>
 
-            <h4 className="text-[11px] sm:text-xs font-bold font-space uppercase text-pastel-navy/50 dark:text-slate-400 tracking-wider mb-3">// Validasi Peminjaman Pending</h4>
+            <h4 className="text-xs font-bold font-space uppercase text-slate-500 dark:text-slate-400 tracking-wider mb-3">Validasi Peminjaman Pending</h4>
             
             <div className="flex flex-col gap-2.5 sm:gap-3">
               {borrowRequests.filter(req => req.status === 'Pending').length === 0 ? (
@@ -1181,7 +1181,7 @@ function Sandbox({ activeTab, setActiveTab, triggerGlobalEffect }) {
       {/* Header */}
       <div className="text-center md:text-left mb-8">
         <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 block mb-2">
-          // Interactive Architecture & Live Lab
+          Interactive Architecture & Live Lab
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-space font-extrabold text-slate-900 dark:text-white tracking-tight">
           {t.sandbox.title}
