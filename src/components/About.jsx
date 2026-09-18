@@ -123,21 +123,21 @@ function About() {
                 <span className={`text-xs font-mono font-extrabold py-1 px-2.5 rounded-xl border ${item.badgeColor}`}>
                   {item.year}
                 </span>
-                <span className="text-[10px] font-bold uppercase text-pastel-navy/40 dark:text-slate-500 font-mono">
+                <span className="text-xs font-bold uppercase text-pastel-navy/50 dark:text-slate-400 font-mono">
                   {item.phase}
                 </span>
               </div>
               <h4 className={`text-base font-space font-bold text-pastel-navy dark:text-white mb-1.5 ${item.hoverText} transition-colors`}>
                 {item.title}
               </h4>
-              <p className="text-xs text-pastel-navy/70 dark:text-slate-300 leading-relaxed mb-3">
+              <p className="text-xs sm:text-sm text-pastel-navy/70 dark:text-slate-300 leading-relaxed mb-3">
                 {item.desc}
               </p>
               <div className="flex flex-wrap gap-1">
                 {item.tags.map((tag, tIdx) => (
                   <span
                     key={tIdx}
-                    className="text-[10px] font-mono font-bold text-pastel-navy/60 dark:text-slate-400 bg-pastel-bg dark:bg-slate-900 px-2 py-0.5 rounded-md"
+                    className="text-xs font-mono font-medium text-pastel-navy/70 dark:text-slate-300 bg-pastel-bg dark:bg-slate-900 px-2 py-0.5 rounded-md border border-pastel-navy/5 dark:border-slate-700"
                   >
                     {tag}
                   </span>
