@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback, memo } from 'react';
-import { ExternalLink, Play, Search, Sparkles, CheckCircle2, Layers } from 'lucide-react';
+import { ExternalLink, Play, Search, Sparkles, Layers } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { ALL_PROJECTS } from '../data/projectsData';
 import { getCategoryCounts } from '../data/categoryConstants';
@@ -11,7 +11,7 @@ const GithubIcon = memo((props) => (
   </svg>
 ));
 
-const ProjectCard = memo(({ project, onOpenSandboxDemo, onOpenCaseStudy, btnTryDemo, btnVisit, btnGitHub, lang }) => {
+const ProjectCard = memo(({ project, onOpenSandboxDemo, onOpenCaseStudy, btnTryDemo, btnVisit, lang }) => {
   const [transform, setTransform] = useState('');
   const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
 
