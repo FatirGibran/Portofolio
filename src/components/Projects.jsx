@@ -231,7 +231,7 @@ function Projects({ onSelectSandboxTab }) {
         <div className="mb-14">
           <div className="flex items-center justify-between mb-5">
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              // Landmark Systems Spotlight
+              Landmark Systems Spotlight
             </span>
             <span className="text-xs font-mono text-blue-600 dark:text-blue-400 font-semibold">
               Core Technical Showcase
