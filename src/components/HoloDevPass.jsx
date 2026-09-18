@@ -174,7 +174,7 @@ function HoloDevPass({ isModal = false }) {
                         HMIF VERIFIED PASS
                       </span>
                       <span className="block text-xs font-mono font-bold text-pastel-blue-dark dark:text-sky-400">
-                        DEV // ROOT 0x7F
+                        DEV • ROOT 0x7F
                       </span>
                     </div>
                   </div>
