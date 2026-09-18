@@ -474,11 +474,13 @@ export default function SpatialStage3D({
 
     // 7. Animation & Render Loop
     const startTime = performance.now();
-    let animId;
+    let animId = null;
+    let isPaused = false;
     let codeScrollOffset = 0;
     let lastConfettiTriggerState = false;
 
     const animate = () => {
+      if (isPaused) return;
       animId = requestAnimationFrame(animate);
       const elapsed = (performance.now() - startTime) / 1000;
 
@@ -641,19 +643,18 @@ export default function SpatialStage3D({
     animate();
 
     // 8b. Pause/resume on visibility change (battery & CPU saving)
-    let animId = null;
-    const animIdRef = { current: null };
-
     const pauseAnimation = () => {
-      if (animIdRef.current) {
-        cancelAnimationFrame(animIdRef.current);
-        animIdRef.current = null;
+      isPaused = true;
+      if (animId) {
+        cancelAnimationFrame(animId);
+        animId = null;
       }
     };
 
     const resumeAnimation = () => {
-      if (!animIdRef.current) {
-        animIdRef.current = requestAnimationFrame(animate);
+      if (isPaused) {
+        isPaused = false;
+        animId = requestAnimationFrame(animate);
       }
     };
 
@@ -683,7 +684,6 @@ export default function SpatialStage3D({
     // 8. Cleanup on Component Unmount
     return () => {
       pauseAnimation();
-      cancelAnimationFrame(animId);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
