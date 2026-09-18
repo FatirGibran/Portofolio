@@ -39,7 +39,7 @@ function Footer() {
     <footer id="kontak" className="bg-white dark:bg-[#0E131F] border-t border-slate-200 dark:border-slate-800 py-16 sm:py-20 px-4 sm:px-8 md:px-12 text-center mt-20 relative z-20 content-auto">
       <div className="max-w-4xl mx-auto flex flex-col items-center">
         <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 block mb-2">
-          // Contact & Open Collaborations
+          Contact & Open Collaborations
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-space font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
           {t.footer.title}
