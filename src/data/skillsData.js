@@ -1,49 +1,41 @@
 /**
- * Static Skills Matrix Data
+ * Technical Capability Matrix & Architecture Stack Data
  */
 export const SKILL_ITEMS = Object.freeze([
   {
     groupKey: 'groupAI',
-    themeBg: 'bg-pastel-blue/30 dark:bg-sky-950/40 border-pastel-blue/80 dark:border-sky-800',
-    iconColor: 'text-pastel-blue-dark dark:text-sky-400',
     skills: [
-      { name: 'MediaPipe Pose & Hands (WebAssembly / WebGL)', val: 92 },
-      { name: 'YOLOv8 & DeepSORT Presenter Tracking', val: 88 },
-      { name: 'Gemini 2.5 Flash & Vercel AI SDK', val: 90 },
-      { name: 'Computer Vision & Real-Time Frame Processing', val: 85 },
+      { name: 'MediaPipe WASM & WebGL', badge: 'On-Device', context: 'Inferensi pose & gestur 33-titik real-time tanpa upload server' },
+      { name: 'YOLOv8 & DeepSORT Tracking', badge: 'Computer Vision', context: 'Pelacakan pembicara otomatis dan deteksi objek lokal' },
+      { name: 'Gemini 2.5 Flash & Vercel AI SDK', badge: 'LLM Integration', context: 'Streaming structured JSON dan semantic architecture generation' },
+      { name: 'Canvas 2D/3D & Frame Processing', badge: 'Graphics Engine', context: 'Filter getaran One-Euro, pipeline video 60 FPS di browser' },
     ]
   },
   {
     groupKey: 'groupWeb',
-    themeBg: 'bg-pastel-yellow/35 dark:bg-amber-950/40 border-pastel-yellow-hover dark:border-amber-800',
-    iconColor: 'text-amber-700 dark:text-amber-400',
     skills: [
-      { name: 'Next.js 15 (App Router, Server Actions) & React 19', val: 94 },
-      { name: 'TypeScript & Modern Tailwind CSS (v3 / v4)', val: 95 },
-      { name: 'Backend & Concurrency (Go / Golang, FastAPI, Java MVC)', val: 90 },
-      { name: 'Database & Realtime (Supabase, Firebase RTDB, MySQL)', val: 91 },
+      { name: 'Next.js 15 & React 19', badge: 'Production', context: 'App Router, Server Actions, partial pre-rendering & concurrent features' },
+      { name: 'TypeScript & Modern Tailwind', badge: 'Design System', context: 'Strong typing, token arsitektur monokrom, dan komponen responsif' },
+      { name: 'Go / Golang & FastAPI', badge: 'Backend Concurrency', context: 'High-throughput microservices, async route handlers, dan JWT' },
+      { name: 'Supabase & PostgreSQL', badge: 'Database & Sync', context: 'Row-Level Security, PostgreSQL migrations, dan sync websocket realtime' },
     ]
   },
   {
     groupKey: 'groupSec',
-    themeBg: 'bg-pastel-green/35 dark:bg-emerald-950/40 border-pastel-green dark:border-emerald-800',
-    iconColor: 'text-emerald-700 dark:text-emerald-400',
     skills: [
-      { name: 'Offline-First Cryptography (AES-128 Fernet, PBKDF2)', val: 90 },
-      { name: 'SHA-256 Incremental File Hashing & Integrity', val: 92 },
-      { name: 'Docker, Cloud Deployment & CI/CD Pipelines', val: 88 },
-      { name: 'Computer Networks & TCP/IP Socket Programming', val: 86 },
+      { name: 'Offline-First Cryptography', badge: 'Security', context: 'AES-128 Fernet & derivasi kunci PBKDF2 (VaultSentinel)' },
+      { name: 'SHA-256 Incremental Hashing', badge: 'Data Integrity', context: 'Verifikasi integritas file lokal dan anti-tampering' },
+      { name: 'Docker & Container Deployment', badge: 'DevOps', context: 'Multi-stage container builds dan isolasi lingkungan deployment' },
+      { name: 'Socket Programming & TCP/IP', badge: 'Networking', context: 'Socket duplex client-server dan transmisi paket data aman' },
     ]
   },
   {
     groupKey: 'groupLead',
-    themeBg: 'bg-pastel-purple/35 dark:bg-purple-950/40 border-pastel-purple dark:border-purple-800',
-    iconColor: 'text-indigo-700 dark:text-purple-400',
     skills: [
-      { name: 'HMIF Leadership (Chairman Executive Board 2025/2026)', val: 95 },
-      { name: 'Test-Driven Development (95.8% Coverage Pytest/Vitest)', val: 90 },
-      { name: 'Vibe Coding Architecture & PRD Structuring', val: 94 },
-      { name: 'Public Speaking & Technical Pitching', val: 88 },
+      { name: 'Chairman HMIF 2025/2026', badge: 'Leadership', context: 'Memimpin organisasi kemahasiswaan & digitalisasi birokrasi himpunan' },
+      { name: 'Test-Driven Development', badge: 'Quality Assurance', context: '95.8% automated test coverage menggunakan Pytest & Vitest' },
+      { name: 'System Specification & PRD', badge: 'Architecture', context: 'Penyusunan arsitektur sistem modular dan standardisasi API spec' },
+      { name: 'Bilingual Technical Communication', badge: 'Communication', context: 'Dokumentasi komprehensif ID/EN dan presentasi teknis tingkat nasional' },
     ]
   }
 ]);
