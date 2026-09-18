@@ -83,7 +83,7 @@ function Hero() {
         {/* Leadership & Status Badge */}
         <div className="inline-flex flex-wrap items-center justify-center md:justify-start gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-pastel-yellow dark:bg-amber-400/20 border border-pastel-yellow-hover dark:border-amber-400/40 text-pastel-navy dark:text-amber-300 font-bold text-xs uppercase tracking-wider mb-5 shadow-pastel-sm">
           <Award className="w-4 h-4 text-pastel-blue-dark dark:text-amber-400 flex-shrink-0" />
-          <span className="text-[11px] sm:text-xs leading-tight">{t.hero.statusBadge}</span>
+          <span className="text-xs leading-tight">{t.hero.statusBadge}</span>
         </div>
         
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-space text-pastel-navy dark:text-white leading-[1.15] sm:leading-[1.1] mb-4">
