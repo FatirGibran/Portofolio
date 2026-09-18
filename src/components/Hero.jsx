@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
-import { ArrowRight, Play, Award, ShieldCheck, Code2, Sparkles } from 'lucide-react';
+import { ArrowRight, Play, ShieldCheck, Code2, Sparkles } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import HoloDevPass from './HoloDevPass';
 import { STATS_CONFIG } from '../data/statsData';
