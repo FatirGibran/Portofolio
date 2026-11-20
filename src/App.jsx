@@ -1,20 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Projects from './components/Projects';
-import TheBuildersOdyssey from './components/TheBuildersOdyssey';
-import Keterampilan from './components/Keterampilan';
-import Footer from './components/Footer';
-import SpatialStage3D from './components/SpatialStage3D';
-import CommandPalette from './components/CommandPalette';
-import ProjectModal from './components/ProjectModal';
-import StoryTicker from './components/StoryTicker';
-import BackToTop from './components/BackToTop';
-import ClickRipple from './components/ClickRipple';
-import CustomCursor from './components/CustomCursor';
 import { PortfolioProvider, usePortfolio } from './context/PortfolioContext';
 import { useScrollReveal } from './hooks/useScrollReveal';
+
+// Dynamic lazy imports to split bundle and eliminate render-blocking JS
+const SpatialStage3D = lazy(() => import('./components/SpatialStage3D'));
+const CommandPalette = lazy(() => import('./components/CommandPalette'));
+const ProjectModal = lazy(() => import('./components/ProjectModal'));
+const BackToTop = lazy(() => import('./components/BackToTop'));
+const ClickRipple = lazy(() => import('./components/ClickRipple'));
+const CustomCursor = lazy(() => import('./components/CustomCursor'));
+
+// Mode-specific dynamic views
+const TheBuildersOdyssey = lazy(() => import('./components/TheBuildersOdyssey'));
+const Hero = lazy(() => import('./components/Hero'));
+const StoryTicker = lazy(() => import('./components/StoryTicker'));
+const About = lazy(() => import('./components/About'));
+const Projects = lazy(() => import('./components/Projects'));
+const Keterampilan = lazy(() => import('./components/Keterampilan'));
+const Footer = lazy(() => import('./components/Footer'));
 
 function PortfolioApp() {
   useScrollReveal();
@@ -223,11 +227,13 @@ function PortfolioApp() {
       </a>
 
       {/* 3D WebGL Persistent Spatial Canvas with reactive props */}
-      <SpatialStage3D
-        isLaserActive={isLaserActive}
-        laserPos={laserPos}
-        isConfettiActive={isConfettiActive}
-      />
+      <Suspense fallback={null}>
+        <SpatialStage3D
+          isLaserActive={isLaserActive}
+          laserPos={laserPos}
+          isConfettiActive={isConfettiActive}
+        />
+      </Suspense>
 
       {/* Laser Pointer Cursor follow dot */}
       {isLaserActive && (
@@ -302,46 +308,59 @@ function PortfolioApp() {
           transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
-        {experienceMode === 'odyssey' ? (
-          <TheBuildersOdyssey triggerGlobalEffect={triggerGlobalEffect} />
-        ) : (
-          <>
-            <Navbar />
-            <Hero />
-            <StoryTicker />
-            <About />
-            <Projects />
-            <Keterampilan />
-            <Footer />
+        {/* Global Unified Navigation: Always Mounted in Both Modes */}
+        <Navbar />
 
-            {/* Floating Return to Odyssey Mode Pill */}
-            <div className="fixed bottom-6 left-6 z-40">
-              <button
-                onClick={toggleExperienceMode}
-                className="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-slate-900/95 dark:bg-white text-white dark:text-slate-950 font-space font-bold text-xs shadow-2xl backdrop-blur-md border border-slate-700/60 dark:border-slate-300 hover:scale-105 active:scale-95 transition-all duration-200"
-              >
-                <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
-                <span>✨ Mode Odyssey</span>
-              </button>
+        <Suspense
+          fallback={
+            <div className="min-h-screen flex items-center justify-center bg-[#08090D] text-[#43D9E8] font-mono text-xs">
+              <span className="w-2 h-2 rounded-full bg-[#43D9E8] animate-ping mr-2.5" />
+              <span>INITIALIZING OBSIDIAN NOIR ENGINE...</span>
             </div>
-          </>
-        )}
+          }
+        >
+          {experienceMode === 'odyssey' ? (
+            <TheBuildersOdyssey triggerGlobalEffect={triggerGlobalEffect} />
+          ) : (
+            <>
+              <Hero />
+              <StoryTicker />
+              <About />
+              <Projects />
+              <Keterampilan />
+              <Footer />
+
+              {/* Floating Return to Odyssey Mode Pill */}
+              <div className="fixed bottom-6 left-6 z-40">
+                <button
+                  onClick={toggleExperienceMode}
+                  className="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-slate-900/95 dark:bg-white text-white dark:text-slate-950 font-space font-bold text-xs shadow-2xl backdrop-blur-md border border-slate-700/60 dark:border-slate-300 hover:scale-105 active:scale-95 transition-all duration-200"
+                >
+                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
+                  <span>✨ Mode Odyssey</span>
+                </button>
+              </div>
+            </>
+          )}
+        </Suspense>
       </div>
 
-      {/* Global Interactive Cyber Command Palette & Terminal (Cmd + K) */}
-      <CommandPalette triggerGlobalEffect={triggerGlobalEffect} />
+      <Suspense fallback={null}>
+        {/* Global Interactive Cyber Command Palette & Terminal (Cmd + K) */}
+        <CommandPalette triggerGlobalEffect={triggerGlobalEffect} />
 
-      {/* Project Architectural Case Study Deep-Dive Modal */}
-      <ProjectModal />
+        {/* Project Architectural Case Study Deep-Dive Modal */}
+        <ProjectModal />
 
-      {/* Smooth Scroll Back To Top Button */}
-      <BackToTop />
+        {/* Smooth Scroll Back To Top Button */}
+        <BackToTop />
 
-      {/* Subtle Interactive Click Ripple Wave */}
-      <ClickRipple />
+        {/* Subtle Interactive Click Ripple Wave */}
+        <ClickRipple />
 
-      {/* Precision Trailing Cursor (Desktop fine pointer only) */}
-      <CustomCursor />
+        {/* Precision Trailing Cursor (Desktop fine pointer only) */}
+        <CustomCursor />
+      </Suspense>
     </div>
   );
 }

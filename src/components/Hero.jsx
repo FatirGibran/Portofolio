@@ -150,19 +150,22 @@ function Hero() {
               title="Klik untuk membuka 3D Developer Pass"
               className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 p-2.5 rounded-3xl bg-white dark:bg-[#111624] border-2 border-slate-200/80 dark:border-[#1E293B] shadow-xl group cursor-pointer transition-all duration-300 hover:border-blue-500/50"
             >
-              <img
-                src="Image/fotomuka.jpg"
-                alt="Foto Profil Fatir Gibran"
-                width="320"
-                height="320"
-                loading="eager"
-                decoding="async"
-                className="w-full h-full aspect-square object-cover object-top rounded-2xl shadow-inner group-hover:scale-[0.98] transition-transform duration-500"
-                style={{ objectPosition: 'center top' }}
-                onError={(e) => {
-                  e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80';
-                }}
-              />
+              <picture>
+                <source srcSet="Image/fotomuka.webp" type="image/webp" />
+                <img
+                  src="Image/fotomuka.jpg"
+                  alt="Foto Profil Fatir Gibran"
+                  width="320"
+                  height="320"
+                  loading="eager"
+                  decoding="async"
+                  className="w-full h-full aspect-square object-cover object-top rounded-2xl shadow-inner group-hover:scale-[0.98] transition-transform duration-500"
+                  style={{ objectPosition: 'center top' }}
+                  onError={(e) => {
+                    e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80';
+                  }}
+                />
+              </picture>
 
               <div className="absolute -bottom-2 -left-2 bg-white dark:bg-[#161D2E] border border-slate-200 dark:border-[#1E293B] py-1 px-3 rounded-xl shadow-md flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />

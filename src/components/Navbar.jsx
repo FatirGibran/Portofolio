@@ -37,6 +37,14 @@ const InsigniaFG = memo(({ className = "w-8 h-8" }) => (
   </div>
 ));
 
+// Map nav item to Odyssey scene
+const NAV_TO_SCENE_MAP = {
+  tentang: '01',
+  proyek: '04',
+  keterampilan: '03',
+  kontak: '07',
+};
+
 function Navbar() {
   const {
     isDark,
@@ -49,6 +57,8 @@ function Navbar() {
     setIsCommandPaletteOpen,
     experienceMode,
     toggleExperienceMode,
+    odysseyScene,
+    goToScene,
     t
   } = usePortfolio();
 
@@ -58,14 +68,27 @@ function Navbar() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   const navItems = [
-    { id: 'tentang', label: t.nav.about },
-    { id: 'proyek', label: t.nav.projects },
-    { id: 'keterampilan', label: t.nav.skills },
-    { id: 'kontak', label: t.nav.contact },
+    { id: 'tentang', label: t.nav.about, sceneId: '01' },
+    { id: 'proyek', label: t.nav.projects, sceneId: '04' },
+    { id: 'keterampilan', label: t.nav.skills, sceneId: '03' },
+    { id: 'kontak', label: t.nav.contact, sceneId: '07' },
   ];
+
+  // Compute active navigation highlight
+  const activeNavId = useMemo(() => {
+    if (experienceMode === 'odyssey') {
+      if (odysseyScene === '01' || odysseyScene === '02') return 'tentang';
+      if (odysseyScene === '04') return 'proyek';
+      if (odysseyScene === '03') return 'keterampilan';
+      if (odysseyScene === '05' || odysseyScene === '06' || odysseyScene === '07') return 'kontak';
+      return 'hero';
+    }
+    return activeSection;
+  }, [experienceMode, odysseyScene, activeSection]);
 
   // Throttled scroll listener using requestAnimationFrame to track section & scroll percentage
   useEffect(() => {
+    if (experienceMode === 'odyssey') return;
     let ticking = false;
 
     const handleScroll = () => {
@@ -95,7 +118,7 @@ function Navbar() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [experienceMode]);
 
   // Close mobile drawer on escape key
   useEffect(() => {
@@ -106,14 +129,38 @@ function Navbar() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const handleNavClick = useCallback((id) => {
-    playSound('tab');
-    setIsOpen(false);
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [playSound]);
+  const handleNavClick = useCallback(
+    (id) => {
+      playSound('tab');
+      setIsOpen(false);
+
+      if (experienceMode === 'odyssey') {
+        const targetScene = NAV_TO_SCENE_MAP[id] || '00';
+        goToScene(targetScene);
+      } else {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    },
+    [experienceMode, goToScene, playSound]
+  );
+
+  const handleBrandClick = useCallback(
+    (e) => {
+      e.preventDefault();
+      setIsOpen(false);
+      playSound('click');
+      if (experienceMode === 'odyssey') {
+        goToScene('00');
+      } else {
+        const el = document.getElementById('hero');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    },
+    [experienceMode, goToScene, playSound]
+  );
 
   return (
     <>
@@ -134,10 +181,7 @@ function Navbar() {
           {/* Brand Logo - The Monolithic Node */}
           <a
             href="#hero"
-            onClick={() => {
-              setIsOpen(false);
-              playSound('click');
-            }}
+            onClick={handleBrandClick}
             className="flex items-center gap-2.5 group min-h-[40px]"
           >
             <InsigniaFG className="w-8 h-8 flex-shrink-0" />
@@ -145,14 +189,22 @@ function Navbar() {
               <span className="tracking-tight font-space font-extrabold text-sm sm:text-base text-slate-900 dark:text-white leading-none">
                 Fatir Gibran
               </span>
-              <span className="text-[10px] font-mono font-bold text-blue-600 dark:text-blue-400 leading-tight tracking-wider uppercase mt-0.5">
+              <span className="text-[10px] font-mono font-bold text-blue-600 dark:text-[#43D9E8] leading-tight tracking-wider uppercase mt-0.5">
                 CS • Systems & AI
               </span>
             </div>
           </a>
 
+          {/* Active Odyssey Scene Indicator Pill */}
+          {experienceMode === 'odyssey' && (
+            <div className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#43D9E8]/10 border border-[#43D9E8]/30 text-[10px] font-mono font-bold text-[#43D9E8]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#43D9E8] animate-pulse" />
+              <span>SCENE {odysseyScene}</span>
+            </div>
+          )}
+
           {/* Desktop Navigation Links - Segmented Rail */}
-          <ul className="hidden md:flex items-center p-1 bg-slate-100/80 dark:bg-[#111624]/90 rounded-xl border border-slate-200/60 dark:border-slate-800/80">
+          <ul className="hidden md:flex items-center p-1 bg-slate-100/80 dark:bg-[#11131B]/90 rounded-xl border border-slate-200/60 dark:border-[#C9D0DF]/15">
             {navItems.map((item) => (
               <li key={item.id}>
                 <a
@@ -162,8 +214,8 @@ function Navbar() {
                     handleNavClick(item.id);
                   }}
                   className={`font-semibold text-xs lg:text-sm transition-all duration-150 py-1.5 px-3 lg:px-3.5 rounded-lg flex items-center gap-1.5 min-h-[34px] ${
-                    activeSection === item.id
-                      ? 'text-slate-950 dark:text-white bg-white dark:bg-[#161D2E] font-bold shadow-sm border border-slate-200/50 dark:border-blue-500/30'
+                    activeNavId === item.id
+                      ? 'text-slate-950 dark:text-white bg-white dark:bg-[#151D35] font-bold shadow-sm border border-slate-200/50 dark:border-[#43D9E8]/30'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/40 dark:hover:bg-slate-800/40'
                   }`}
                 >
@@ -286,13 +338,13 @@ function Navbar() {
                       handleNavClick(item.id);
                     }}
                     className={`block py-2.5 px-3.5 rounded-xl font-bold text-sm transition-colors min-h-[44px] flex items-center justify-between ${
-                      activeSection === item.id
+                      activeNavId === item.id
                         ? 'text-white dark:text-slate-950 bg-slate-900 dark:bg-white font-bold shadow-sm'
-                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#111624]'
+                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#11131B]'
                     }`}
                   >
                     <span>{item.label}</span>
-                    {activeSection === item.id && (
+                    {activeNavId === item.id && (
                       <span className="text-xs font-mono opacity-60">•</span>
                     )}
                   </a>

@@ -16,8 +16,6 @@ import {
   Users,
   Code,
   BookOpen,
-  Volume2,
-  VolumeX,
   RotateCcw,
   Sparkles,
   ShieldCheck,
@@ -41,41 +39,6 @@ const GithubIcon = memo((props) => (
   </svg>
 ));
 
-const InsigniaFG = memo(({ className = 'w-7 h-7' }) => (
-  <div className={`relative flex items-center justify-center ${className} group`}>
-    <svg
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full transform-gpu transition-transform duration-300 group-hover:scale-105"
-    >
-      <rect
-        x="1"
-        y="1"
-        width="34"
-        height="34"
-        rx="9"
-        className="fill-[#11131B] stroke-[#C9D0DF]/20"
-        strokeWidth="1.2"
-      />
-      <path
-        d="M11 11H23M11 11V25M11 18H20"
-        className="stroke-[#F1F0F5]"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M25 21V25H18"
-        className="stroke-[#F1F0F5]"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="25" cy="11" r="2.2" fill="#43D9E8" />
-    </svg>
-  </div>
-));
 
 // =========================================================================
 // OBSIDIAN NOIR MASTER DESIGN SYSTEM SPECIFICATION
@@ -221,11 +184,8 @@ const SCENES_CONFIG = [
 export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
   const {
     lang,
-    toggleLang,
     t,
     playSound,
-    soundEnabled,
-    toggleSound,
     odysseyScene,
     goToScene,
     setSelectedProjectForModal,
@@ -259,19 +219,27 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
   const activeSceneConfig = SCENES_CONFIG[currentSceneIndex >= 0 ? currentSceneIndex : 0];
   const activeTheme = OBSIDIAN_NOIR_THEMES[odysseyScene] || OBSIDIAN_NOIR_THEMES['00'];
 
-  // Smooth mouse follower
+  // Smooth mouse follower throttled with requestAnimationFrame
   useEffect(() => {
+    let rafId = null;
     const handleMouseMove = (e) => {
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-      setMousePos({ x, y });
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        const x = (e.clientX / window.innerWidth) * 100;
+        const y = (e.clientY / window.innerHeight) * 100;
+        setMousePos({ x, y });
+        rafId = null;
+      });
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  // Aurora Mesh Background Generator
+  // Aurora Mesh Background Generator with visibility check
   useEffect(() => {
     const canvas = auroraCanvasRef.current;
     if (!canvas) return;
@@ -292,6 +260,12 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
     let step = 0;
 
     const render = () => {
+      // Pause drawing when tab is hidden to save GPU cycles
+      if (document.hidden) {
+        animId = requestAnimationFrame(render);
+        return;
+      }
+
       step += 0.005;
       ctx.clearRect(0, 0, width, height);
 
@@ -619,118 +593,10 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
       <div className="pointer-events-none fixed inset-0 scanline-grid opacity-30 z-0" />
 
       {/* =====================================================================
-          TOP HUD: TELEMETRY BAR & UTILITY CONTROLS (OBSIDIAN NOIR)
-      ===================================================================== */}
-      <header className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-6 pt-4 pb-2">
-        <div className="flex items-center justify-between gap-4 p-3 rounded-2xl frosted-noir shadow-2xl">
-          {/* Brand Identity / Home Anchor */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => handleSceneChange('00', 'prev')}
-              className="flex items-center gap-2.5 group focus:outline-none"
-              title="Return to Scene 00: The Arrival"
-            >
-              <InsigniaFG className="w-8 h-8 flex-shrink-0" />
-              <div className="text-left hidden sm:block">
-                <span className="font-space font-extrabold text-xs sm:text-sm text-[#F1F0F5] tracking-tight leading-none block">
-                  Fatir Gibran
-                </span>
-                <span className="font-mono text-[10px] text-[#43D9E8] font-bold uppercase tracking-wider block mt-0.5">
-                  The Builder’s Odyssey
-                </span>
-              </div>
-            </button>
-
-            <div className="h-4 w-[1px] bg-white/10 hidden sm:block" />
-
-            {/* Active Chapter Telemetry Badge */}
-            <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-[#11131B] border border-[#C9D0DF]/15">
-              <span
-                className="w-2 h-2 rounded-full animate-pulse"
-                style={{ backgroundColor: activeTheme.accentColor }}
-              />
-              <span className="font-mono text-[11px] font-bold text-[#F1F0F5] tracking-wider">
-                {activeTheme.badgeText} • {lang === 'id' ? activeSceneConfig.titleId : activeSceneConfig.titleEn}
-              </span>
-            </div>
-          </div>
-
-          {/* Stepper Progress Rail (Desktop) */}
-          <div className="hidden lg:flex items-center gap-1.5 flex-1 max-w-md mx-4">
-            {SCENES_CONFIG.map((scene, idx) => {
-              const isActive = scene.id === odysseyScene;
-              const isPast = idx < currentSceneIndex;
-              return (
-                <button
-                  key={scene.id}
-                  onClick={() => handleSceneChange(scene.id, idx > currentSceneIndex ? 'next' : 'prev')}
-                  className="flex-1 group py-2 text-left focus:outline-none"
-                  title={`${scene.tag}: ${lang === 'id' ? scene.titleId : scene.titleEn}`}
-                >
-                  <div
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      isActive
-                        ? 'bg-[#43D9E8] shadow-[0_0_14px_rgba(67,217,232,0.9)] scale-y-125'
-                        : isPast
-                        ? 'bg-[#5146E5]/50 group-hover:bg-[#5146E5]/80'
-                        : 'bg-white/10 group-hover:bg-white/25'
-                    }`}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Right Utilities: Sound, Language, Mode Switcher */}
-          <div className="flex items-center gap-1.5">
-            {/* Audio Toggle */}
-            <button
-              onClick={toggleSound}
-              title={soundEnabled ? 'Disable Audio FX' : 'Enable Audio FX'}
-              className="flex items-center justify-center w-8 h-8 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-all shadow-sm"
-            >
-              {soundEnabled ? (
-                <Volume2 className="w-3.5 h-3.5 text-[#43D9E8]" />
-              ) : (
-                <VolumeX className="w-3.5 h-3.5 text-slate-500" />
-              )}
-            </button>
-
-            {/* Language Switcher */}
-            <button
-              onClick={() => {
-                toggleLang();
-                playSound('tab');
-              }}
-              title={lang === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
-              className="flex items-center justify-center gap-1 h-8 px-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-mono font-bold text-[#F1F0F5] transition-all shadow-sm"
-            >
-              <Globe className="w-3 h-3 text-[#43D9E8]" />
-              <span>{lang.toUpperCase()}</span>
-            </button>
-
-            {/* Direct Full Portfolio Toggle */}
-            <button
-              onClick={() => {
-                toggleExperienceMode();
-                playSound('toggle');
-              }}
-              title="Switch to Continuous Full Portfolio View"
-              className="flex items-center gap-1.5 h-8 px-3 rounded-xl bg-white/10 hover:bg-white/15 border border-[#C9D0DF]/20 text-[11px] font-space font-bold text-[#F1F0F5] transition-all shadow-sm"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#43D9E8] animate-pulse" />
-              <span className="hidden sm:inline">EXPLORE DIRECT</span>
-              <span className="sm:hidden">DIRECT</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* =====================================================================
           MAIN SCENE CONTAINER (CINEMATIC NOIR TRANSITIONS)
       ===================================================================== */}
       <main
-        className={`relative z-10 flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-8 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`relative z-10 flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 pt-24 sm:pt-28 pb-8 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           isTransitioning
             ? transitionDir === 'next'
               ? 'opacity-0 -translate-x-8 scale-[0.96] blur-md'
@@ -738,11 +604,28 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
             : 'opacity-100 translate-x-0 scale-100 blur-0'
         }`}
       >
+        {/* Dynamic Chapter Identity Breadcrumb Strip */}
+        <div className="flex items-center justify-between gap-3 mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-[#11131B] border border-[#C9D0DF]/15 shadow-sm">
+            <span
+              className="w-2 h-2 rounded-full animate-pulse"
+              style={{ backgroundColor: activeTheme.accentColor }}
+            />
+            <span className="font-mono text-[11px] font-bold text-[#F1F0F5] tracking-wider">
+              {activeTheme.badgeText} • {lang === 'id' ? activeSceneConfig.titleId : activeSceneConfig.titleEn}
+            </span>
+          </div>
+
+          <span className="text-[11px] font-mono text-slate-500 hidden sm:inline">
+            CHAPTER {currentSceneIndex + 1} OF {SCENES_CONFIG.length}
+          </span>
+        </div>
+
         {/* =====================================================================
             SCENE 00 — THE ARRIVAL (OBSIDIAN NOIR OPENING)
         ===================================================================== */}
         {odysseyScene === '00' && (
-          <section className="min-h-[76vh] flex flex-col justify-center animate-fade-in relative">
+          <section className="min-h-[72vh] flex flex-col justify-center animate-fade-in relative">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
               {/* Focal Monolithic Portrait with Liquid Metallic Rim */}
               <div className="lg:col-span-5 flex justify-center order-2 lg:order-1">
@@ -752,18 +635,22 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
 
                   {/* Liquid Chrome Chamfered Frame */}
                   <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-3xl p-3 bg-gradient-to-b from-[#151D35] to-[#08090D] border border-[#C9D0DF]/30 shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]">
-                    <img
-                      src="Image/fotomuka.jpg"
-                      alt="Fatir Gibran Portrait"
-                      width="384"
-                      height="384"
-                      loading="eager"
-                      className="w-full h-full object-cover object-top rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-700"
-                      onError={(e) => {
-                        e.target.src =
-                          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80';
-                      }}
-                    />
+                    <picture>
+                      <source srcSet="Image/fotomuka.webp" type="image/webp" />
+                      <img
+                        src="Image/fotomuka.jpg"
+                        alt="Fatir Gibran Portrait"
+                        width="384"
+                        height="384"
+                        loading="eager"
+                        decoding="async"
+                        className="w-full h-full object-cover object-top rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-700"
+                        onError={(e) => {
+                          e.target.src =
+                            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80';
+                        }}
+                      />
+                    </picture>
 
                     {/* Telemetry Precision Pill */}
                     <div className="absolute -bottom-3 -right-3 px-3.5 py-1.5 rounded-xl bg-[#08090D]/95 backdrop-blur-md border border-[#43D9E8]/50 text-[11px] font-mono text-[#43D9E8] font-bold shadow-2xl flex items-center gap-2">
