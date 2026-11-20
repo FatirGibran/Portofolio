@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, memo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { Menu, X, Sun, Moon, Globe, Search, Volume2, VolumeX } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 
