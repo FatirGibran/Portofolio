@@ -19,9 +19,14 @@ import {
   RotateCcw,
   Sparkles,
   ShieldCheck,
+  GraduationCap,
+  MapPin,
+  CheckCircle,
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { ALL_PROJECTS } from '../data/projectsData';
+import { CAREER_TIMELINE_DATA } from '../data/timelineData';
+import { SKILL_ITEMS } from '../data/skillsData';
 
 const GithubIcon = memo((props) => (
   <svg
@@ -734,14 +739,93 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
             SCENE 01 — THE PERSON BEHIND THE CODE (DOSSIER DE LUXE)
         ===================================================================== */}
         {odysseyScene === '01' && (
-          <section className="space-y-8 animate-fade-in relative">
+          <section className="space-y-10 animate-fade-in relative">
             <div className="max-w-4xl space-y-3">
               <span className="text-xs font-mono text-[#D8B77A] font-bold uppercase tracking-wider block">
                 {t.odyssey?.scene01.narrative || 'Before the code, there was curiosity.'}
               </span>
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-space text-[#F1F0F5] tracking-tight">
-                {lang === 'id' ? 'Sosok di Balik Kode' : 'The Person Behind the Code'}
+                {lang === 'id' ? 'Identitas & Fondasi Rekayasa' : 'Identity & Engineering Foundations'}
               </h2>
+            </div>
+
+            {/* Complete Profile & Academic Dossier Card */}
+            <div className="p-6 sm:p-8 rounded-3xl frosted-noir-elevated border-2 border-[#D8B77A]/30 shadow-2xl">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center">
+                {/* Upright Verified Portrait */}
+                <div className="md:col-span-4 flex justify-center">
+                  <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-2xl p-2 bg-[#08090D] border-2 border-[#D8B77A]/40 shadow-xl overflow-hidden group">
+                    <picture>
+                      <source srcSet="Image/fotomuka.webp" type="image/webp" />
+                      <img
+                        src="Image/fotomuka.jpg"
+                        alt="Fatir Gibran"
+                        width="320"
+                        height="320"
+                        loading="eager"
+                        decoding="async"
+                        className="w-full h-full object-cover object-top rounded-xl transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </picture>
+                    <div className="absolute bottom-3 left-3 right-3 py-1 px-2.5 rounded-lg bg-[#08090D]/90 backdrop-blur-md border border-[#D8B77A]/40 text-[10px] font-mono text-[#D8B77A] font-bold text-center">
+                      VERIFIED ENGINEER
+                    </div>
+                  </div>
+                </div>
+
+                {/* Identity, Education & Credentials */}
+                <div className="md:col-span-8 space-y-4">
+                  <div>
+                    <span className="text-xs font-mono font-bold text-[#43D9E8] uppercase tracking-wider">
+                      IDENTITAS RESMI
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-black font-space text-[#F1F0F5]">
+                      Fatir Gibran
+                    </h3>
+                    <p className="text-sm font-mono text-[#C9D0DF] mt-0.5">
+                      Software Engineer • On-Device AI • Cryptography & Systems
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <div className="p-3 rounded-xl bg-[#08090D]/60 border border-white/10 flex items-start gap-2.5">
+                      <GraduationCap className="w-4 h-4 text-[#43D9E8] mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="block text-[10px] font-mono text-slate-400 uppercase">Pendidikan</span>
+                        <span className="text-xs font-bold font-space text-white">S1 Teknik Informatika</span>
+                        <span className="block text-[11px] text-slate-300">Telkom University Purwokerto</span>
+                      </div>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-[#08090D]/60 border border-white/10 flex items-start gap-2.5">
+                      <MapPin className="w-4 h-4 text-[#D8B77A] mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="block text-[10px] font-mono text-slate-400 uppercase">Domisili & Status</span>
+                        <span className="text-xs font-bold font-space text-white">Purwokerto, Indonesia</span>
+                        <span className="block text-[11px] text-emerald-400 font-mono">Semester 5 (Aktif)</span>
+                      </div>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-[#08090D]/60 border border-white/10 flex items-start gap-2.5">
+                      <ShieldCheck className="w-4 h-4 text-[#5146E5] mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="block text-[10px] font-mono text-slate-400 uppercase">Standar Mutu</span>
+                        <span className="text-xs font-bold font-space text-white">Clean Architecture</span>
+                        <span className="block text-[11px] text-slate-300">95.8% Test Coverage (Pytest)</span>
+                      </div>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-[#08090D]/60 border border-white/10 flex items-start gap-2.5">
+                      <CheckCircle className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="block text-[10px] font-mono text-slate-400 uppercase">Kemandirian Sistem</span>
+                        <span className="text-xs font-bold font-space text-white">Zero Cloud Egress</span>
+                        <span className="block text-[11px] text-slate-300">On-Device Edge WASM & Fernet</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Asymmetric Editorial Magazine Composition */}
@@ -838,6 +922,48 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Academic & Professional Journey Track (Milestones) */}
+            <div className="space-y-4 pt-4 border-t border-white/10">
+              <span className="text-xs font-mono text-[#D8B77A] font-bold uppercase tracking-wider block">
+                PERJALANAN AKADEMIK & REKAYASA (2023 – 2026)
+              </span>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {CAREER_TIMELINE_DATA.map((milestone, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 rounded-2xl bg-[#08090D]/70 border border-white/10 hover:border-[#D8B77A]/50 transition-all space-y-2 flex flex-col justify-between"
+                  >
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <span className="px-2.5 py-0.5 rounded-md bg-[#D8B77A]/15 text-[#D8B77A] font-mono text-xs font-bold">
+                          {milestone.year}
+                        </span>
+                        <span className="text-[10px] font-mono text-slate-400">
+                          {milestone.phase}
+                        </span>
+                      </div>
+                      <h4 className="text-base font-bold font-space text-[#F1F0F5]">
+                        {milestone.title}
+                      </h4>
+                      <p className="text-xs text-slate-300 leading-relaxed font-sans">
+                        {milestone.desc}
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap gap-1 pt-2">
+                      {milestone.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 rounded bg-white/5 text-[10px] font-mono text-slate-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
@@ -1055,6 +1181,67 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
               </div>
             )}
 
+            {/* Full Technical Stack & Architecture Matrix from SKILL_ITEMS */}
+            <div className="space-y-4 pt-6 border-t border-white/10">
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="text-xs font-mono text-[#43D9E8] font-bold uppercase tracking-wider block">
+                    MATRIKS TEKNOLOGI & KAPABILITAS REKAYASA
+                  </span>
+                  <h4 className="text-2xl font-bold font-space text-[#F1F0F5] mt-1">
+                    {lang === 'id' ? 'Arsitektur Stack Berstandar Produksi' : 'Production-Grade Architecture Stack'}
+                  </h4>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {SKILL_ITEMS.map((group, gIdx) => {
+                  const groupTitles = {
+                    groupAI: lang === 'id' ? 'On-Device Edge AI & Computer Vision' : 'On-Device Edge AI & Vision',
+                    groupWeb: lang === 'id' ? 'Modern Full-Stack Web Architecture' : 'Modern Full-Stack Architecture',
+                    groupSec: lang === 'id' ? 'Security, Cryptography & Systems' : 'Security, Crypto & Systems',
+                    groupLead: lang === 'id' ? 'Rekayasa Kualitas & Kepemimpinan' : 'Quality Engineering & Leadership',
+                  };
+                  return (
+                    <div
+                      key={gIdx}
+                      className="p-5 rounded-2xl bg-[#08090D]/75 border border-white/10 space-y-3"
+                    >
+                      <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+                        <span className="text-sm font-bold font-space text-white">
+                          {groupTitles[group.groupKey] || group.groupKey}
+                        </span>
+                        <span className="px-2 py-0.5 rounded bg-[#963CFF]/20 text-[#43D9E8] font-mono text-[10px] font-bold">
+                          VERIFIED
+                        </span>
+                      </div>
+
+                      <div className="space-y-2.5">
+                        {group.skills.map((skill, sIdx) => (
+                          <div
+                            key={sIdx}
+                            className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5 space-y-1"
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs font-mono font-bold text-[#F1F0F5]">
+                                {skill.name}
+                              </span>
+                              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-[#D8B77A]">
+                                {skill.badge}
+                              </span>
+                            </div>
+                            <p className="text-[11px] text-slate-400 font-sans leading-relaxed">
+                              {skill.context}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
             <div className="pt-2">
               <button
                 onClick={() => handleSceneChange('04', 'next')}
@@ -1181,9 +1368,27 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
                   className="p-5 rounded-2xl frosted-noir hover:border-[#43D9E8]/50 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
                 >
                   <div>
+                    {/* Visual Project Preview Header Banner */}
+                    <div className="w-full h-20 rounded-xl bg-gradient-to-br from-[#151D35] to-[#08090D] border border-white/10 p-2.5 mb-3 flex flex-col justify-between relative overflow-hidden group-hover:border-[#43D9E8]/40 transition-colors">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono text-[#43D9E8] font-bold">
+                          SYS-{(idx + 1).toString().padStart(2, '0')}
+                        </span>
+                        <span className="px-2 py-0.5 rounded-full bg-white/10 text-white font-mono text-[9px] font-bold uppercase">
+                          {proj.badge}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                        <span className="text-[10px] font-mono text-slate-300 truncate">
+                          {proj.category.toUpperCase()} • {proj.role}
+                        </span>
+                      </div>
+                    </div>
+
                     <div className="flex items-center justify-between gap-2 mb-2">
                       <span className="text-[11px] font-mono text-[#43D9E8] font-bold">
-                        SYS-{(idx + 1).toString().padStart(2, '0')}: {proj.role}
+                        {proj.role}
                       </span>
                       <span className="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-300 font-mono text-[10px] border border-white/10">
                         {proj.badge}

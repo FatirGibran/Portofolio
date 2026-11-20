@@ -21,8 +21,8 @@ const Keterampilan = lazy(() => import('./components/Keterampilan'));
 const Footer = lazy(() => import('./components/Footer'));
 
 function PortfolioApp() {
-  useScrollReveal();
   const { experienceMode, toggleExperienceMode } = usePortfolio();
+  useScrollReveal(experienceMode);
 
   // Interactive Presentation Effects State
   const [isLaserActive, setIsLaserActive] = useState(false);
@@ -226,14 +226,16 @@ function PortfolioApp() {
         Lewati ke Konten Utama
       </a>
 
-      {/* 3D WebGL Persistent Spatial Canvas with reactive props */}
-      <Suspense fallback={null}>
-        <SpatialStage3D
-          isLaserActive={isLaserActive}
-          laserPos={laserPos}
-          isConfettiActive={isConfettiActive}
-        />
-      </Suspense>
+      {/* 3D WebGL Spatial Canvas for Direct Mode & Interactive Effects */}
+      {experienceMode === 'direct' && (
+        <Suspense fallback={null}>
+          <SpatialStage3D
+            isLaserActive={isLaserActive}
+            laserPos={laserPos}
+            isConfettiActive={isConfettiActive}
+          />
+        </Suspense>
+      )}
 
       {/* Laser Pointer Cursor follow dot */}
       {isLaserActive && (

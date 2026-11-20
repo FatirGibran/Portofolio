@@ -712,8 +712,7 @@ export default function SpatialStage3D({
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
-      style={{ opacity: 0.95 }}
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-30 dark:opacity-35 transition-opacity duration-700"
     >
       <canvas ref={canvasRef} className="w-full h-full block" />
     </div>
