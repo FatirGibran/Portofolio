@@ -13,12 +13,7 @@ const CustomCursor = lazy(() => import('./components/CustomCursor'));
 
 // Mode-specific dynamic views
 const TheBuildersOdyssey = lazy(() => import('./components/TheBuildersOdyssey'));
-const Hero = lazy(() => import('./components/Hero'));
-const StoryTicker = lazy(() => import('./components/StoryTicker'));
-const About = lazy(() => import('./components/About'));
-const Projects = lazy(() => import('./components/Projects'));
-const Keterampilan = lazy(() => import('./components/Keterampilan'));
-const Footer = lazy(() => import('./components/Footer'));
+const DirectPortfolio = lazy(() => import('./components/DirectPortfolio'));
 
 function PortfolioApp() {
   const { experienceMode, toggleExperienceMode } = usePortfolio();
@@ -324,25 +319,7 @@ function PortfolioApp() {
           {experienceMode === 'odyssey' ? (
             <TheBuildersOdyssey triggerGlobalEffect={triggerGlobalEffect} />
           ) : (
-            <>
-              <Hero />
-              <StoryTicker />
-              <About />
-              <Projects />
-              <Keterampilan />
-              <Footer />
-
-              {/* Floating Return to Odyssey Mode Pill */}
-              <div className="fixed bottom-6 left-6 z-40">
-                <button
-                  onClick={toggleExperienceMode}
-                  className="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-slate-900/95 dark:bg-white text-white dark:text-slate-950 font-space font-bold text-xs shadow-2xl backdrop-blur-md border border-slate-700/60 dark:border-slate-300 hover:scale-105 active:scale-95 transition-all duration-200"
-                >
-                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
-                  <span>✨ Mode Odyssey</span>
-                </button>
-              </div>
-            </>
+            <DirectPortfolio toggleExperienceMode={toggleExperienceMode} />
           )}
         </Suspense>
       </div>
