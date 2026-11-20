@@ -47,8 +47,8 @@ function Navbar() {
     toggleSound,
     playSound,
     setIsCommandPaletteOpen,
-    journeyMode,
-    toggleJourneyMode,
+    experienceMode,
+    toggleExperienceMode,
     t
   } = usePortfolio();
 
@@ -60,7 +60,6 @@ function Navbar() {
   const navItems = [
     { id: 'tentang', label: t.nav.about },
     { id: 'proyek', label: t.nav.projects },
-    { id: 'the-builders-journey', label: t.nav.journey },
     { id: 'keterampilan', label: t.nav.skills },
     { id: 'kontak', label: t.nav.contact },
   ];
@@ -79,7 +78,7 @@ function Navbar() {
           const currentProgress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
           setScrollProgress(Math.min(100, Math.max(0, currentProgress)));
 
-          const sections = ['hero', 'tentang', 'proyek', 'the-builders-journey', 'keterampilan', 'kontak'];
+          const sections = ['hero', 'tentang', 'proyek', 'keterampilan', 'kontak'];
           let current = 'hero';
           for (const section of sections) {
             const el = document.getElementById(section);
@@ -235,13 +234,14 @@ function Navbar() {
               )}
             </button>
 
-            {/* Exploration Mode Switcher (Story vs Direct) */}
+            {/* Odyssey Mode Launcher */}
             <button
-              onClick={toggleJourneyMode}
-              title={journeyMode === 'story' ? 'Switch to Direct View' : 'Switch to Story Mode'}
-              className="hidden lg:flex items-center justify-center h-8 px-2 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-100/70 dark:bg-[#111624]/80 text-[10px] font-mono font-bold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-sky-400 transition-colors shadow-sm"
+              onClick={toggleExperienceMode}
+              title={experienceMode === 'odyssey' ? t.nav.modeDirect : t.nav.modeOdyssey}
+              className="hidden lg:flex items-center gap-1.5 h-8 px-2.5 rounded-xl border border-blue-500/40 dark:border-sky-500/40 bg-blue-50/80 dark:bg-sky-950/50 text-[11px] font-space font-bold text-blue-700 dark:text-sky-300 hover:bg-blue-100 dark:hover:bg-sky-900/60 transition-colors shadow-sm"
             >
-              <span>{journeyMode === 'story' ? 'STORY' : 'DIRECT'}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-sky-400 animate-pulse" />
+              <span>{experienceMode === 'odyssey' ? 'DIRECT' : 'ODYSSEY'}</span>
             </button>
           </div>
 
@@ -302,6 +302,16 @@ function Navbar() {
 
             {/* Mobile Drawer Bottom Utility Section */}
             <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2">
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  toggleExperienceMode();
+                }}
+                className="inline-flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 rounded-xl shadow-sm min-h-[44px]"
+              >
+                <span>✨ {experienceMode === 'odyssey' ? 'Mode Portofolio Lengkap' : "The Builder's Odyssey"}</span>
+              </button>
+
               <button
                 onClick={() => {
                   setIsOpen(false);

@@ -5,7 +5,7 @@ import HoloDevPass from './HoloDevPass';
 import { STATS_CONFIG } from '../data/statsData';
 
 function Hero() {
-  const { t, playSound } = usePortfolio();
+  const { t, lang, playSound, toggleExperienceMode } = usePortfolio();
   const roles = t.hero.roles;
   const [heroView, setHeroView] = useState('photo'); // 'photo' | 'badge'
   const [projectCount, setProjectCount] = useState(0);
@@ -67,14 +67,16 @@ function Hero() {
         
         {/* Action CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start mb-10 w-full sm:w-auto">
-          <a
-            href="#the-builders-journey"
-            onClick={() => playSound('tab')}
+          <button
+            onClick={() => {
+              playSound('tab');
+              toggleExperienceMode();
+            }}
             className="inline-flex items-center justify-center gap-2.5 bg-blue-600 hover:bg-blue-700 dark:bg-cobalt dark:hover:bg-cobalt-hover text-white font-bold py-3.5 px-6 sm:px-8 rounded-xl shadow-md hover:shadow-cobalt-glow transition-all duration-200 transform hover:-translate-y-0.5 text-sm sm:text-base group min-h-[48px]"
           >
             <Play className="w-4 h-4 fill-white flex-shrink-0 group-hover:scale-110 transition-transform" />
             <span>{t.hero.ctaDemos}</span>
-          </a>
+          </button>
           <a
             href="#proyek"
             onClick={() => playSound('click')}
@@ -92,7 +94,7 @@ function Hero() {
             <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">{t.hero.statProjects}</span>
           </div>
           <div className="bg-white dark:bg-[#111624] p-3 rounded-xl border border-slate-200/80 dark:border-[#1E293B] text-center transition-all hover:border-slate-300 dark:hover:border-slate-700">
-            <span className="block font-space font-extrabold text-xl sm:text-2xl text-amber-600 dark:text-amber-400">7 Bab</span>
+            <span className="block font-space font-extrabold text-xl sm:text-2xl text-amber-600 dark:text-amber-400">{lang === 'en' ? '8 Scenes' : '8 Adegan'}</span>
             <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">{t.hero.statDemos}</span>
           </div>
           <div className="bg-white dark:bg-[#111624] p-3 rounded-xl border border-slate-200/80 dark:border-[#1E293B] text-center transition-all hover:border-slate-300 dark:hover:border-slate-700">

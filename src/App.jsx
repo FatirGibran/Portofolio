@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
-import TheBuildersJourney from './components/TheBuildersJourney';
+import TheBuildersOdyssey from './components/TheBuildersOdyssey';
 import Keterampilan from './components/Keterampilan';
 import Footer from './components/Footer';
 import SpatialStage3D from './components/SpatialStage3D';
@@ -13,11 +13,12 @@ import StoryTicker from './components/StoryTicker';
 import BackToTop from './components/BackToTop';
 import ClickRipple from './components/ClickRipple';
 import CustomCursor from './components/CustomCursor';
-import { PortfolioProvider } from './context/PortfolioContext';
+import { PortfolioProvider, usePortfolio } from './context/PortfolioContext';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 function PortfolioApp() {
   useScrollReveal();
+  const { experienceMode, toggleExperienceMode } = usePortfolio();
 
   // Interactive Presentation Effects State
   const [isLaserActive, setIsLaserActive] = useState(false);
@@ -301,21 +302,30 @@ function PortfolioApp() {
           transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
-        <Navbar />
-        <Hero />
-        <StoryTicker />
-        <About />
+        {experienceMode === 'odyssey' ? (
+          <TheBuildersOdyssey triggerGlobalEffect={triggerGlobalEffect} />
+        ) : (
+          <>
+            <Navbar />
+            <Hero />
+            <StoryTicker />
+            <About />
+            <Projects />
+            <Keterampilan />
+            <Footer />
 
-        {/* Projects Gallery */}
-        <div>
-          <Projects />
-        </div>
-
-        {/* The Builder's Journey: Interactive Storytelling Experience */}
-        <TheBuildersJourney triggerGlobalEffect={triggerGlobalEffect} />
-
-        <Keterampilan />
-        <Footer />
+            {/* Floating Return to Odyssey Mode Pill */}
+            <div className="fixed bottom-6 left-6 z-40">
+              <button
+                onClick={toggleExperienceMode}
+                className="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-slate-900/95 dark:bg-white text-white dark:text-slate-950 font-space font-bold text-xs shadow-2xl backdrop-blur-md border border-slate-700/60 dark:border-slate-300 hover:scale-105 active:scale-95 transition-all duration-200"
+              >
+                <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
+                <span>✨ Mode Odyssey</span>
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Global Interactive Cyber Command Palette & Terminal (Cmd + K) */}

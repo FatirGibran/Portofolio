@@ -39,40 +39,51 @@ export function PortfolioProvider({ children }) {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [selectedProjectForModal, setSelectedProjectForModal] = useState(null);
 
-  // 5. Exploration Mode ('story' | 'direct')
-  const [journeyMode, setJourneyMode] = useState(() => {
+  // 5. Exploration Mode ('odyssey' | 'direct')
+  const [experienceMode, setExperienceMode] = useState(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('fatir_journey_mode');
+      const saved = localStorage.getItem('fatir_experience_mode');
       if (saved) return saved;
     }
-    return 'story';
+    return 'odyssey';
   });
 
-  // 6. The Builder's Journey Chapter State ('00' through '07')
-  const [journeyChapter, setJourneyChapter] = useState('00');
+  // 6. The Builder's Odyssey Active Scene ('00' through '07')
+  const [odysseyScene, setOdysseyScene] = useState('00');
 
-  const toggleJourneyMode = () => {
-    setJourneyMode((prev) => {
-      const next = prev === 'story' ? 'direct' : 'story';
+  const toggleExperienceMode = () => {
+    setExperienceMode((prev) => {
+      const next = prev === 'odyssey' ? 'direct' : 'odyssey';
       if (typeof window !== 'undefined') {
-        localStorage.setItem('fatir_journey_mode', next);
+        localStorage.setItem('fatir_experience_mode', next);
       }
       playSound('toggle');
       return next;
     });
   };
 
-  const jumpToJourneyChapter = (chapterId) => {
-    if (chapterId) {
-      setJourneyChapter(chapterId);
+  const goToScene = (sceneId) => {
+    if (sceneId) {
+      setOdysseyScene(sceneId);
     }
     playSound('tab');
-    if (typeof document !== 'undefined') {
-      const el = document.getElementById('the-builders-journey');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  };
+
+  const nextScene = () => {
+    const scenes = ['00', '01', '02', '03', '04', '05', '06', '07'];
+    const idx = scenes.indexOf(odysseyScene);
+    const nextIdx = (idx + 1) % scenes.length;
+    goToScene(scenes[nextIdx]);
+  };
+
+  const prevScene = () => {
+    const scenes = ['00', '01', '02', '03', '04', '05', '06', '07'];
+    const idx = scenes.indexOf(odysseyScene);
+    const prevIdx = (idx - 1 + scenes.length) % scenes.length;
+    goToScene(scenes[prevIdx]);
   };
 
   // Sync dark class on <html> element
@@ -147,24 +158,32 @@ export function PortfolioProvider({ children }) {
         setIsCommandPaletteOpen,
         selectedProjectForModal,
         setSelectedProjectForModal,
-        journeyMode,
-        setJourneyMode,
-        toggleJourneyMode,
-        journeyChapter,
-        setJourneyChapter,
-        jumpToJourneyChapter,
-        portfolioMode: journeyMode,
-        setPortfolioMode: setJourneyMode,
-        togglePortfolioMode: toggleJourneyMode,
-        atlasStation: journeyChapter,
-        setAtlasStation: setJourneyChapter,
-        jumpToStation: jumpToJourneyChapter,
-        chroniclesChapter: journeyChapter,
-        setChroniclesChapter: setJourneyChapter,
-        jumpToChapter: jumpToJourneyChapter,
-        openSandboxTab: jumpToJourneyChapter,
-        sandboxTab: journeyChapter,
-        setSandboxTab: setJourneyChapter,
+        experienceMode,
+        setExperienceMode,
+        toggleExperienceMode,
+        odysseyScene,
+        setOdysseyScene,
+        goToScene,
+        nextScene,
+        prevScene,
+        journeyMode: experienceMode,
+        setJourneyMode: setExperienceMode,
+        toggleJourneyMode: toggleExperienceMode,
+        journeyChapter: odysseyScene,
+        setJourneyChapter: setOdysseyScene,
+        jumpToJourneyChapter: goToScene,
+        portfolioMode: experienceMode,
+        setPortfolioMode: setExperienceMode,
+        togglePortfolioMode: toggleExperienceMode,
+        atlasStation: odysseyScene,
+        setAtlasStation: setOdysseyScene,
+        jumpToStation: goToScene,
+        chroniclesChapter: odysseyScene,
+        setChroniclesChapter: setOdysseyScene,
+        jumpToChapter: goToScene,
+        openSandboxTab: goToScene,
+        sandboxTab: odysseyScene,
+        setSandboxTab: setOdysseyScene,
         t,
       }}
     >
