@@ -95,6 +95,114 @@
   .dark .noise-overlay::before {
     opacity: 0.04;
   }
+
+  /* OBSIDIAN NOIR Master Utilities */
+  .bg-obsidian-gradient {
+    background: radial-gradient(circle at 50% 0%, #151D35 0%, #11131B 45%, #08090D 100%);
+  }
+
+  .frosted-noir {
+    background: rgba(17, 19, 27, 0.76);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 208, 223, 0.12);
+  }
+
+  .frosted-noir-elevated {
+    background: rgba(21, 29, 53, 0.70);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(201, 208, 223, 0.20);
+  }
+
+  .liquid-chrome-text {
+    background: linear-gradient(135deg, #FFFFFF 0%, #C9D0DF 40%, #94A3B8 70%, #FFFFFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .champagne-text {
+    background: linear-gradient(135deg, #F1F0F5 0%, #D8B77A 50%, #B89255 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .aurora-text {
+    background: linear-gradient(135deg, #43D9E8 0%, #5146E5 50%, #963CFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .ultraviolet-glow {
+    box-shadow: 0 0 50px -10px rgba(150, 60, 255, 0.38);
+  }
+
+  .aurora-glow {
+    box-shadow: 0 0 50px -10px rgba(67, 217, 232, 0.38);
+  }
+
+  .indigo-glow {
+    box-shadow: 0 0 50px -10px rgba(81, 70, 229, 0.38);
+  }
+
+  .champagne-glow {
+    box-shadow: 0 0 50px -10px rgba(216, 183, 122, 0.35);
+  }
+
+  .cinematic-glow-blue {
+    box-shadow: 0 0 50px -10px rgba(81, 70, 229, 0.38);
+  }
+
+  .cinematic-glow-amber {
+    box-shadow: 0 0 50px -10px rgba(216, 183, 122, 0.35);
+  }
+
+  .cinematic-glow-purple {
+    box-shadow: 0 0 50px -10px rgba(150, 60, 255, 0.38);
+  }
+
+  .cinematic-glow-cyan {
+    box-shadow: 0 0 50px -10px rgba(67, 217, 232, 0.38);
+  }
+
+  .scanline-grid {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .dark .scanline-grid {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.08);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 14s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 6s ease-in-out infinite;
 }
 
 @keyframes bounce-soft {

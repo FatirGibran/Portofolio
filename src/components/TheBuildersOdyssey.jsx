@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useEffect, memo } from 'react';
+import React, { useState, useMemo, useCallback, useEffect, useRef, memo } from 'react';
 import {
   Cpu,
   Globe,
@@ -20,6 +20,7 @@ import {
   VolumeX,
   RotateCcw,
   Sparkles,
+  ShieldCheck,
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { ALL_PROJECTS } from '../data/projectsData';
@@ -39,6 +40,172 @@ const GithubIcon = memo((props) => (
     <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
   </svg>
 ));
+
+const InsigniaFG = memo(({ className = 'w-7 h-7' }) => (
+  <div className={`relative flex items-center justify-center ${className} group`}>
+    <svg
+      viewBox="0 0 36 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-full h-full transform-gpu transition-transform duration-300 group-hover:scale-105"
+    >
+      <rect
+        x="1"
+        y="1"
+        width="34"
+        height="34"
+        rx="9"
+        className="fill-[#11131B] stroke-[#C9D0DF]/20"
+        strokeWidth="1.2"
+      />
+      <path
+        d="M11 11H23M11 11V25M11 18H20"
+        className="stroke-[#F1F0F5]"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M25 21V25H18"
+        className="stroke-[#F1F0F5]"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="25" cy="11" r="2.2" fill="#43D9E8" />
+    </svg>
+  </div>
+));
+
+// =========================================================================
+// OBSIDIAN NOIR MASTER DESIGN SYSTEM SPECIFICATION
+// Base: Obsidian (#08090D), Carbon (#11131B), Midnight Navy (#151D35)
+// Primary: Electric Indigo (#5146E5), Ultraviolet (#963CFF), Aurora Cyan (#43D9E8)
+// Premium Accents: Liquid Silver (#C9D0DF), Champagne (#D8B77A), Soft White (#F1F0F5)
+// =========================================================================
+
+const OBSIDIAN_NOIR_THEMES = {
+  '00': {
+    name: 'The Arrival',
+    subtitle: 'The Origin of Systems',
+    bgGradient: 'from-[#08090D] via-[#11131B] to-[#08090D]',
+    spotlightGlow: 'rgba(67, 217, 232, 0.22)',
+    auroraPrimary: '#43D9E8',
+    auroraSecondary: '#5146E5',
+    accentColor: '#43D9E8',
+    metallicAccent: '#C9D0DF',
+    badgeText: 'OBSIDIAN // 00_ORIGIN',
+    tagClass: 'text-[#43D9E8] border-[#43D9E8]/30 bg-[#43D9E8]/10',
+    glowClass: 'aurora-glow',
+    particleTint: '#43D9E8',
+    chapterNum: '00',
+  },
+  '01': {
+    name: 'The Person',
+    subtitle: 'Craft & Individual Identity',
+    bgGradient: 'from-[#08090D] via-[#151D35]/60 to-[#08090D]',
+    spotlightGlow: 'rgba(216, 183, 122, 0.20)',
+    auroraPrimary: '#D8B77A',
+    auroraSecondary: '#5146E5',
+    accentColor: '#D8B77A',
+    metallicAccent: '#F1F0F5',
+    badgeText: 'DOSSIER // 01_IDENTITY',
+    tagClass: 'text-[#D8B77A] border-[#D8B77A]/30 bg-[#D8B77A]/10',
+    glowClass: 'champagne-glow',
+    particleTint: '#D8B77A',
+    chapterNum: '01',
+  },
+  '02': {
+    name: 'The Journey',
+    subtitle: 'Evolutionary Trajectory 2023-2026',
+    bgGradient: 'from-[#08090D] via-[#151D35] to-[#08090D]',
+    spotlightGlow: 'rgba(67, 217, 232, 0.24)',
+    auroraPrimary: '#43D9E8',
+    auroraSecondary: '#D8B77A',
+    accentColor: '#43D9E8',
+    metallicAccent: '#C9D0DF',
+    badgeText: 'EXPEDITION // 02_TRAJECTORY',
+    tagClass: 'text-[#43D9E8] border-[#43D9E8]/30 bg-[#43D9E8]/10',
+    glowClass: 'aurora-glow',
+    particleTint: '#43D9E8',
+    chapterNum: '02',
+  },
+  '03': {
+    name: 'The Mindset',
+    subtitle: 'Engineering Cognition Matrix',
+    bgGradient: 'from-[#08090D] via-[#18112C] to-[#08090D]',
+    spotlightGlow: 'rgba(150, 60, 255, 0.26)',
+    auroraPrimary: '#963CFF',
+    auroraSecondary: '#5146E5',
+    accentColor: '#963CFF',
+    metallicAccent: '#C9D0DF',
+    badgeText: 'MATRIX // 03_COGNITION',
+    tagClass: 'text-[#963CFF] border-[#963CFF]/30 bg-[#963CFF]/10',
+    glowClass: 'ultraviolet-glow',
+    particleTint: '#963CFF',
+    chapterNum: '03',
+  },
+  '04': {
+    name: 'The Lab',
+    subtitle: '20 Production Systems Showcase',
+    bgGradient: 'from-[#08090D] via-[#0E1B24] to-[#08090D]',
+    spotlightGlow: 'rgba(67, 217, 232, 0.26)',
+    auroraPrimary: '#43D9E8',
+    auroraSecondary: '#963CFF',
+    accentColor: '#43D9E8',
+    metallicAccent: '#C9D0DF',
+    badgeText: 'FORGE // 04_SYSTEMS',
+    tagClass: 'text-[#43D9E8] border-[#43D9E8]/30 bg-[#43D9E8]/10',
+    glowClass: 'aurora-glow',
+    particleTint: '#43D9E8',
+    chapterNum: '04',
+  },
+  '05': {
+    name: 'Beyond Code',
+    subtitle: 'Human Leadership & Resilience',
+    bgGradient: 'from-[#08090D] via-[#1C1610] to-[#08090D]',
+    spotlightGlow: 'rgba(216, 183, 122, 0.24)',
+    auroraPrimary: '#D8B77A',
+    auroraSecondary: '#5146E5',
+    accentColor: '#D8B77A',
+    metallicAccent: '#F1F0F5',
+    badgeText: 'ETHOS // 05_HUMAN',
+    tagClass: 'text-[#D8B77A] border-[#D8B77A]/30 bg-[#D8B77A]/10',
+    glowClass: 'champagne-glow',
+    particleTint: '#D8B77A',
+    chapterNum: '05',
+  },
+  '06': {
+    name: 'Next Frontier',
+    subtitle: 'Future Research Horizons',
+    bgGradient: 'from-[#08090D] via-[#1A0E2E] to-[#08090D]',
+    spotlightGlow: 'rgba(150, 60, 255, 0.26)',
+    auroraPrimary: '#963CFF',
+    auroraSecondary: '#43D9E8',
+    accentColor: '#963CFF',
+    metallicAccent: '#C9D0DF',
+    badgeText: 'HORIZON // 06_RESEARCH',
+    tagClass: 'text-[#963CFF] border-[#963CFF]/30 bg-[#963CFF]/10',
+    glowClass: 'ultraviolet-glow',
+    particleTint: '#963CFF',
+    chapterNum: '06',
+  },
+  '07': {
+    name: 'The Connection',
+    subtitle: 'Direct Engineering Nexus',
+    bgGradient: 'from-[#08090D] via-[#151D35] to-[#08090D]',
+    spotlightGlow: 'rgba(81, 70, 229, 0.30)',
+    auroraPrimary: '#5146E5',
+    auroraSecondary: '#43D9E8',
+    accentColor: '#5146E5',
+    metallicAccent: '#F1F0F5',
+    badgeText: 'CONVERGENCE // 07_SIGNAL',
+    tagClass: 'text-[#43D9E8] border-[#43D9E8]/30 bg-[#43D9E8]/10',
+    glowClass: 'indigo-glow',
+    particleTint: '#43D9E8',
+    chapterNum: '07',
+  },
+};
 
 const SCENES_CONFIG = [
   { id: '00', tag: 'SCENE 00', titleId: 'The Arrival', titleEn: 'The Arrival', icon: Compass },
@@ -65,8 +232,12 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
     toggleExperienceMode,
   } = usePortfolio();
 
-  // Scene transition animation state
+  // Scene transition animation state & direction
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionDir, setTransitionDir] = useState('next'); // 'next' | 'prev'
+
+  // Cursor-responsive lighting state
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
   // Active Milestone in Scene 02 (The Journey)
   const [selectedMilestone, setSelectedMilestone] = useState('2025');
@@ -74,25 +245,110 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
   // Active Mindset Tab in Scene 03 (The Mindset)
   const [activeMindsetTab, setActiveMindsetTab] = useState('se');
 
-  // Project Lab Filter in Scene 04 (The Lab)
+  // Project Lab Filter & Search in Scene 04 (The Lab)
   const [labCategory, setLabCategory] = useState('all');
   const [labSearch, setLabSearch] = useState('');
 
   // Email Copy State in Scene 07 (The Connection)
   const [copiedEmail, setCopiedEmail] = useState(false);
 
+  // Aurora Mesh Canvas Ref
+  const auroraCanvasRef = useRef(null);
+
   const currentSceneIndex = SCENES_CONFIG.findIndex((s) => s.id === odysseyScene);
   const activeSceneConfig = SCENES_CONFIG[currentSceneIndex >= 0 ? currentSceneIndex : 0];
+  const activeTheme = OBSIDIAN_NOIR_THEMES[odysseyScene] || OBSIDIAN_NOIR_THEMES['00'];
+
+  // Smooth mouse follower
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      setMousePos({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Aurora Mesh Background Generator
+  useEffect(() => {
+    const canvas = auroraCanvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animId;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    let step = 0;
+
+    const render = () => {
+      step += 0.005;
+      ctx.clearRect(0, 0, width, height);
+
+      // Aurora Wave 1: Primary Theme Aura
+      const grad1 = ctx.createRadialGradient(
+        width * 0.3 + Math.sin(step) * 120,
+        height * 0.2 + Math.cos(step * 0.8) * 80,
+        50,
+        width * 0.3 + Math.sin(step) * 120,
+        height * 0.2 + Math.cos(step * 0.8) * 80,
+        width * 0.55
+      );
+      grad1.addColorStop(0, `${activeTheme.auroraPrimary}25`);
+      grad1.addColorStop(0.5, `${activeTheme.auroraSecondary}15`);
+      grad1.addColorStop(1, 'transparent');
+
+      ctx.fillStyle = grad1;
+      ctx.fillRect(0, 0, width, height);
+
+      // Aurora Wave 2: Secondary Theme Aura
+      const grad2 = ctx.createRadialGradient(
+        width * 0.75 + Math.cos(step * 0.7) * 140,
+        height * 0.65 + Math.sin(step * 0.9) * 90,
+        80,
+        width * 0.75 + Math.cos(step * 0.7) * 140,
+        height * 0.65 + Math.sin(step * 0.9) * 90,
+        width * 0.5
+      );
+      grad2.addColorStop(0, `${activeTheme.auroraSecondary}20`);
+      grad2.addColorStop(0.6, `${activeTheme.auroraPrimary}10`);
+      grad2.addColorStop(1, 'transparent');
+
+      ctx.fillStyle = grad2;
+      ctx.fillRect(0, 0, width, height);
+
+      animId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (animId) cancelAnimationFrame(animId);
+    };
+  }, [activeTheme.auroraPrimary, activeTheme.auroraSecondary]);
 
   const handleSceneChange = useCallback(
-    (targetId) => {
+    (targetId, direction = 'next') => {
       if (targetId === odysseyScene || isTransitioning) return;
       setIsTransitioning(true);
+      setTransitionDir(direction);
       playSound('tab');
+
       setTimeout(() => {
         goToScene(targetId);
         setIsTransitioning(false);
-      }, 220);
+      }, 260);
     },
     [odysseyScene, isTransitioning, playSound, goToScene]
   );
@@ -100,7 +356,7 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
   const handleNext = useCallback(() => {
     if (isTransitioning) return;
     const nextIdx = (currentSceneIndex + 1) % SCENES_CONFIG.length;
-    handleSceneChange(SCENES_CONFIG[nextIdx].id);
+    handleSceneChange(SCENES_CONFIG[nextIdx].id, 'next');
     if (nextIdx === SCENES_CONFIG.length - 1 && triggerGlobalEffect) {
       triggerGlobalEffect('confetti');
     }
@@ -109,25 +365,27 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
   const handlePrev = useCallback(() => {
     if (isTransitioning) return;
     const prevIdx = (currentSceneIndex - 1 + SCENES_CONFIG.length) % SCENES_CONFIG.length;
-    handleSceneChange(SCENES_CONFIG[prevIdx].id);
+    handleSceneChange(SCENES_CONFIG[prevIdx].id, 'prev');
   }, [currentSceneIndex, isTransitioning, handleSceneChange]);
 
-  // Keyboard navigation support: ArrowRight (Next), ArrowLeft (Prev)
+  // Keyboard Navigation: Arrows & Number Keys [0-7]
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Don't intercept if user is typing in an input
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
-      if (e.key === 'ArrowRight') {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
         handleNext();
-      } else if (e.key === 'ArrowLeft') {
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
         handlePrev();
+      } else if (['0', '1', '2', '3', '4', '5', '6', '7'].includes(e.key)) {
+        const target = `0${e.key}`;
+        handleSceneChange(target, target > odysseyScene ? 'next' : 'prev');
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleNext, handlePrev]);
+  }, [handleNext, handlePrev, handleSceneChange, odysseyScene]);
 
   const handleCopyEmail = () => {
     const email = 'fatirgibrann@gmail.com';
@@ -137,11 +395,12 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
-  // Scene 02: Journey Milestones Data
+  // Evolution Milestones
   const evolutionMilestones = {
     '2023': {
       year: '2023',
       phase: 'Semester 1 - 2 • Telkom University Purwokerto',
+      epoch: 'ALGORITHMIC FOUNDATIONS',
       title: lang === 'id' ? 'Fondasi Algoritma & Logika Komputasi' : 'Algorithmic Foundations & Systems Logic',
       desc:
         lang === 'id'
@@ -149,10 +408,12 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
           : 'Began Informatics Engineering journey. Mastered C/C++ imperative programming, discrete mathematics, data structures, and Big-O computational complexity.',
       tags: ['C/C++', 'Python', 'Algorithms', 'Data Structures', 'Discrete Math'],
       metric: 'GPA: 3.8+ / Top Tier',
+      highlight: 'Rekayasa dasar imperatif & optimasi efisiensi memori.',
     },
     '2024': {
       year: '2024',
       phase: 'Semester 3 - 4 • Telkom University Purwokerto',
+      epoch: 'EDGE AI & OFF-GRID SECURITY',
       title: lang === 'id' ? 'Eksplorasi Edge AI & Kriptografi Offline' : 'Edge AI Prototyping & Offline Cryptography',
       desc:
         lang === 'id'
@@ -160,10 +421,12 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
           : 'Pioneered on-device AI research with zero cloud telemetry: PostureLens (MediaPipe Pose WASM) and el_gestur_v2 (YOLOv8 + DeepSORT). Engineered VaultSentinel featuring AES-128 Fernet encryption with 95.8% automated test coverage.',
       tags: ['MediaPipe WASM', 'YOLOv8', 'AES-128 Fernet', 'PBKDF2', 'Next.js', 'FastAPI'],
       metric: '95.8% Test Coverage',
+      highlight: 'Privasi data 100% lokal & pengujian matematis terverifikasi.',
     },
     '2025': {
       year: '2025',
       phase: 'Semester 5 (Aktif) • Telkom University Purwokerto',
+      epoch: 'PRODUCTION ARCHITECTURES',
       title: lang === 'id' ? 'Arsitektur Produksi & 20 Sistem Rekayasa' : 'Production Systems & 20 Verified Architectures',
       desc:
         lang === 'id'
@@ -171,10 +434,12 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
           : 'Consolidated a portfolio of 20 verified software engineering systems: Next.js 15 App Router, React 19, Go microservices, multi-tenant PostgreSQL schemas, and dockerized production pipelines.',
       tags: ['Next.js 15', 'Go / Golang', 'TypeScript', 'Docker', 'PostgreSQL', '20 Systems'],
       metric: '20 Verified Repositories',
+      highlight: 'Sistem komersial nyata, payment gateway Midtrans & zero-bloat.',
     },
     '2026': {
       year: '2026',
       phase: 'Horizon Riset Berkelanjutan',
+      epoch: 'NEURAL HORIZONS',
       title: lang === 'id' ? 'Riset Komputasi Masa Depan & Local Enclaves' : 'Future Computing & Local Neural Enclaves',
       desc:
         lang === 'id'
@@ -182,15 +447,20 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
           : 'Exploring on-device neural execution via WebGPU, zero-trust transient memory encryption, and latency-resilient peer sync topologies using CRDTs.',
       tags: ['WebGPU', 'Local Enclaves', 'Zero-Trust', 'CRDTs', 'Low Latency'],
       metric: 'Sub-50ms On-Device Target',
+      highlight: 'Desentralisasi komputasi penuh tanpa ketergantungan API terpusat.',
     },
   };
 
-  // Scene 03: Engineering Mindset 4 Quadrants
+  // Engineering Mindset 4 Quadrants
   const engineeringMindset = {
     se: {
       id: 'se',
       title: lang === 'id' ? 'Software Engineering & Arsitektur' : 'Software Engineering & Architecture',
       proficiency: lang === 'id' ? 'Tingkat: Berpengalaman' : 'Proficiency: Experienced',
+      rationale:
+        lang === 'id'
+          ? 'Struktur kode harus merefleksikan domain problem, bukan ketergantungan library pihak ketiga yang mudah kadaluwarsa.'
+          : 'Code structure must reflect the domain problem directly, decoupled from third-party libraries prone to rapid obsolescence.',
       understands:
         lang === 'id'
           ? 'Prinsip Clean Architecture, pemisahan tanggung jawab (separation of concerns), pola desain modular, dan pentingnya pengujian otomatis.'
@@ -212,6 +482,10 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
       id: 'fullstack',
       title: lang === 'id' ? 'Modern Full-Stack Development' : 'Modern Full-Stack Development',
       proficiency: lang === 'id' ? 'Tingkat: Berpengalaman' : 'Proficiency: Experienced',
+      rationale:
+        lang === 'id'
+          ? 'Antarmuka pengguna bukan sekadar tampilan visual, melainkan mesin state terprediksi yang menjamin waktu respon sub-100ms.'
+          : 'User interfaces are predictable state machines ensuring sub-100ms perceived latency and zero layout shifting.',
       understands:
         lang === 'id'
           ? 'Siklus hidup rendering React 19, Next.js 15 App Router, Server Components vs Client Components, dan integrasi API RESTful / WebSocket.'
@@ -231,8 +505,12 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
     },
     ai: {
       id: 'ai',
-      title: lang === 'id' ? 'Artificial Intelligence & Computer Vision' : 'Artificial Intelligence & Computer Vision',
+      title: lang === 'id' ? 'Edge AI & Computer Vision' : 'Edge AI & Computer Vision',
       proficiency: lang === 'id' ? 'Tingkat: Praktisi Aktif' : 'Proficiency: Practiced',
+      rationale:
+        lang === 'id'
+          ? 'Kecerdasan komputasi harus beroperasi di tangan pengguna (on-device), mempertahankan kedaulatan privasi tanpa rekaman cloud.'
+          : 'Computational intelligence belongs on user devices, ensuring inviolable privacy without third-party cloud streaming.',
       understands:
         lang === 'id'
           ? 'Inferensi on-device lokal tanpa upload video ke server, estimasi pose 33 landmark spasial MediaPipe, tracking objek YOLOv8 + DeepSORT.'
@@ -248,229 +526,290 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
       improving:
         lang === 'id'
           ? 'Integrasi WebGPU untuk inferensi neural berakselerasi hardware langsung di browser dan pemanfaatan Small Language Models (SLMs) lokal.'
-          : 'WebGPU acceleration for in-browser neural networks and evaluating local Small Language Models (SLMs) without remote API dependencies.',
+          : 'WebGPU acceleration for client-side model execution and deployment of quantized Small Language Models (SLMs).',
     },
     cybersec: {
       id: 'cybersec',
       title: lang === 'id' ? 'Cybersecurity & Kriptografi' : 'Cybersecurity & Cryptography',
-      proficiency: lang === 'id' ? 'Tingkat: Praktisi Aktif' : 'Proficiency: Practiced',
+      proficiency: lang === 'id' ? 'Tingkat: Praktisi Terfokus' : 'Proficiency: Practiced',
+      rationale:
+        lang === 'id'
+          ? 'Keamanan bukan fitur pelengkap di akhir proyek, melainkan aksioma matematis yang dibuktikan melalui pengujian otomatis.'
+          : 'Security is not an afterthought bolt-on, but a mathematical axiom verified through rigorous automated test suites.',
       understands:
         lang === 'id'
-          ? 'Enkripsi simetris terotentikasi (Fernet / AES-128 CBC + HMAC-SHA256), derivasi kunci berbasis PBKDF2 dengan salt kriptografis, dan hashing SHA-256.'
-          : 'Authenticated symmetric ciphers (Fernet / AES-128 CBC + HMAC-SHA256), PBKDF2 cryptographic salt key derivation, and incremental SHA-256 hashes.',
+          ? 'Prinsip kriptografi simetris AES-128/256, key derivation PBKDF2 dengan salt kriptografis acak, sanitasi input, dan prinsip zero-trust.'
+          : 'Symmetric encryption (AES-128/256), cryptographic salt key derivation via PBKDF2, strict input sanitization, and zero-trust primitives.',
       workedOn:
         lang === 'id'
-          ? 'VaultSentinel (sistem backup terenkripsi lokal dengan verifikasi integritas berkesinambungan) dan JARKOM-TUBES (audit paket soket TCP/IP).'
-          : 'VaultSentinel (offline encrypted backup system with continuous integrity verification) and JARKOM-TUBES (TCP/IP socket packet inspection).',
+          ? 'VaultSentinel CLI: utilitas cadangan data terenkripsi lokal dengan cipher Fernet, pemulihan hashing aman, dan 95.8% test coverage.'
+          : 'VaultSentinel CLI: encrypted local backup utility with Fernet ciphers, secure hash verification, and 95.8% automated test coverage.',
       explored:
         lang === 'id'
-          ? 'Mendeteksi silent data corruption pada penyimpanan lokal, mitigasi serangan timing pada verifikasi token, dan manajemen kunci aman.'
-          : 'Detecting silent data corruption in local storage, timing-attack mitigation in token validation, and secure memory key handling.',
+          ? 'Manajemen kunci enkripsi lokal tanpa hardcoded secret, proteksi terhadap serangan brute force melalui iterasi hashing yang dikalibrasi.'
+          : 'Transient local key lifecycle management without hardcoded secrets, and brute-force mitigation through calibrated KDF hashing iterations.',
       improving:
         lang === 'id'
-          ? 'Protokol enkripsi end-to-end berbasis kurva eliptik (X25519) dan arsitektur Zero-Trust untuk penyimpanan lokal transien.'
-          : 'Elliptic curve end-to-end encryption protocols (X25519) and Zero-Trust architectures for transient local memory buffers.',
+          ? 'Kriptografi pasca-kuantum (PQC) dasar, otentikasi zero-knowledge proofs (ZKP), dan audit keamanan terotomatisasi pada CI/CD.'
+          : 'Foundational post-quantum cryptography (PQC), zero-knowledge proof primitives, and automated CI/CD static security scanning.',
     },
     infra: {
       id: 'infra',
-      title: lang === 'id' ? 'Infrastruktur & Sistem Terdistribusi' : 'Infrastructure & Distributed Systems',
-      proficiency: lang === 'id' ? 'Tingkat: Familiar & Bertumbuh' : 'Proficiency: Familiar & Growing',
+      title: lang === 'id' ? 'Sistem Backend & DevOps' : 'Backend Systems & DevOps',
+      proficiency: lang === 'id' ? 'Tingkat: Praktisi Aktif' : 'Proficiency: Practiced',
+      rationale:
+        lang === 'id'
+          ? 'Kehandalan sistem ditentukan oleh bagaimana layanan menangani kegagalan jaringan dan isolasi proses di lingkungan produksi.'
+          : 'System resilience is measured by how gracefully services handle partition failures and runtime container isolation.',
       understands:
         lang === 'id'
-          ? 'Model konkurensi goroutine / channel pada Go, microservices containerized dengan Docker, dan replikasi database PostgreSQL.'
-          : 'Goroutine and channel concurrency models in Go, containerized microservices via Docker, and PostgreSQL replication schemas.',
+          ? 'Containerization Docker, orkestrasi Docker Compose, reverse proxy Nginx, model konkurensi Go goroutine & channel, dan migrasi SQL.'
+          : 'Docker containerization, Docker Compose topologies, Nginx reverse proxies, Go goroutine/channel concurrency, and SQL schema migrations.',
       workedOn:
         lang === 'id'
-          ? 'LibraryPro (arsitektur MVC Java dengan PostgreSQL), microservices REST Go, dan konfigurasi Docker Compose terisolasi.'
-          : 'LibraryPro (Java MVC architecture with PostgreSQL), Go REST microservices, and multi-container Docker Compose orchestrations.',
+          ? 'Penyusunan pipeline container multi-stage untuk efisiensi image produksi, API RESTful Go / FastAPI, dan deployment Firebase.'
+          : 'Multi-stage Docker build pipelines minimizing production attack surfaces, Go / FastAPI microservices, and Firebase cloud deployments.',
       explored:
         lang === 'id'
-          ? 'Connection pooling pada database relasional, isolasi lingkungan kontainer, dan pengelolaan variabel lingkungan yang aman.'
-          : 'Relational database connection pooling, container environment isolation, and secure secret injection paradigms.',
+          ? 'Optimalisasi koneksi pool database PostgreSQL, penanganan graceful shutdown pada server, dan idempotensi pemrosesan webhook.'
+          : 'PostgreSQL connection pool sizing, graceful daemon shutdown signals, and strict webhook replay idempotency verification.',
       improving:
         lang === 'id'
-          ? 'Arsitektur data terdistribusi tahan latensi menggunakan Conflict-Free Replicated Data Types (CRDTs) dan reverse proxy Caddy / Nginx.'
-          : 'Latency-resilient distributed data models using Conflict-Free Replicated Data Types (CRDTs) and high-performance reverse proxies.',
+          ? 'Monitoring telemetri dengan Prometheus/Grafana, implementasi distributed tracing OpenTelemetry, dan pipeline deployment Blue/Green.'
+          : 'Telemetry aggregation via Prometheus/Grafana, OpenTelemetry distributed tracing, and automated zero-downtime Blue/Green rollouts.',
     },
   };
 
-  // Filtered Projects for Scene 04 (The Lab)
+  // Filtered project list for Scene 04 (The Lab)
   const filteredLabProjects = useMemo(() => {
     return ALL_PROJECTS.filter((proj) => {
-      const matchCategory = labCategory === 'all' || proj.category === labCategory;
-      const q = labSearch.toLowerCase();
+      const matchCat = labCategory === 'all' || proj.category === labCategory;
       const matchSearch =
-        q === '' ||
-        proj.title.toLowerCase().includes(q) ||
-        proj.tech.some((tItem) => tItem.toLowerCase().includes(q)) ||
-        proj.role.toLowerCase().includes(q);
-      return matchCategory && matchSearch;
+        labSearch.trim() === '' ||
+        proj.title.toLowerCase().includes(labSearch.toLowerCase()) ||
+        proj.tech.some((t) => t.toLowerCase().includes(labSearch.toLowerCase())) ||
+        proj.role.toLowerCase().includes(labSearch.toLowerCase());
+      return matchCat && matchSearch;
     });
   }, [labCategory, labSearch]);
 
-  const progressPercentage = ((currentSceneIndex) / (SCENES_CONFIG.length - 1)) * 100;
+  const spotlightProject = useMemo(() => {
+    return ALL_PROJECTS.find((p) => p.id === 'posture_lens') || ALL_PROJECTS[0];
+  }, []);
 
   return (
     <div
-      id="the-builders-odyssey"
-      className="relative min-h-screen bg-[#090D16] text-slate-100 overflow-x-hidden selection:bg-blue-600 selection:text-white flex flex-col justify-between"
-      aria-label="The Builder's Odyssey Narrative Experience"
+      className={`relative min-h-screen bg-gradient-to-b ${activeTheme.bgGradient} text-[#F1F0F5] font-sans overflow-hidden transition-colors duration-700 select-none`}
     >
-      {/* Background Architectural Geometry & Ambient Lighting */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#161D2E0A_1px,transparent_1px),linear-gradient(to_bottom,#161D2E0A_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0" />
-      <div className="fixed top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="fixed bottom-10 right-10 w-80 h-80 bg-sky-500/10 rounded-full blur-[120px] pointer-events-none z-0" />
+      {/* 1. Dynamic Cursor-Reactive Spotlight Field */}
+      <div
+        className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle 650px at ${mousePos.x}% ${mousePos.y}%, ${activeTheme.spotlightGlow}, transparent 75%)`,
+        }}
+      />
 
-      {/* Top Floating Odyssey HUD (Persistent across scenes) */}
-      <header className="relative z-30 pt-4 px-4 sm:px-6 max-w-6xl mx-auto w-full">
-        <div className="flex items-center justify-between gap-3 p-2.5 sm:px-5 sm:py-3 rounded-2xl bg-[#111624]/90 border border-slate-800/80 backdrop-blur-xl shadow-2xl">
-          {/* Brand Monogram & Scene Telemetry */}
-          <button
-            onClick={() => handleSceneChange('00')}
-            className="flex items-center gap-2.5 text-left group cursor-pointer focus:outline-none"
-            title="Return to Scene 00 (Arrival)"
-          >
-            <div className="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-sky-400 font-space font-black text-xs group-hover:scale-105 transition-transform">
-              FG
-            </div>
-            <div>
-              <span className="block font-space font-bold text-xs sm:text-sm text-white leading-tight">
-                THE BUILDER’S ODYSSEY
-              </span>
-              <span className="block font-mono text-[10px] text-sky-400/90 leading-none">
-                {activeSceneConfig.tag} • {lang === 'id' ? activeSceneConfig.titleId : activeSceneConfig.titleEn}
-              </span>
-            </div>
-          </button>
+      {/* 2. Aurora Mesh Canvas */}
+      <canvas
+        ref={auroraCanvasRef}
+        className="pointer-events-none fixed inset-0 w-full h-full z-0 opacity-80"
+      />
 
-          {/* Stepper HUD Indicators (Scenes 00 through 07) */}
-          <div className="hidden md:flex items-center gap-1 bg-[#161D2E]/70 p-1 rounded-xl border border-slate-800">
-            {SCENES_CONFIG.map((sc) => {
-              const isCurrent = sc.id === odysseyScene;
+      {/* 3. Fine Technical Grain Texture Overlay */}
+      <div className="pointer-events-none fixed inset-0 scanline-grid opacity-30 z-0" />
+
+      {/* =====================================================================
+          TOP HUD: TELEMETRY BAR & UTILITY CONTROLS (OBSIDIAN NOIR)
+      ===================================================================== */}
+      <header className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-6 pt-4 pb-2">
+        <div className="flex items-center justify-between gap-4 p-3 rounded-2xl frosted-noir shadow-2xl">
+          {/* Brand Identity / Home Anchor */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => handleSceneChange('00', 'prev')}
+              className="flex items-center gap-2.5 group focus:outline-none"
+              title="Return to Scene 00: The Arrival"
+            >
+              <InsigniaFG className="w-8 h-8 flex-shrink-0" />
+              <div className="text-left hidden sm:block">
+                <span className="font-space font-extrabold text-xs sm:text-sm text-[#F1F0F5] tracking-tight leading-none block">
+                  Fatir Gibran
+                </span>
+                <span className="font-mono text-[10px] text-[#43D9E8] font-bold uppercase tracking-wider block mt-0.5">
+                  The Builder’s Odyssey
+                </span>
+              </div>
+            </button>
+
+            <div className="h-4 w-[1px] bg-white/10 hidden sm:block" />
+
+            {/* Active Chapter Telemetry Badge */}
+            <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-[#11131B] border border-[#C9D0DF]/15">
+              <span
+                className="w-2 h-2 rounded-full animate-pulse"
+                style={{ backgroundColor: activeTheme.accentColor }}
+              />
+              <span className="font-mono text-[11px] font-bold text-[#F1F0F5] tracking-wider">
+                {activeTheme.badgeText} • {lang === 'id' ? activeSceneConfig.titleId : activeSceneConfig.titleEn}
+              </span>
+            </div>
+          </div>
+
+          {/* Stepper Progress Rail (Desktop) */}
+          <div className="hidden lg:flex items-center gap-1.5 flex-1 max-w-md mx-4">
+            {SCENES_CONFIG.map((scene, idx) => {
+              const isActive = scene.id === odysseyScene;
+              const isPast = idx < currentSceneIndex;
               return (
                 <button
-                  key={sc.id}
-                  onClick={() => handleSceneChange(sc.id)}
-                  aria-pressed={isCurrent}
-                  className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold transition-all ${
-                    isCurrent
-                      ? 'bg-blue-600 text-white shadow-sm shadow-blue-600/30'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-[#111624]'
-                  }`}
-                  title={`${sc.tag}: ${lang === 'id' ? sc.titleId : sc.titleEn}`}
+                  key={scene.id}
+                  onClick={() => handleSceneChange(scene.id, idx > currentSceneIndex ? 'next' : 'prev')}
+                  className="flex-1 group py-2 text-left focus:outline-none"
+                  title={`${scene.tag}: ${lang === 'id' ? scene.titleId : scene.titleEn}`}
                 >
-                  {sc.id}
+                  <div
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      isActive
+                        ? 'bg-[#43D9E8] shadow-[0_0_14px_rgba(67,217,232,0.9)] scale-y-125'
+                        : isPast
+                        ? 'bg-[#5146E5]/50 group-hover:bg-[#5146E5]/80'
+                        : 'bg-white/10 group-hover:bg-white/25'
+                    }`}
+                  />
                 </button>
               );
             })}
           </div>
 
-          {/* Utility Actions: Audio, Language, Direct View Toggle */}
-          <div className="flex items-center gap-2">
+          {/* Right Utilities: Sound, Language, Mode Switcher */}
+          <div className="flex items-center gap-1.5">
+            {/* Audio Toggle */}
             <button
               onClick={toggleSound}
-              title={soundEnabled ? 'Mute Sound FX' : 'Enable Sound FX'}
-              className="p-2 rounded-xl bg-[#161D2E] hover:bg-slate-800 border border-slate-700/60 text-slate-300 transition-colors"
-              aria-label="Toggle Audio"
+              title={soundEnabled ? 'Disable Audio FX' : 'Enable Audio FX'}
+              className="flex items-center justify-center w-8 h-8 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-all shadow-sm"
             >
-              {soundEnabled ? <Volume2 className="w-4 h-4 text-emerald-400" /> : <VolumeX className="w-4 h-4 text-slate-500" />}
+              {soundEnabled ? (
+                <Volume2 className="w-3.5 h-3.5 text-[#43D9E8]" />
+              ) : (
+                <VolumeX className="w-3.5 h-3.5 text-slate-500" />
+              )}
             </button>
 
+            {/* Language Switcher */}
             <button
               onClick={() => {
                 toggleLang();
                 playSound('tab');
               }}
               title={lang === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
-              className="px-2.5 py-1.5 rounded-xl bg-[#161D2E] hover:bg-slate-800 border border-slate-700/60 text-slate-300 font-mono text-xs font-bold transition-colors"
+              className="flex items-center justify-center gap-1 h-8 px-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-mono font-bold text-[#F1F0F5] transition-all shadow-sm"
             >
-              {lang.toUpperCase()}
+              <Globe className="w-3 h-3 text-[#43D9E8]" />
+              <span>{lang.toUpperCase()}</span>
             </button>
 
-            {/* Direct Portfolio View Escape Hatch */}
+            {/* Direct Full Portfolio Toggle */}
             <button
               onClick={() => {
                 toggleExperienceMode();
-                playSound('click');
+                playSound('toggle');
               }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs font-mono font-semibold text-slate-200 transition-all"
-              title="Switch to Classic Continuous Portfolio"
+              title="Switch to Continuous Full Portfolio View"
+              className="flex items-center gap-1.5 h-8 px-3 rounded-xl bg-white/10 hover:bg-white/15 border border-[#C9D0DF]/20 text-[11px] font-space font-bold text-[#F1F0F5] transition-all shadow-sm"
             >
-              <span>{t.nav?.modeDirect || 'Classic View'}</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#43D9E8] animate-pulse" />
+              <span className="hidden sm:inline">EXPLORE DIRECT</span>
+              <span className="sm:hidden">DIRECT</span>
             </button>
           </div>
         </div>
-
-        {/* Global Progress Bar */}
-        <div className="w-full bg-slate-800/60 h-1 rounded-full mt-2 overflow-hidden">
-          <div
-            className="bg-gradient-to-r from-blue-600 to-sky-400 h-full transition-all duration-300 ease-out"
-            style={{ width: `${Math.max(8, progressPercentage)}%` }}
-          />
-        </div>
       </header>
 
-      {/* Main Narrative Stage Area */}
+      {/* =====================================================================
+          MAIN SCENE CONTAINER (CINEMATIC NOIR TRANSITIONS)
+      ===================================================================== */}
       <main
-        className={`relative z-10 flex-1 max-w-6xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-10 transition-all duration-300 ease-in-out ${
-          isTransitioning ? 'opacity-0 scale-[0.98] blur-sm' : 'opacity-100 scale-100 blur-0'
+        className={`relative z-10 flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-8 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isTransitioning
+            ? transitionDir === 'next'
+              ? 'opacity-0 -translate-x-8 scale-[0.96] blur-md'
+              : 'opacity-0 translate-x-8 scale-[0.96] blur-md'
+            : 'opacity-100 translate-x-0 scale-100 blur-0'
         }`}
       >
         {/* =====================================================================
-            SCENE 00 — THE ARRIVAL
+            SCENE 00 — THE ARRIVAL (OBSIDIAN NOIR OPENING)
         ===================================================================== */}
         {odysseyScene === '00' && (
-          <div className="min-h-[75vh] flex flex-col justify-center animate-fade-in">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              {/* Portrait & Atmospheric Frame */}
+          <section className="min-h-[76vh] flex flex-col justify-center animate-fade-in relative">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+              {/* Focal Monolithic Portrait with Liquid Metallic Rim */}
               <div className="lg:col-span-5 flex justify-center order-2 lg:order-1">
-                <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl p-3 bg-gradient-to-b from-[#161D2E] to-[#111624] border-2 border-slate-700/80 shadow-2xl group transition-all duration-500 hover:border-blue-500/60">
-                  <img
-                    src="Image/fotomuka.jpg"
-                    alt="Fatir Gibran Portrait"
-                    width="320"
-                    height="320"
-                    loading="eager"
-                    className="w-full h-full object-cover object-top rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-700"
-                    onError={(e) => {
-                      e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80';
-                    }}
-                  />
-                  <div className="absolute -bottom-3 -right-3 px-3 py-1.5 rounded-xl bg-[#090D16] border border-slate-700 text-[11px] font-mono text-emerald-400 font-bold shadow-lg flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>ONLINE • S1 CS PURWOKERTO</span>
+                <div className="relative group">
+                  {/* Multi-layer Aurora Bloom Halo */}
+                  <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-[#5146E5]/40 via-[#43D9E8]/30 to-[#963CFF]/40 blur-2xl opacity-70 group-hover:opacity-100 transition-opacity duration-700" />
+
+                  {/* Liquid Chrome Chamfered Frame */}
+                  <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-3xl p-3 bg-gradient-to-b from-[#151D35] to-[#08090D] border border-[#C9D0DF]/30 shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]">
+                    <img
+                      src="Image/fotomuka.jpg"
+                      alt="Fatir Gibran Portrait"
+                      width="384"
+                      height="384"
+                      loading="eager"
+                      className="w-full h-full object-cover object-top rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-700"
+                      onError={(e) => {
+                        e.target.src =
+                          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80';
+                      }}
+                    />
+
+                    {/* Telemetry Precision Pill */}
+                    <div className="absolute -bottom-3 -right-3 px-3.5 py-1.5 rounded-xl bg-[#08090D]/95 backdrop-blur-md border border-[#43D9E8]/50 text-[11px] font-mono text-[#43D9E8] font-bold shadow-2xl flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#43D9E8] animate-pulse" />
+                      <span>CS • TELKOM PURWOKERTO</span>
+                    </div>
+
+                    {/* Geolocation Tag */}
+                    <div className="absolute -top-3 -left-3 px-3 py-1 rounded-lg bg-[#08090D]/90 backdrop-blur-md border border-white/10 text-[10px] font-mono text-[#C9D0DF] font-medium">
+                      LAT 7.4243° S // LON 109.2391° E
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Editorial Opening Typography & Core Hook */}
+              {/* Monumental Liquid Silver & Aurora Typography */}
               <div className="lg:col-span-7 space-y-6 order-1 lg:order-2 text-center lg:text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-sky-400 text-xs font-mono font-medium tracking-wider uppercase">
-                  <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#43D9E8]/10 border border-[#43D9E8]/30 text-[#43D9E8] text-xs font-mono font-medium tracking-wider uppercase shadow-sm">
+                  <Sparkles className="w-3.5 h-3.5 text-[#43D9E8] animate-pulse" />
                   <span>{t.odyssey?.scene00.hook || 'Every system begins with a question.'}</span>
                 </div>
 
-                <h1 className="text-4xl sm:text-6xl md:text-7xl font-black font-space tracking-tight text-white leading-none">
-                  FATIR GIBRAN
+                {/* Monumental Headline */}
+                <h1 className="text-5xl sm:text-7xl md:text-8xl font-black font-space tracking-tight leading-[0.94]">
+                  <span className="liquid-chrome-text">FATIR</span> <br />
+                  <span className="aurora-text">GIBRAN</span>
                 </h1>
 
-                <p className="text-lg sm:text-xl font-space font-medium text-sky-400/90">
-                  {t.odyssey?.scene00.tagline || 'Software Engineer • On-Device AI • Cryptography'}
+                <p className="text-lg sm:text-2xl font-space font-medium text-[#C9D0DF]">
+                  {t.odyssey?.scene00.tagline ||
+                    'Software Engineer • On-Device Edge AI • Cryptography'}
                 </p>
 
-                <p className="text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 font-sans">
+                <p className="text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-sans">
                   {t.odyssey?.scene00.lead ||
                     'An interactive narrative digital experience exploring how complex abstract ideas evolve into production-ready software systems.'}
                 </p>
 
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+                {/* Action Buttons */}
+                <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                   <button
-                    onClick={() => handleSceneChange('01')}
-                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-blue-600/30 transition-all transform hover:-translate-y-0.5"
+                    onClick={() => handleSceneChange('01', 'next')}
+                    className="group relative w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#5146E5] via-[#43D9E8] to-[#963CFF] hover:opacity-95 text-[#08090D] font-space font-black text-sm uppercase tracking-wider flex items-center justify-center gap-3 shadow-xl shadow-[#5146E5]/40 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
                   >
                     <span>{t.odyssey?.scene00.btnBegin || 'BEGIN THE JOURNEY'}</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
 
                   <button
@@ -478,44 +817,71 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
                       toggleExperienceMode();
                       playSound('click');
                     }}
-                    className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#161D2E] hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 font-mono text-xs uppercase tracking-wider transition-all"
+                    className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white/5 hover:bg-white/10 text-[#C9D0DF] hover:text-white border border-[#C9D0DF]/20 font-space text-xs font-bold uppercase tracking-wider transition-all"
                   >
                     <span>{t.odyssey?.scene00.btnExplore || 'EXPLORE DIRECTLY'}</span>
                   </button>
                 </div>
 
-                <span className="block text-[11px] font-mono text-slate-500 mt-4">
-                  {t.odyssey?.scene00.scrollHint || 'Use arrow keys [← →] or buttons to navigate scenes'}
-                </span>
+                <div className="flex items-center justify-center lg:justify-start gap-4 pt-2 text-[11px] font-mono text-slate-400">
+                  <span className="flex items-center gap-1.5">
+                    <kbd className="px-2 py-0.5 rounded bg-white/10 border border-white/20 text-[#F1F0F5] font-bold">
+                      [← / →]
+                    </kbd>
+                    <span>Navigate Chapters</span>
+                  </span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1.5">
+                    <kbd className="px-2 py-0.5 rounded bg-white/10 border border-white/20 text-[#F1F0F5] font-bold">
+                      [0 - 7]
+                    </kbd>
+                    <span>Direct Jump</span>
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          </section>
         )}
 
         {/* =====================================================================
-            SCENE 01 — THE PERSON BEHIND THE CODE
+            SCENE 01 — THE PERSON BEHIND THE CODE (DOSSIER DE LUXE)
         ===================================================================== */}
         {odysseyScene === '01' && (
-          <div className="space-y-8 animate-fade-in">
-            <div className="max-w-3xl space-y-3">
-              <span className="text-xs font-mono text-sky-400 font-bold uppercase tracking-wider block">
+          <section className="space-y-8 animate-fade-in relative">
+            <div className="max-w-4xl space-y-3">
+              <span className="text-xs font-mono text-[#D8B77A] font-bold uppercase tracking-wider block">
                 {t.odyssey?.scene01.narrative || 'Before the code, there was curiosity.'}
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-space text-white tracking-tight">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-space text-[#F1F0F5] tracking-tight">
                 {lang === 'id' ? 'Sosok di Balik Kode' : 'The Person Behind the Code'}
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-              {/* Narrative Content */}
-              <div className="md:col-span-7 space-y-5 text-slate-300 text-sm sm:text-base leading-relaxed font-sans">
-                <p>{t.odyssey?.scene01.p1}</p>
-                <p>{t.odyssey?.scene01.p2}</p>
+            {/* Asymmetric Editorial Magazine Composition */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Left Column: Personal Narrative & Philosophy */}
+              <div className="lg:col-span-7 space-y-6 text-slate-300 text-base sm:text-lg leading-relaxed font-sans">
+                <p className="first-letter:text-5xl first-letter:font-black first-letter:font-space first-letter:text-[#D8B77A] first-letter:mr-3 first-letter:float-left leading-relaxed">
+                  {t.odyssey?.scene01.p1}
+                </p>
+                <p className="leading-relaxed">{t.odyssey?.scene01.p2}</p>
 
-                <div className="pt-4">
+                {/* Personal Manifesto Quote Callout with Champagne Rim */}
+                <div className="p-5 rounded-2xl frosted-noir border-l-4 border-[#D8B77A] space-y-2">
+                  <p className="font-space italic text-sm sm:text-base text-[#F1F0F5]">
+                    "Rekayasa perangkat lunak bukan tentang mengetik sintaks; melainkan tentang
+                    mengeliminasi kompleksitas yang tidak perlu dan menjamin kedaulatan data
+                    pengguna."
+                  </p>
+                  <span className="block text-xs font-mono text-[#D8B77A] font-bold">
+                    — Fatir Gibran, Informatics Engineering
+                  </span>
+                </div>
+
+                <div className="pt-2">
                   <button
-                    onClick={() => handleSceneChange('02')}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold shadow-lg shadow-blue-600/30 transition-all"
+                    onClick={() => handleSceneChange('02', 'next')}
+                    className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#5146E5] to-[#43D9E8] hover:opacity-90 text-[#08090D] font-space font-black text-xs uppercase tracking-wider shadow-lg shadow-[#5146E5]/30 transition-all transform hover:-translate-y-0.5"
                   >
                     <span>{t.odyssey?.scene01.nextCta || 'Continue to The Journey'}</span>
                     <ArrowRight className="w-4 h-4" />
@@ -523,113 +889,161 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
                 </div>
               </div>
 
-              {/* 4 Pillars Card */}
-              <div className="md:col-span-5 p-6 rounded-2xl bg-[#111624] border border-slate-800 space-y-4">
-                <span className="text-xs font-mono text-slate-400 font-bold block uppercase pb-3 border-b border-slate-800">
-                  Four Disciplines of Craftsmanship
-                </span>
+              {/* Right Column: Architectural Dossier of 4 Disciplines */}
+              <div className="lg:col-span-5 p-6 rounded-3xl frosted-noir shadow-2xl space-y-5">
+                <div className="flex items-center justify-between border-b border-[#C9D0DF]/10 pb-3">
+                  <span className="text-xs font-mono text-[#C9D0DF] font-bold uppercase tracking-wider">
+                    Four Disciplines of Craftsmanship
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded bg-[#D8B77A]/15 text-[#D8B77A] font-mono text-[10px] font-bold">
+                    DOSSIER PILLARS
+                  </span>
+                </div>
 
-                <div className="space-y-3">
-                  <div className="p-3.5 rounded-xl bg-[#161D2E] border border-slate-800">
-                    <span className="block text-xs font-mono text-sky-400 font-bold">1. Edge AI & Vision</span>
-                    <span className="block text-xs text-slate-300 mt-1">Zero-cloud local inference via MediaPipe Pose & YOLOv8</span>
+                <div className="space-y-3.5">
+                  <div className="p-4 rounded-2xl bg-[#08090D]/60 border border-[#43D9E8]/30 space-y-1 transition-all hover:border-[#43D9E8]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono text-[#43D9E8] font-bold">
+                        01 // EDGE AI & VISION
+                      </span>
+                      <span className="text-[10px] font-mono text-[#C9D0DF]">30+ FPS LOCAL</span>
+                    </div>
+                    <p className="text-xs text-slate-300 font-sans">
+                      Zero-cloud local inference via MediaPipe 33-point Pose WASM & YOLOv8 + DeepSORT.
+                    </p>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-[#161D2E] border border-slate-800">
-                    <span className="block text-xs font-mono text-amber-400 font-bold">2. Security & Cryptography</span>
-                    <span className="block text-xs text-slate-300 mt-1">AES-128 Fernet cipher, PBKDF2 salt, 95.8% test coverage</span>
+                  <div className="p-4 rounded-2xl bg-[#08090D]/60 border border-[#D8B77A]/30 space-y-1 transition-all hover:border-[#D8B77A]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono text-[#D8B77A] font-bold">
+                        02 // SECURITY & CRYPTOGRAPHY
+                      </span>
+                      <span className="text-[10px] font-mono text-[#43D9E8] font-bold">
+                        95.8% PYTEST
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-300 font-sans">
+                      AES-128 Fernet cipher, PBKDF2 random salt derivation, and zero-trust local vault.
+                    </p>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-[#161D2E] border border-slate-800">
-                    <span className="block text-xs font-mono text-emerald-400 font-bold">3. Modern Full-Stack</span>
-                    <span className="block text-xs text-slate-300 mt-1">Next.js 15 App Router, React 19 concurrent, TypeScript</span>
+                  <div className="p-4 rounded-2xl bg-[#08090D]/60 border border-[#5146E5]/40 space-y-1 transition-all hover:border-[#5146E5]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono text-[#5146E5] font-bold">
+                        03 // MODERN FULL-STACK
+                      </span>
+                      <span className="text-[10px] font-mono text-[#C9D0DF]">REACT 19 / NEXT 15</span>
+                    </div>
+                    <p className="text-xs text-slate-300 font-sans">
+                      App Router, Server Components, TypeScript strict, and mid-tier edge caching.
+                    </p>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-[#161D2E] border border-slate-800">
-                    <span className="block text-xs font-mono text-purple-400 font-bold">4. Systems & Infrastructure</span>
-                    <span className="block text-xs text-slate-300 mt-1">Go concurrency channels, FastAPI, Docker Compose, PostgreSQL</span>
+                  <div className="p-4 rounded-2xl bg-[#08090D]/60 border border-[#963CFF]/40 space-y-1 transition-all hover:border-[#963CFF]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-mono text-[#963CFF] font-bold">
+                        04 // SYSTEMS & INFRASTRUCTURE
+                      </span>
+                      <span className="text-[10px] font-mono text-[#C9D0DF]">GO / DOCKER</span>
+                    </div>
+                    <p className="text-xs text-slate-300 font-sans">
+                      High-concurrency Go channels, FastAPI microservices, and containerized schemas.
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         )}
 
         {/* =====================================================================
-            SCENE 02 — THE JOURNEY
+            SCENE 02 — THE JOURNEY (AURORA EXPEDITION TIMELINE)
         ===================================================================== */}
         {odysseyScene === '02' && (
-          <div className="space-y-8 animate-fade-in">
-            <div className="max-w-3xl space-y-2">
-              <span className="text-xs font-mono text-sky-400 font-bold uppercase tracking-wider block">
+          <section className="space-y-8 animate-fade-in relative">
+            <div className="max-w-4xl space-y-2">
+              <span className="text-xs font-mono text-[#43D9E8] font-bold uppercase tracking-wider block">
                 {t.odyssey?.scene02.narrative || 'Every builder has a starting point.'}
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-space text-white tracking-tight">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-space text-[#F1F0F5] tracking-tight">
                 {t.odyssey?.scene02.subtitle || 'Evolutionary Trajectory (2023 - 2026)'}
               </h2>
-              <p className="text-slate-400 text-sm sm:text-base font-sans">
+              <p className="text-slate-300 text-sm sm:text-base font-sans">
                 {t.odyssey?.scene02.desc}
               </p>
             </div>
 
-            {/* Interactive Timeline Milestones */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {['2023', '2024', '2025', '2026'].map((year) => {
-                const isSelected = selectedMilestone === year;
-                return (
-                  <button
-                    key={year}
-                    onClick={() => {
-                      setSelectedMilestone(year);
-                      playSound('tab');
-                    }}
-                    className={`p-4 rounded-2xl text-left border transition-all ${
-                      isSelected
-                        ? 'bg-blue-600/15 border-blue-500 text-white shadow-lg shadow-blue-600/20'
-                        : 'bg-[#111624] border-slate-800 text-slate-400 hover:bg-[#161D2E] hover:text-slate-200'
-                    }`}
-                  >
-                    <span className="block text-2xl font-black font-space text-white">{year}</span>
-                    <span className="block text-xs font-mono text-sky-400 mt-1">
-                      {year === '2023'
-                        ? 'Algoritma & C/C++'
-                        : year === '2024'
-                        ? 'Edge AI & Enkripsi'
-                        : year === '2025'
-                        ? '20 Sistem Produksi'
-                        : 'Riset Masa Depan'}
-                    </span>
-                  </button>
-                );
-              })}
+            {/* Illuminated Expedition Timeline Nodes */}
+            <div className="relative py-4">
+              <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-[#43D9E8]/30 via-[#5146E5]/40 to-[#D8B77A]/30 -translate-y-1/2 hidden sm:block" />
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 relative z-10">
+                {['2023', '2024', '2025', '2026'].map((year) => {
+                  const isSelected = selectedMilestone === year;
+                  const item = evolutionMilestones[year];
+                  return (
+                    <button
+                      key={year}
+                      onClick={() => {
+                        setSelectedMilestone(year);
+                        playSound('tab');
+                      }}
+                      className={`p-5 rounded-3xl text-left border transition-all duration-300 ${
+                        isSelected
+                          ? 'bg-[#151D35] border-[#43D9E8] text-[#F1F0F5] shadow-xl shadow-[#43D9E8]/20 scale-105'
+                          : 'frosted-noir text-slate-400 hover:text-white hover:border-[#C9D0DF]/30'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-3xl font-black font-space text-white">{year}</span>
+                        <span
+                          className={`w-3 h-3 rounded-full transition-transform ${
+                            isSelected ? 'bg-[#43D9E8] animate-ping' : 'bg-white/20'
+                          }`}
+                        />
+                      </div>
+                      <span className="block text-[11px] font-mono text-[#43D9E8] font-bold uppercase tracking-wider">
+                        {item.epoch}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Selected Milestone Inspection Card */}
+            {/* Selected Milestone Inspection Stage */}
             {evolutionMilestones[selectedMilestone] && (
-              <div className="p-6 sm:p-8 rounded-2xl bg-[#111624] border border-slate-800 space-y-4">
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+              <div className="p-6 sm:p-8 rounded-3xl frosted-noir-elevated space-y-6 shadow-2xl">
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#C9D0DF]/10 pb-4">
                   <div>
-                    <h3 className="text-xl font-bold font-space text-white">
-                      {evolutionMilestones[selectedMilestone].title}
-                    </h3>
-                    <span className="text-xs font-mono text-slate-400">
+                    <span className="text-xs font-mono text-[#D8B77A] uppercase tracking-wider block mb-1">
                       {evolutionMilestones[selectedMilestone].phase}
                     </span>
+                    <h3 className="text-2xl sm:text-3xl font-bold font-space text-[#F1F0F5]">
+                      {evolutionMilestones[selectedMilestone].title}
+                    </h3>
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold">
+                  <span className="px-4 py-1.5 rounded-full bg-[#43D9E8]/15 border border-[#43D9E8]/30 text-[#43D9E8] font-mono text-xs font-bold shadow-sm">
                     {evolutionMilestones[selectedMilestone].metric}
                   </span>
                 </div>
 
-                <p className="text-sm sm:text-base text-slate-300 font-sans leading-relaxed">
+                <p className="text-base sm:text-lg text-slate-200 font-sans leading-relaxed">
                   {evolutionMilestones[selectedMilestone].desc}
                 </p>
+
+                <div className="p-4 rounded-2xl bg-[#08090D]/70 border border-[#C9D0DF]/15 flex items-center gap-3">
+                  <ShieldCheck className="w-5 h-5 text-[#D8B77A] flex-shrink-0" />
+                  <span className="text-xs sm:text-sm text-slate-300 font-mono">
+                    {evolutionMilestones[selectedMilestone].highlight}
+                  </span>
+                </div>
 
                 <div className="flex flex-wrap gap-2 pt-2">
                   {evolutionMilestones[selectedMilestone].tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2.5 py-1 rounded-lg bg-[#161D2E] text-slate-300 text-xs font-mono border border-slate-700/60"
+                      className="px-3 py-1 rounded-xl bg-white/5 text-slate-300 text-xs font-mono border border-white/10"
                     >
                       {tag}
                     </span>
@@ -640,35 +1054,35 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
 
             <div className="pt-2">
               <button
-                onClick={() => handleSceneChange('03')}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold shadow-lg shadow-blue-600/30 transition-all"
+                onClick={() => handleSceneChange('03', 'next')}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#5146E5] to-[#43D9E8] hover:opacity-90 text-[#08090D] font-space font-black text-xs uppercase tracking-wider shadow-lg shadow-[#5146E5]/30 transition-all transform hover:-translate-y-0.5"
               >
                 <span>{t.odyssey?.scene02.nextCta || 'Explore The Engineering Mindset'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-          </div>
+          </section>
         )}
 
         {/* =====================================================================
-            SCENE 03 — THE MINDSET
+            SCENE 03 — THE MINDSET (ULTRAVIOLET TELEMETRY MATRIX)
         ===================================================================== */}
         {odysseyScene === '03' && (
-          <div className="space-y-8 animate-fade-in">
-            <div className="max-w-3xl space-y-2">
-              <span className="text-xs font-mono text-sky-400 font-bold uppercase tracking-wider block">
+          <section className="space-y-8 animate-fade-in relative">
+            <div className="max-w-4xl space-y-2">
+              <span className="text-xs font-mono text-[#963CFF] font-bold uppercase tracking-wider block">
                 {t.odyssey?.scene03.narrative || 'Curiosity becomes capability through exploration.'}
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-space text-white tracking-tight">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-space text-[#F1F0F5] tracking-tight">
                 {t.odyssey?.scene03.subtitle || 'Engineering Mindset & 5 Disciplines'}
               </h2>
-              <p className="text-slate-400 text-sm sm:text-base font-sans">
+              <p className="text-slate-300 text-sm sm:text-base font-sans">
                 {t.odyssey?.scene03.desc}
               </p>
             </div>
 
             {/* 5 Technical Disciplines Switcher */}
-            <div className="grid grid-cols-2 lg:grid-cols-5 gap-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               {Object.values(engineeringMindset).map((disc) => {
                 const isActive = activeMindsetTab === disc.id;
                 return (
@@ -678,16 +1092,16 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
                       setActiveMindsetTab(disc.id);
                       playSound('tab');
                     }}
-                    className={`p-3.5 rounded-2xl text-left border transition-all ${
+                    className={`p-4 rounded-2xl text-left border transition-all duration-200 ${
                       isActive
-                        ? 'bg-blue-600/15 border-blue-500 text-white shadow-lg shadow-blue-600/20'
-                        : 'bg-[#111624] border-slate-800 text-slate-400 hover:bg-[#161D2E] hover:text-slate-200'
+                        ? 'bg-[#18112C] border-[#963CFF] text-[#F1F0F5] shadow-xl shadow-[#963CFF]/25 scale-[1.02]'
+                        : 'frosted-noir text-slate-400 hover:text-white hover:border-[#C9D0DF]/30'
                     }`}
                   >
-                    <span className="block text-[11px] font-mono text-sky-400 line-clamp-1">
+                    <span className="block text-[10px] font-mono text-[#963CFF] font-bold uppercase">
                       {disc.proficiency.split(':')[1]}
                     </span>
-                    <span className="block text-xs font-bold font-space text-white mt-1 line-clamp-1">
+                    <span className="block text-xs sm:text-sm font-bold font-space text-white mt-1 line-clamp-1">
                       {disc.title.split('&')[0]}
                     </span>
                   </button>
@@ -695,53 +1109,58 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
               })}
             </div>
 
-            {/* 4 Quadrants Display */}
+            {/* 4 Quadrants Matrix */}
             {engineeringMindset[activeMindsetTab] && (
-              <div className="p-6 sm:p-8 rounded-2xl bg-[#111624] border border-slate-800 space-y-6">
-                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
-                  <div>
-                    <span className="text-xs font-mono text-sky-400 uppercase tracking-wider block mb-1">
-                      {engineeringMindset[activeMindsetTab].proficiency}
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-bold font-space text-white">
-                      {engineeringMindset[activeMindsetTab].title}
-                    </h3>
-                  </div>
+              <div className="p-6 sm:p-8 rounded-3xl frosted-noir-elevated space-y-6 shadow-2xl">
+                <div className="border-b border-[#C9D0DF]/10 pb-4">
+                  <span className="text-xs font-mono text-[#963CFF] uppercase tracking-wider block mb-1">
+                    {engineeringMindset[activeMindsetTab].proficiency}
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-bold font-space text-[#F1F0F5]">
+                    {engineeringMindset[activeMindsetTab].title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#C9D0DF] font-mono mt-1 italic">
+                    "{engineeringMindset[activeMindsetTab].rationale}"
+                  </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-[#161D2E] border border-slate-800 space-y-1.5">
-                    <span className="text-xs font-mono text-sky-400 font-bold block uppercase">
+                  <div className="p-5 rounded-2xl bg-[#08090D]/70 border border-[#43D9E8]/30 space-y-2">
+                    <span className="text-xs font-mono text-[#43D9E8] font-bold block uppercase flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#43D9E8]" />
                       1. What I Understand
                     </span>
-                    <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-200 font-sans leading-relaxed">
                       {engineeringMindset[activeMindsetTab].understands}
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#161D2E] border border-slate-800 space-y-1.5">
-                    <span className="text-xs font-mono text-emerald-400 font-bold block uppercase">
-                      2. What I Have Worked On
+                  <div className="p-5 rounded-2xl bg-[#08090D]/70 border border-[#5146E5]/40 space-y-2">
+                    <span className="text-xs font-mono text-[#5146E5] font-bold block uppercase flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#5146E5]" />
+                      2. What I Have Built
                     </span>
-                    <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-200 font-sans leading-relaxed">
                       {engineeringMindset[activeMindsetTab].workedOn}
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#161D2E] border border-slate-800 space-y-1.5">
-                    <span className="text-xs font-mono text-amber-400 font-bold block uppercase">
+                  <div className="p-5 rounded-2xl bg-[#08090D]/70 border border-[#D8B77A]/30 space-y-2">
+                    <span className="text-xs font-mono text-[#D8B77A] font-bold block uppercase flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#D8B77A]" />
                       3. What Problems I Have Explored
                     </span>
-                    <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-200 font-sans leading-relaxed">
                       {engineeringMindset[activeMindsetTab].explored}
                     </p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#161D2E] border border-slate-800 space-y-1.5">
-                    <span className="text-xs font-mono text-purple-400 font-bold block uppercase">
+                  <div className="p-5 rounded-2xl bg-[#08090D]/70 border border-[#963CFF]/40 space-y-2">
+                    <span className="text-xs font-mono text-[#963CFF] font-bold block uppercase flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#963CFF]" />
                       4. What I Am Currently Improving
                     </span>
-                    <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-200 font-sans leading-relaxed">
                       {engineeringMindset[activeMindsetTab].improving}
                     </p>
                   </div>
@@ -751,41 +1170,45 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
 
             <div className="pt-2">
               <button
-                onClick={() => handleSceneChange('04')}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold shadow-lg shadow-blue-600/30 transition-all"
+                onClick={() => handleSceneChange('04', 'next')}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#5146E5] to-[#43D9E8] hover:opacity-90 text-[#08090D] font-space font-black text-xs uppercase tracking-wider shadow-lg shadow-[#5146E5]/30 transition-all transform hover:-translate-y-0.5"
               >
                 <span>{t.odyssey?.scene03.nextCta || 'Visit The Builder’s Lab'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-          </div>
+          </section>
         )}
 
         {/* =====================================================================
-            SCENE 04 — THE LAB
+            SCENE 04 — THE LAB (20 VERIFIED PRODUCTION SYSTEMS)
         ===================================================================== */}
         {odysseyScene === '04' && (
-          <div className="space-y-6 animate-fade-in">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <span className="text-xs font-mono text-sky-400 font-bold uppercase tracking-wider block">
+          <section className="space-y-8 animate-fade-in relative">
+            {/* Header & Filter Controls */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <div className="max-w-2xl space-y-2">
+                <span className="text-xs font-mono text-[#43D9E8] font-bold uppercase tracking-wider block">
                   {t.odyssey?.scene04.narrative || 'Ideas become real when they are built.'}
                 </span>
-                <h2 className="text-3xl sm:text-4xl font-black font-space text-white tracking-tight">
+                <h2 className="text-4xl sm:text-5xl font-black font-space text-[#F1F0F5] tracking-tight">
                   {t.odyssey?.scene04.subtitle || 'Laboratory of 20 Verified Systems'}
                 </h2>
+                <p className="text-slate-300 text-xs sm:text-sm font-sans">
+                  Setiap sistem diuji dan dibangun dengan arsitektur produksi nyata, bukan sekadar prototipe tiruan.
+                </p>
               </div>
 
-              {/* Filter & Search Bar */}
-              <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
-                <div className="relative flex-1 sm:w-64">
-                  <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+              {/* Real-time Search and Category Filters */}
+              <div className="flex flex-wrap items-center gap-2.5">
+                <div className="relative w-full sm:w-60">
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     value={labSearch}
                     onChange={(e) => setLabSearch(e.target.value)}
-                    placeholder="Search 20 projects or tech..."
-                    className="w-full pl-9 pr-3 py-2 rounded-xl bg-[#111624] border border-slate-700 text-xs text-white placeholder-slate-500 font-mono focus:outline-none focus:border-blue-500"
+                    placeholder="Search systems or stack..."
+                    className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-[#08090D]/80 border border-[#C9D0DF]/20 text-xs text-[#F1F0F5] placeholder-slate-500 font-mono focus:outline-none focus:border-[#43D9E8]"
                   />
                 </div>
 
@@ -795,37 +1218,94 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
                     setLabCategory(e.target.value);
                     playSound('tab');
                   }}
-                  className="px-3 py-2 rounded-xl bg-[#111624] border border-slate-700 text-xs text-slate-200 font-mono focus:outline-none focus:border-blue-500"
+                  className="px-3.5 py-2.5 rounded-xl bg-[#08090D]/80 border border-[#C9D0DF]/20 text-xs text-slate-200 font-mono focus:outline-none focus:border-[#43D9E8]"
                 >
                   <option value="all">All Domains ({ALL_PROJECTS.length})</option>
                   <option value="ai">AI & Vision</option>
                   <option value="fullstack">Full-Stack Web</option>
-                  <option value="cybersec">CyberSec & Systems</option>
-                  <option value="org">Infrastructure & Web</option>
+                  <option value="cybersec">CyberSec & Cryptography</option>
+                  <option value="org">Infrastructure & Portals</option>
                 </select>
               </div>
             </div>
 
-            {/* 20 Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Featured Hero System Spotlight */}
+            {spotlightProject && labSearch === '' && labCategory === 'all' && (
+              <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#151D35] via-[#11131B] to-[#08090D] border-2 border-[#43D9E8]/40 shadow-2xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 px-4 py-1.5 rounded-bl-2xl bg-[#43D9E8] text-[#08090D] font-mono text-[10px] font-black uppercase tracking-wider">
+                  SPOTLIGHT SYSTEM
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                  <div className="lg:col-span-8 space-y-3">
+                    <span className="text-xs font-mono text-[#43D9E8] font-bold">
+                      {spotlightProject.badge} • {spotlightProject.role}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-black font-space text-[#F1F0F5]">
+                      {spotlightProject.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-300 font-sans leading-relaxed">
+                      {lang === 'id' ? spotlightProject.desc : spotlightProject.descEn}
+                    </p>
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {spotlightProject.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="px-2.5 py-1 rounded-lg bg-white/10 text-[#43D9E8] text-xs font-mono border border-[#43D9E8]/30"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-4 flex flex-col gap-2.5 justify-center">
+                    <button
+                      onClick={() => {
+                        setSelectedProjectForModal(spotlightProject);
+                        playSound('modal');
+                      }}
+                      className="w-full py-3 px-4 rounded-xl bg-[#43D9E8] hover:bg-[#43D9E8]/90 text-[#08090D] font-space font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#43D9E8]/30 transition-all"
+                    >
+                      <Eye className="w-4 h-4" />
+                      <span>Inspect Blueprint</span>
+                    </button>
+                    {spotlightProject.liveLink && (
+                      <a
+                        href={spotlightProject.liveLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 font-mono text-xs flex items-center justify-center gap-2 transition-all"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>Launch Live System</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* 20 Projects Responsive Matrix */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredLabProjects.map((proj, idx) => (
                 <div
                   key={proj.id}
-                  className="p-5 rounded-2xl bg-[#111624] border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between group"
+                  className="p-5 rounded-2xl frosted-noir hover:border-[#43D9E8]/50 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="text-[11px] font-mono text-sky-400 font-bold">
+                      <span className="text-[11px] font-mono text-[#43D9E8] font-bold">
                         SYS-{(idx + 1).toString().padStart(2, '0')}: {proj.role}
                       </span>
-                      <span className="px-2.5 py-0.5 rounded-full bg-[#161D2E] text-slate-300 font-mono text-[10px]">
+                      <span className="px-2.5 py-0.5 rounded-full bg-white/5 text-slate-300 font-mono text-[10px] border border-white/10">
                         {proj.badge}
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold font-space text-white group-hover:text-sky-300 transition-colors">
+                    <h4 className="text-lg font-bold font-space text-[#F1F0F5] group-hover:text-[#43D9E8] transition-colors">
                       {proj.title}
-                    </h3>
+                    </h4>
 
                     <p className="text-xs text-slate-400 font-sans mt-2 line-clamp-2 leading-relaxed">
                       {lang === 'id' ? proj.desc : proj.descEn}
@@ -835,7 +1315,7 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
                       {proj.tech.slice(0, 4).map((tech) => (
                         <span
                           key={tech}
-                          className="px-2 py-0.5 rounded bg-[#161D2E] text-slate-400 font-mono text-[10px]"
+                          className="px-2 py-0.5 rounded bg-white/5 text-slate-300 font-mono text-[10px] border border-white/5"
                         >
                           {tech}
                         </span>
@@ -848,27 +1328,27 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
                     </div>
                   </div>
 
-                  {/* Actions */}
-                  <div className="flex items-center justify-between gap-2 pt-4 mt-4 border-t border-slate-800/80">
+                  {/* Actions Bar */}
+                  <div className="flex items-center justify-between gap-2 pt-4 mt-4 border-t border-white/10">
                     <button
                       onClick={() => {
                         setSelectedProjectForModal(proj);
                         playSound('modal');
                       }}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-sky-400 hover:text-sky-300 font-semibold"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-[#43D9E8] hover:text-[#43D9E8]/80 font-semibold"
                     >
                       <Eye className="w-3.5 h-3.5" />
-                      <span>Inspect Blueprint</span>
+                      <span>Blueprint</span>
                     </button>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5">
                       {proj.liveLink && (
                         <a
                           href={proj.liveLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 rounded-lg bg-[#161D2E] text-slate-300 hover:text-white hover:bg-slate-700 transition-all"
-                          title="Live Site"
+                          className="p-1.5 rounded-lg bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 transition-all"
+                          title="Open Live Deployment"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
@@ -878,8 +1358,8 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
                           href={proj.repoLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 rounded-lg bg-[#161D2E] text-slate-300 hover:text-white hover:bg-slate-700 transition-all"
-                          title="Source Code"
+                          className="p-1.5 rounded-lg bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 transition-all"
+                          title="View Verified GitHub Repository"
                         >
                           <GithubIcon className="w-3.5 h-3.5" />
                         </a>
@@ -892,84 +1372,85 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
 
             <div className="pt-2">
               <button
-                onClick={() => handleSceneChange('05')}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold shadow-lg shadow-blue-600/30 transition-all"
+                onClick={() => handleSceneChange('05', 'next')}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#5146E5] to-[#43D9E8] hover:opacity-90 text-[#08090D] font-space font-black text-xs uppercase tracking-wider shadow-lg shadow-[#5146E5]/30 transition-all transform hover:-translate-y-0.5"
               >
                 <span>{t.odyssey?.scene04.nextCta || 'Explore Beyond The Code'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-          </div>
+          </section>
         )}
 
         {/* =====================================================================
-            SCENE 05 — BEYOND THE CODE
+            SCENE 05 — BEYOND THE CODE (CHAMPAGNE HUMAN DIMENSION)
         ===================================================================== */}
         {odysseyScene === '05' && (
-          <div className="space-y-8 animate-fade-in">
-            <div className="max-w-3xl space-y-2">
-              <span className="text-xs font-mono text-sky-400 font-bold uppercase tracking-wider block">
+          <section className="space-y-8 animate-fade-in relative">
+            <div className="max-w-4xl space-y-2">
+              <span className="text-xs font-mono text-[#D8B77A] font-bold uppercase tracking-wider block">
                 {t.odyssey?.scene05.narrative || 'Engineering is also about people.'}
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-space text-white tracking-tight">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-space text-[#F1F0F5] tracking-tight">
                 {t.odyssey?.scene05.subtitle || 'Human Dimensions, Leadership & Communication'}
               </h2>
-              <p className="text-slate-400 text-sm sm:text-base font-sans">
+              <p className="text-slate-300 text-sm sm:text-base font-sans">
                 {t.odyssey?.scene05.desc}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-[#111624] border border-slate-800 space-y-2">
-                <span className="text-xs font-mono text-sky-400 font-bold block uppercase">
-                  Inisiatif & Kepemimpinan Teknis
+            {/* Asymmetrical Human Dimension Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="p-6 rounded-3xl frosted-noir border border-[#D8B77A]/30 space-y-3">
+                <span className="text-xs font-mono text-[#D8B77A] font-bold block uppercase">
+                  01 // INISIASI & KEPEMIMPINAN TEKNIS
                 </span>
-                <h3 className="font-space font-bold text-base text-white">
+                <h3 className="font-space font-bold text-xl text-[#F1F0F5]">
                   Memandu Kolaborasi Pengembang
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-400 font-sans leading-relaxed">
+                <p className="text-sm text-slate-300 font-sans leading-relaxed">
                   {lang === 'id'
-                    ? 'Memandu arah teknis pada proyek mahasiswa, memecah arsitektur kompleks menjadi modul kerja terdistribusi, dan mengawal standar kualitas kode.'
+                    ? 'Memandu arah teknis pada proyek kolaboratif mahasiswa, memecah arsitektur kompleks menjadi modul kerja terdistribusi, dan mengawal standar kualitas kode.'
                     : 'Guiding technical direction across collaborative student initiatives, decomposing complex architectures into manageable sprints, and enforcing code quality.'}
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#111624] border border-slate-800 space-y-2">
-                <span className="text-xs font-mono text-emerald-400 font-bold block uppercase">
-                  Komunikasi & Dokumentasi Jernih
+              <div className="p-6 rounded-3xl frosted-noir border border-[#D8B77A]/30 space-y-3">
+                <span className="text-xs font-mono text-[#D8B77A] font-bold block uppercase">
+                  02 // KOMUNIKASI & DOKUMENTASI JERNIH
                 </span>
-                <h3 className="font-space font-bold text-base text-white">
+                <h3 className="font-space font-bold text-xl text-[#F1F0F5]">
                   Spesifikasi Teknis yang Terstruktur
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-400 font-sans leading-relaxed">
+                <p className="text-sm text-slate-300 font-sans leading-relaxed">
                   {lang === 'id'
                     ? 'Menulis dokumentasi arsitektur, diagram aliran data, dan PRD padat konteks (seperti pada VibeDoc) yang menjembatani kebutuhan teknis dan non-teknis.'
                     : 'Authoring architectural specifications, data flow diagrams, and context-dense PRDs (demonstrated in VibeDoc) that bridge technical and non-technical stakeholders.'}
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#111624] border border-slate-800 space-y-2">
-                <span className="text-xs font-mono text-amber-400 font-bold block uppercase">
-                  Pemecahan Masalah di Bawah Batasan
+              <div className="p-6 rounded-3xl frosted-noir border border-[#D8B77A]/30 space-y-3">
+                <span className="text-xs font-mono text-[#D8B77A] font-bold block uppercase">
+                  03 // PEMECAHAN MASALAH DI BAWAH BATASAN
                 </span>
-                <h3 className="font-space font-bold text-base text-white">
+                <h3 className="font-space font-bold text-xl text-[#F1F0F5]">
                   Rekayasa untuk Perangkat Terbatas
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-400 font-sans leading-relaxed">
+                <p className="text-sm text-slate-300 font-sans leading-relaxed">
                   {lang === 'id'
-                    ? 'Mendesain PostureLens agar tetap berjalan 30+ FPS pada webcam standar tanpa GPU eksternal dan tanpa pengiriman data ke server.'
+                    ? 'Mendesain PostureLens agar tetap berjalan 30+ FPS pada webcam standar tanpa GPU eksternal dan tanpa pengiriman data sensitif ke server eksternal.'
                     : 'Designing PostureLens to sustain 30+ FPS on consumer hardware without external dedicated GPUs and with zero cloud server egress.'}
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#111624] border border-slate-800 space-y-2">
-                <span className="text-xs font-mono text-purple-400 font-bold block uppercase">
-                  Kultur Belajar & Ketekunan
+              <div className="p-6 rounded-3xl frosted-noir border border-[#D8B77A]/30 space-y-3">
+                <span className="text-xs font-mono text-[#D8B77A] font-bold block uppercase">
+                  04 // KULTUR BELAJAR & KETEKUNAN
                 </span>
-                <h3 className="font-space font-bold text-base text-white">
-                  Evolusi Berkelanjutan
+                <h3 className="font-space font-bold text-xl text-[#F1F0F5]">
+                  Evolusi Mandiri Berkelanjutan
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-400 font-sans leading-relaxed">
+                <p className="text-sm text-slate-300 font-sans leading-relaxed">
                   {lang === 'id'
                     ? 'Secara mandiri mempelajari WebGPU, model inferensi lokal, dan pengujian terotentikasi untuk terus memperdalam kapabilitas rekayasa.'
                     : 'Autonomously mastering WebGPU, local neural inference models, and authenticated testing pipelines to expand software engineering frontiers.'}
@@ -977,230 +1458,265 @@ export default function TheBuildersOdyssey({ triggerGlobalEffect }) {
               </div>
             </div>
 
+            {/* Leadership Manifesto */}
+            <div className="p-6 rounded-3xl bg-[#D8B77A]/10 border border-[#D8B77A]/30 flex items-center gap-4">
+              <Users className="w-8 h-8 text-[#D8B77A] flex-shrink-0" />
+              <p className="text-sm sm:text-base text-[#F1F0F5] font-space italic">
+                "Kualitas seorang engineer tidak diukur dari kerumitan kode yang dibuat, melainkan
+                dari seberapa mudah sistem tersebut dipahami, diuji, dan dipercaya oleh manusia
+                lain."
+              </p>
+            </div>
+
             <div className="pt-2">
               <button
-                onClick={() => handleSceneChange('06')}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold shadow-lg shadow-blue-600/30 transition-all"
+                onClick={() => handleSceneChange('06', 'next')}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#5146E5] to-[#43D9E8] hover:opacity-90 text-[#08090D] font-space font-black text-xs uppercase tracking-wider shadow-lg shadow-[#5146E5]/30 transition-all transform hover:-translate-y-0.5"
               >
                 <span>{t.odyssey?.scene05.nextCta || 'Advance to The Next Frontier'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-          </div>
+          </section>
         )}
 
         {/* =====================================================================
-            SCENE 06 — THE NEXT FRONTIER
+            SCENE 06 — THE NEXT FRONTIER (RESEARCH HORIZONS)
         ===================================================================== */}
         {odysseyScene === '06' && (
-          <div className="space-y-8 animate-fade-in">
-            <div className="max-w-3xl space-y-2">
-              <span className="text-xs font-mono text-sky-400 font-bold uppercase tracking-wider block">
+          <section className="space-y-8 animate-fade-in relative">
+            <div className="max-w-4xl space-y-2">
+              <span className="text-xs font-mono text-[#963CFF] font-bold uppercase tracking-wider block">
                 {t.odyssey?.scene06.narrative || 'The journey is still unfolding.'}
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-space text-white tracking-tight">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-space text-[#F1F0F5] tracking-tight">
                 {t.odyssey?.scene06.subtitle || 'Future Research Horizons'}
               </h2>
-              <p className="text-slate-400 text-sm sm:text-base font-sans">
+              <p className="text-slate-300 text-sm sm:text-base font-sans">
                 {t.odyssey?.scene06.desc}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-5 rounded-2xl bg-[#111624] border border-rose-500/30 space-y-3">
-                <span className="text-xs font-mono text-rose-400 font-bold block">HORIZON 01</span>
-                <h3 className="text-base font-bold font-space text-white">Local Neural Enclaves</h3>
-                <p className="text-xs text-slate-400 leading-relaxed font-sans">
+            {/* 3 Research Horizons */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="p-6 rounded-3xl frosted-noir border border-[#963CFF]/30 space-y-4 hover:border-[#963CFF] transition-all">
+                <span className="text-xs font-mono text-[#963CFF] font-bold block">
+                  HORIZON // 01
+                </span>
+                <h3 className="text-xl font-bold font-space text-[#F1F0F5]">Local Neural Enclaves</h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
                   {lang === 'id'
                     ? 'Mengeksekusi model visi dan inferensi bahasa kecil langsung di browser via WebGPU tanpa streaming data atau biaya API per-token.'
                     : 'Executing vision and small language models directly in client browsers via WebGPU with zero server streaming or API token billing.'}
                 </p>
+                <div className="pt-2">
+                  <span className="px-3 py-1 rounded-lg bg-[#963CFF]/10 text-[#963CFF] font-mono text-[10px] border border-[#963CFF]/30 block text-center">
+                    WebGPU • Zero API Latency
+                  </span>
+                </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#111624] border border-blue-500/30 space-y-3">
-                <span className="text-xs font-mono text-sky-400 font-bold block">HORIZON 02</span>
-                <h3 className="text-base font-bold font-space text-white">Zero-Trust Local Storage</h3>
-                <p className="text-xs text-slate-400 leading-relaxed font-sans">
+              <div className="p-6 rounded-3xl frosted-noir border border-[#43D9E8]/30 space-y-4 hover:border-[#43D9E8] transition-all">
+                <span className="text-xs font-mono text-[#43D9E8] font-bold block">HORIZON // 02</span>
+                <h3 className="text-xl font-bold font-space text-[#F1F0F5]">Zero-Trust Local Storage</h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
                   {lang === 'id'
                     ? 'Enkripsi memori transien, logging terverifikasi tamper-evident, dan audit integritas kontinu yang memperluas prinsip VaultSentinel.'
                     : 'Transient memory encryption, tamper-evident audit logs, and continuous integrity verification extending VaultSentinel core principles.'}
                 </p>
+                <div className="pt-2">
+                  <span className="px-3 py-1 rounded-lg bg-[#43D9E8]/10 text-[#43D9E8] font-mono text-[10px] border border-[#43D9E8]/30 block text-center">
+                    Tamper-Evident • AES Integrity
+                  </span>
+                </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#111624] border border-emerald-500/30 space-y-3">
-                <span className="text-xs font-mono text-emerald-400 font-bold block">HORIZON 03</span>
-                <h3 className="text-base font-bold font-space text-white">Resilient Edge Topologies</h3>
-                <p className="text-xs text-slate-400 leading-relaxed font-sans">
+              <div className="p-6 rounded-3xl frosted-noir border border-[#5146E5]/40 space-y-4 hover:border-[#5146E5] transition-all">
+                <span className="text-xs font-mono text-[#5146E5] font-bold block">
+                  HORIZON // 03
+                </span>
+                <h3 className="text-xl font-bold font-space text-[#F1F0F5]">Resilient Edge Topologies</h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
                   {lang === 'id'
                     ? 'Sinkronisasi data offline-first dengan CRDTs untuk aplikasi kolaboratif berkinerja tinggi tanpa server terpusat.'
                     : 'Offline-first peer synchronizations powered by CRDTs, ensuring zero data loss across volatile network conditions.'}
                 </p>
+                <div className="pt-2">
+                  <span className="px-3 py-1 rounded-lg bg-[#5146E5]/10 text-[#43D9E8] font-mono text-[10px] border border-[#5146E5]/30 block text-center">
+                    Offline CRDTs • Decentralized
+                  </span>
+                </div>
               </div>
             </div>
 
             <div className="pt-2">
               <button
-                onClick={() => handleSceneChange('07')}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold shadow-lg shadow-blue-600/30 transition-all"
+                onClick={() => handleSceneChange('07', 'next')}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#5146E5] to-[#43D9E8] hover:opacity-90 text-[#08090D] font-space font-black text-xs uppercase tracking-wider shadow-lg shadow-[#5146E5]/30 transition-all transform hover:-translate-y-0.5"
               >
                 <span>{t.odyssey?.scene06.nextCta || 'Open The Connection'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
-          </div>
+          </section>
         )}
 
         {/* =====================================================================
-            SCENE 07 — THE CONNECTION
+            SCENE 07 — THE CONNECTION (MONUMENTAL CLOSING NEXUS)
         ===================================================================== */}
         {odysseyScene === '07' && (
-          <div className="space-y-8 animate-fade-in">
-            <div className="max-w-3xl space-y-2">
-              <span className="text-xs font-mono text-emerald-400 font-bold tracking-wider block">
+          <section className="space-y-8 animate-fade-in relative">
+            <div className="max-w-4xl space-y-3">
+              <span className="text-xs font-mono text-[#43D9E8] font-bold uppercase tracking-wider block">
                 {t.odyssey?.scene07.narrative || 'Perhaps our next chapter starts here.'}
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-space text-white tracking-tight">
-                {t.odyssey?.scene07.heading || 'Every great build starts with a conversation.'}
+              <h2 className="text-4xl sm:text-6xl md:text-7xl font-black font-space tracking-tight">
+                <span className="liquid-chrome-text">
+                  {t.odyssey?.scene07.heading || 'Every great build starts with a conversation.'}
+                </span>
               </h2>
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans">
+              <p className="text-base sm:text-xl text-[#C9D0DF] leading-relaxed font-sans max-w-2xl">
                 {t.odyssey?.scene07.subheading ||
                   'Whether you are a technical recruiter, engineering leader, or fellow builder with a challenge worth solving, my inbox is always open.'}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              <div className="md:col-span-7 space-y-4">
-                <div className="p-5 rounded-2xl bg-[#111624] border border-slate-800 space-y-3">
-                  <span className="text-xs font-mono text-slate-400 block uppercase">PRIMARY DIRECT INBOX:</span>
-                  <div className="flex items-center justify-between gap-3 p-3 rounded-xl bg-[#161D2E] border border-slate-700">
-                    <span className="font-mono text-xs sm:text-sm text-sky-300 truncate">
-                      fatirgibrann@gmail.com
+            {/* Glowing Direct Connection Nexus Card */}
+            <div className="p-6 sm:p-10 rounded-3xl frosted-noir-elevated border-2 border-[#5146E5]/50 shadow-2xl space-y-6">
+              <span className="text-xs font-mono text-[#C9D0DF] block uppercase tracking-wider">
+                PRIMARY DIRECT INBOX (1-CLICK COPY / MAILTO):
+              </span>
+
+              {/* Verified Direct Email Box */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 rounded-2xl bg-[#08090D]/80 border border-[#C9D0DF]/20">
+                <span className="font-mono text-base sm:text-xl text-[#43D9E8] font-bold tracking-tight">
+                  fatirgibrann@gmail.com
+                </span>
+
+                <div className="flex items-center gap-2 w-full sm:w-auto">
+                  <button
+                    onClick={handleCopyEmail}
+                    className="flex-1 sm:flex-none px-5 py-3 rounded-xl bg-[#5146E5] hover:bg-[#5146E5]/90 text-white font-space font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md"
+                  >
+                    {copiedEmail ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                    <span>
+                      {copiedEmail
+                        ? t.odyssey?.scene07.copied || 'Copied!'
+                        : t.odyssey?.scene07.copyEmail || 'Copy Email'}
                     </span>
-                    <button
-                      onClick={handleCopyEmail}
-                      className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs flex items-center gap-1.5 transition-all shrink-0"
-                    >
-                      {copiedEmail ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                      <span>{copiedEmail ? (t.odyssey?.scene07.copied || 'Copied!') : (t.odyssey?.scene07.copyEmail || 'Copy Email')}</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    href="https://github.com/Fatirrr08"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-xl bg-[#161D2E] hover:bg-slate-800 text-slate-200 border border-slate-700 font-mono text-xs flex items-center gap-2 transition-all"
-                  >
-                    <GithubIcon className="w-4 h-4" />
-                    <span>GitHub @Fatirrr08</span>
-                  </a>
-
-                  <a
-                    href="https://linkedin.com/in/FatirGibran"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-xl bg-[#161D2E] hover:bg-slate-800 text-slate-200 border border-slate-700 font-mono text-xs flex items-center gap-2 transition-all"
-                  >
-                    <Globe className="w-4 h-4" />
-                    <span>LinkedIn Profile</span>
-                  </a>
+                  </button>
 
                   <a
                     href="mailto:fatirgibrann@gmail.com"
-                    className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs flex items-center gap-2 shadow-md shadow-blue-600/30 transition-all"
+                    className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-space text-xs font-bold transition-all"
+                    title="Open in Email App"
                   >
-                    <Globe className="w-4 h-4" />
-                    <span>Open Mail Client</span>
+                    <ExternalLink className="w-4 h-4" />
                   </a>
                 </div>
-
-                <div className="pt-4 flex flex-wrap gap-3 border-t border-slate-800/80">
-                  <button
-                    onClick={() => handleSceneChange('00')}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#161D2E] hover:bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300 transition-all"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    <span>{t.odyssey?.scene07.btnRestart || 'Restart The Journey'}</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      toggleExperienceMode();
-                      playSound('click');
-                    }}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-xs font-mono text-sky-300 transition-all"
-                  >
-                    <span>{t.odyssey?.scene07.btnDirect || 'Open Classic Portfolio'}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
               </div>
 
-              {/* Dossier Card */}
-              <div className="md:col-span-5 p-5 rounded-2xl bg-[#111624] border border-cyan-500/30 font-mono text-xs space-y-2">
-                <span className="text-cyan-400 font-bold block mb-2">VERIFIED REPOSITORY DOSSIER</span>
-                <p className="text-slate-400">
-                  Name: <span className="text-white">Fatir Gibran</span>
-                </p>
-                <p className="text-slate-400">
-                  Discipline: <span className="text-white">Software & Edge AI Engineer</span>
-                </p>
-                <p className="text-slate-400">
-                  Academic: <span className="text-white">Telkom Univ Purwokerto</span>
-                </p>
-                <p className="text-slate-400">
-                  Production Repositories: <span className="text-white">20 Verified Systems</span>
-                </p>
-                <p className="text-slate-400">
-                  Verification: <span className="text-emerald-400 font-bold">100% AUTHENTIC CODE</span>
-                </p>
+              {/* Social Channels Nexus */}
+              <div className="flex flex-wrap gap-3 pt-2">
+                <a
+                  href="https://github.com/Fatirrr08"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-[#C9D0DF] hover:text-white border border-[#C9D0DF]/20 font-mono text-xs flex items-center gap-2 transition-all"
+                >
+                  <GithubIcon className="w-4 h-4" />
+                  <span>GitHub @Fatirrr08</span>
+                </a>
+
+                <a
+                  href="https://linkedin.com/in/fatirgibran"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-[#C9D0DF] hover:text-white border border-[#C9D0DF]/20 font-mono text-xs flex items-center gap-2 transition-all"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>LinkedIn /in/fatirgibran</span>
+                </a>
               </div>
             </div>
-          </div>
+
+            {/* Closing Journey Actions */}
+            <div className="pt-4 flex flex-col sm:flex-row items-center gap-4">
+              <button
+                onClick={() => {
+                  handleSceneChange('00', 'prev');
+                  if (triggerGlobalEffect) triggerGlobalEffect('confetti');
+                }}
+                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-space font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-white/15 transition-all"
+              >
+                <RotateCcw className="w-4 h-4" />
+                <span>{t.odyssey?.scene07.restart || 'RESTART THE ODYSSEY'}</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  toggleExperienceMode();
+                  playSound('toggle');
+                }}
+                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#5146E5] via-[#43D9E8] to-[#963CFF] text-[#08090D] font-space font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#5146E5]/30 transition-all"
+              >
+                <span>{t.odyssey?.scene07.exploreClassic || 'EXPLORE DIRECT PORTFOLIO'}</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </section>
         )}
       </main>
 
-      {/* Persistent Scene Footer Controls */}
-      <footer className="relative z-30 pb-4 px-4 sm:px-6 max-w-6xl mx-auto w-full">
-        <div className="flex items-center justify-between text-xs font-mono text-slate-500 pt-3 border-t border-slate-800/60">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handlePrev}
-              disabled={currentSceneIndex === 0}
-              className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border transition-all ${
-                currentSceneIndex === 0
-                  ? 'opacity-40 border-slate-800 cursor-not-allowed'
-                  : 'bg-[#111624] border-slate-700 text-slate-300 hover:text-white'
-              }`}
-            >
-              <ChevronLeft className="w-3.5 h-3.5" />
-              <span>Previous</span>
-            </button>
-            <span className="hidden sm:inline">Scene {odysseyScene} of 07</span>
+      {/* =====================================================================
+          BOTTOM DOCK STEPPER & KEYBOARD TELEMETRY (OBSIDIAN NOIR)
+      ===================================================================== */}
+      <footer className="relative z-30 w-full max-w-5xl mx-auto px-4 sm:px-6 pb-6 pt-2">
+        <div className="flex items-center justify-between gap-3 p-3 rounded-2xl frosted-noir shadow-2xl">
+          {/* Previous Scene Button */}
+          <button
+            onClick={handlePrev}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white text-xs font-mono font-bold transition-all"
+            title="Previous Chapter [ArrowLeft]"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <span className="hidden sm:inline">PREV</span>
+          </button>
+
+          {/* Stepper Scene Buttons with dynamic glowing active indicator */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {SCENES_CONFIG.map((scene, idx) => {
+              const isActive = scene.id === odysseyScene;
+              const Icon = scene.icon;
+              return (
+                <button
+                  key={scene.id}
+                  onClick={() =>
+                    handleSceneChange(scene.id, idx > currentSceneIndex ? 'next' : 'prev')
+                  }
+                  title={`${scene.tag}: ${lang === 'id' ? scene.titleId : scene.titleEn}`}
+                  className={`flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl font-mono text-xs font-bold transition-all duration-200 ${
+                    isActive
+                      ? 'bg-[#43D9E8] text-[#08090D] font-black shadow-[0_0_18px_rgba(67,217,232,0.85)] scale-110'
+                      : 'bg-white/5 hover:bg-white/15 text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <span className="hidden sm:inline">{scene.id}</span>
+                  <Icon className="w-4 h-4 sm:hidden" />
+                </button>
+              );
+            })}
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="hidden md:inline text-slate-500">
-              Navigation: Click buttons or press [←] [→]
-            </span>
-          </div>
-
-          <div>
-            <button
-              onClick={handleNext}
-              disabled={currentSceneIndex === SCENES_CONFIG.length - 1}
-              className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border transition-all ${
-                currentSceneIndex === SCENES_CONFIG.length - 1
-                  ? 'opacity-40 border-slate-800 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-500 text-white border-blue-500 shadow-md shadow-blue-600/20'
-              }`}
-            >
-              <span>Next</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
+          {/* Next Scene Button */}
+          <button
+            onClick={handleNext}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#43D9E8] hover:bg-[#43D9E8]/90 text-[#08090D] text-xs font-space font-black uppercase tracking-wider transition-all shadow-md shadow-[#43D9E8]/30"
+            title="Next Chapter [ArrowRight]"
+          >
+            <span className="hidden sm:inline">NEXT</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
       </footer>
     </div>

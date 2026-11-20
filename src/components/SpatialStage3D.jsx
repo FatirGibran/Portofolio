@@ -65,14 +65,14 @@ export default function SpatialStage3D({
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.1;
 
-    // Fog for depth blending
+    // Fog for depth blending (Obsidian Noir)
     const fogColorLight = new THREE.Color('#FDFBF7');
-    const fogColorDark = new THREE.Color('#0B1120');
+    const fogColorDark = new THREE.Color('#08090D');
     scene.fog = new THREE.FogExp2(isDarkRef.current ? fogColorDark : fogColorLight, 0.035);
 
     // 2. Lighting Setup
     const ambientLight = new THREE.AmbientLight(
-      isDarkRef.current ? 0x1e293b : 0xf8fafc,
+      isDarkRef.current ? 0x11131b : 0xf8fafc,
       isDarkRef.current ? 1.2 : 1.8
     );
     scene.add(ambientLight);
@@ -81,12 +81,12 @@ export default function SpatialStage3D({
     dirLight.position.set(5, 8, 4);
     scene.add(dirLight);
 
-    // Pastel point lights
-    const bluePointLight = new THREE.PointLight(0x38bdf8, 2.5, 12);
+    // Obsidian Noir Aurora Point Lights (Aurora Cyan & Electric Indigo)
+    const bluePointLight = new THREE.PointLight(0x43d9e8, 2.5, 12);
     bluePointLight.position.set(-2, 2.5, 2);
     scene.add(bluePointLight);
 
-    const yellowPointLight = new THREE.PointLight(0xfde047, 2.0, 10);
+    const yellowPointLight = new THREE.PointLight(0xd8b77a, 2.0, 10);
     yellowPointLight.position.set(2.5, 1.8, 1);
     scene.add(yellowPointLight);
 
