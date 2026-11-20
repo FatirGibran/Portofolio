@@ -39,6 +39,42 @@ export function PortfolioProvider({ children }) {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [selectedProjectForModal, setSelectedProjectForModal] = useState(null);
 
+  // 5. Exploration Mode ('story' | 'direct')
+  const [journeyMode, setJourneyMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('fatir_journey_mode');
+      if (saved) return saved;
+    }
+    return 'story';
+  });
+
+  // 6. The Builder's Journey Chapter State ('00' through '07')
+  const [journeyChapter, setJourneyChapter] = useState('00');
+
+  const toggleJourneyMode = () => {
+    setJourneyMode((prev) => {
+      const next = prev === 'story' ? 'direct' : 'story';
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('fatir_journey_mode', next);
+      }
+      playSound('toggle');
+      return next;
+    });
+  };
+
+  const jumpToJourneyChapter = (chapterId) => {
+    if (chapterId) {
+      setJourneyChapter(chapterId);
+    }
+    playSound('tab');
+    if (typeof document !== 'undefined') {
+      const el = document.getElementById('the-builders-journey');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   // Sync dark class on <html> element
   useEffect(() => {
     const root = document.documentElement;
@@ -111,6 +147,24 @@ export function PortfolioProvider({ children }) {
         setIsCommandPaletteOpen,
         selectedProjectForModal,
         setSelectedProjectForModal,
+        journeyMode,
+        setJourneyMode,
+        toggleJourneyMode,
+        journeyChapter,
+        setJourneyChapter,
+        jumpToJourneyChapter,
+        portfolioMode: journeyMode,
+        setPortfolioMode: setJourneyMode,
+        togglePortfolioMode: toggleJourneyMode,
+        atlasStation: journeyChapter,
+        setAtlasStation: setJourneyChapter,
+        jumpToStation: jumpToJourneyChapter,
+        chroniclesChapter: journeyChapter,
+        setChroniclesChapter: setJourneyChapter,
+        jumpToChapter: jumpToJourneyChapter,
+        openSandboxTab: jumpToJourneyChapter,
+        sandboxTab: journeyChapter,
+        setSandboxTab: setJourneyChapter,
         t,
       }}
     >

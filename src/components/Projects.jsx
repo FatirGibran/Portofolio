@@ -47,7 +47,7 @@ const ProjectCard = memo(({ project, onOpenSandboxDemo, onOpenCaseStudy, btnTryD
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ transform, transition: transform ? 'transform 0.05s ease-out' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}
-      className="bg-white dark:bg-slate-900/80 border border-slate-200/90 dark:border-slate-800/90 hover:border-blue-500/60 dark:hover:border-blue-500/60 rounded-2xl p-6 flex flex-col justify-between h-full relative overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md group transform-gpu-safe"
+      className="bg-white dark:bg-[#111624] border border-slate-200/90 dark:border-[#1E293B] hover:border-blue-500/60 dark:hover:border-blue-500/60 rounded-2xl p-6 flex flex-col justify-between h-full relative overflow-hidden transition-all duration-300 shadow-sm hover:shadow-card-hover dark:hover:shadow-card-hover-dark group transform-gpu-safe"
     >
       {/* Holographic Glare Sheen Overlay */}
       <div
@@ -59,7 +59,7 @@ const ProjectCard = memo(({ project, onOpenSandboxDemo, onOpenCaseStudy, btnTryD
       />
       <div>
         <div className="flex justify-between items-start gap-2 mb-3.5">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 py-0.5 px-2.5 rounded-md border border-blue-200 dark:border-blue-800/80">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 dark:text-sky-400 bg-blue-50 dark:bg-blue-950/60 py-0.5 px-2.5 rounded-md border border-blue-200 dark:border-blue-800/80">
             {project.role}
           </span>
           {project.badge && (
@@ -70,7 +70,7 @@ const ProjectCard = memo(({ project, onOpenSandboxDemo, onOpenCaseStudy, btnTryD
           )}
         </div>
 
-        <h3 className="text-lg sm:text-xl font-space font-bold text-slate-900 dark:text-white mb-2 leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+        <h3 className="text-lg sm:text-xl font-space font-bold text-slate-900 dark:text-white mb-2 leading-snug group-hover:text-blue-600 dark:group-hover:text-sky-400 transition-colors">
           {project.title}
         </h3>
 
@@ -83,7 +83,7 @@ const ProjectCard = memo(({ project, onOpenSandboxDemo, onOpenCaseStudy, btnTryD
           {project.tech.map((tItem, idx) => (
             <span
               key={idx}
-              className="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 py-0.5 px-2 rounded-md"
+              className="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-[#161D2E] border border-slate-200/80 dark:border-[#1E293B] py-0.5 px-2 rounded-md"
             >
               {tItem}
             </span>
@@ -92,20 +92,20 @@ const ProjectCard = memo(({ project, onOpenSandboxDemo, onOpenCaseStudy, btnTryD
       </div>
 
       {/* Card Action Buttons */}
-      <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-slate-100 dark:border-slate-800/80 mt-auto">
+      <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-slate-100 dark:border-[#1E293B] mt-auto">
         <button
           onClick={() => onOpenCaseStudy(project)}
-          className="inline-flex items-center gap-1.5 text-xs font-bold font-space text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 py-2 px-3 rounded-xl transition-all min-h-[38px]"
+          className="inline-flex items-center gap-1.5 text-xs font-bold font-space text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-[#161D2E] hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-[#1E293B] py-2 px-3 rounded-xl transition-all min-h-[38px]"
           title="Lihat Diagram Arsitektur & Case Study"
         >
-          <Layers className="w-3.5 h-3.5 flex-shrink-0 text-blue-600 dark:text-blue-400" />
+          <Layers className="w-3.5 h-3.5 flex-shrink-0 text-blue-600 dark:text-sky-400" />
           <span>{lang === 'en' ? 'Architecture' : 'Arsitektur'}</span>
         </button>
 
         {project.demoTab && (
           <button
             onClick={() => onOpenSandboxDemo(project.demoTab)}
-            className="inline-flex items-center gap-1.5 text-xs font-bold font-space text-white bg-blue-600 hover:bg-blue-700 py-2 px-3.5 rounded-xl shadow-sm transition-all hover:scale-105 min-h-[38px]"
+            className="inline-flex items-center gap-1.5 text-xs font-bold font-space text-white bg-blue-600 hover:bg-blue-700 dark:bg-cobalt dark:hover:bg-cobalt-hover py-2 px-3.5 rounded-xl shadow-sm transition-all hover:scale-105 min-h-[38px]"
           >
             <Play className="w-3.5 h-3.5 fill-white flex-shrink-0" />
             <span>{btnTryDemo}</span>
@@ -141,8 +141,8 @@ const ProjectCard = memo(({ project, onOpenSandboxDemo, onOpenCaseStudy, btnTryD
   );
 });
 
-function Projects({ onSelectSandboxTab }) {
-  const { t, setSelectedProjectForModal, playSound, lang } = usePortfolio();
+function Projects() {
+  const { t, setSelectedProjectForModal, playSound, lang, jumpToChapter } = usePortfolio();
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -175,15 +175,10 @@ function Projects({ onSelectSandboxTab }) {
     });
   }, [activeCategory, searchQuery, lang]);
 
-  const handleOpenSandbox = useCallback((tabId) => {
-    if (onSelectSandboxTab) {
-      onSelectSandboxTab(tabId);
-    }
-    const sandboxEl = document.getElementById('simulator');
-    if (sandboxEl) {
-      sandboxEl.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [onSelectSandboxTab]);
+  const handleOpenSandbox = useCallback(() => {
+    playSound('tab');
+    jumpToChapter('04');
+  }, [jumpToChapter, playSound]);
 
   // Landmark Projects for Bento Showcase
   const landmarkProjects = useMemo(() => {
@@ -195,16 +190,13 @@ function Projects({ onSelectSandboxTab }) {
   }, []);
 
   return (
-    <section id="proyek" className="py-20 sm:py-24 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto scroll-mt-12 content-auto">
+    <section id="proyek" className="py-20 sm:py-24 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto scroll-mt-12 content-auto scroll-reveal">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-slate-200 dark:border-slate-800 pb-8">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 border-b border-slate-200 dark:border-[#1E293B] pb-8">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400"></span>
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
-              {t.projects.badgeVerified}
-            </span>
-          </div>
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-sky-400 block mb-1">
+            {t.projects.badgeVerified}
+          </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-space font-extrabold text-slate-900 dark:text-white tracking-tight">
             {t.projects.title}
           </h2>
@@ -220,7 +212,7 @@ function Projects({ onSelectSandboxTab }) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t.projects.searchPlaceholder}
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 focus:border-blue-600 dark:focus:border-blue-400 outline-none font-semibold text-xs md:text-sm text-slate-900 dark:text-white bg-white dark:bg-slate-900/80 shadow-sm transition-colors min-h-[44px]"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#1E293B] focus:border-blue-600 dark:focus:border-sky-400 outline-none font-semibold text-xs md:text-sm text-slate-900 dark:text-white bg-white dark:bg-[#111624] shadow-sm transition-colors min-h-[44px]"
           />
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
         </div>
@@ -233,7 +225,7 @@ function Projects({ onSelectSandboxTab }) {
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Landmark Systems Spotlight
             </span>
-            <span className="text-xs font-mono text-blue-600 dark:text-blue-400 font-semibold">
+            <span className="text-xs font-mono text-blue-600 dark:text-sky-400 font-semibold">
               Core Technical Showcase
             </span>
           </div>
@@ -242,13 +234,13 @@ function Projects({ onSelectSandboxTab }) {
             {landmarkProjects.map((project, idx) => (
               <div
                 key={project.id}
-                className={`p-6 sm:p-7 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-blue-500/70 dark:hover:border-blue-500/70 transition-all flex flex-col justify-between ${
+                className={`p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#111624] border border-slate-200 dark:border-[#1E293B] shadow-sm hover:border-blue-500/70 dark:hover:border-blue-500/70 transition-all flex flex-col justify-between ${
                   idx === 0 ? 'md:col-span-2' : 'md:col-span-1'
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-xs font-mono font-bold uppercase py-0.5 px-2.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
+                    <span className="text-xs font-mono font-bold uppercase py-0.5 px-2.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-sky-400 border border-blue-200 dark:border-blue-800">
                       {project.role}
                     </span>
                     <span className="text-xs font-mono font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 py-0.5 px-2 rounded border border-emerald-500/30">
@@ -268,7 +260,7 @@ function Projects({ onSelectSandboxTab }) {
                     {project.tech.map((tItem, tIdx) => (
                       <span
                         key={tIdx}
-                        className="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 py-0.5 px-2 rounded-md"
+                        className="text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-[#161D2E] py-0.5 px-2 rounded-md"
                       >
                         {tItem}
                       </span>
@@ -276,25 +268,25 @@ function Projects({ onSelectSandboxTab }) {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-[#1E293B]">
                   <button
                     onClick={() => {
                       playSound('modal');
                       setSelectedProjectForModal(project);
                     }}
-                    className="inline-flex items-center gap-1.5 text-xs font-space font-bold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 py-2.5 px-4 rounded-xl transition-all"
+                    className="inline-flex items-center gap-1.5 text-xs font-space font-bold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-[#161D2E] hover:bg-slate-200 dark:hover:bg-slate-700 py-2.5 px-4 rounded-xl transition-all"
                   >
-                    <Layers className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                    <Layers className="w-3.5 h-3.5 text-blue-600 dark:text-sky-400" />
                     <span>Deep-Dive Arsitektur</span>
                   </button>
 
                   {project.demoTab && (
                     <button
                       onClick={() => handleOpenSandbox(project.demoTab)}
-                      className="inline-flex items-center gap-1.5 text-xs font-space font-bold text-white bg-blue-600 hover:bg-blue-700 py-2.5 px-4 rounded-xl shadow-sm transition-all"
+                      className="inline-flex items-center gap-1.5 text-xs font-space font-bold text-white bg-blue-600 hover:bg-blue-700 dark:bg-cobalt dark:hover:bg-cobalt-hover py-2.5 px-4 rounded-xl shadow-sm transition-all"
                     >
                       <Play className="w-3.5 h-3.5 fill-white" />
-                      <span>Uji Demo Sandbox</span>
+                      <span>Buka di Journey</span>
                     </button>
                   )}
                 </div>
@@ -317,12 +309,12 @@ function Projects({ onSelectSandboxTab }) {
               className={`flex items-center gap-2 py-2 px-3.5 sm:px-4 rounded-xl text-xs sm:text-sm font-space font-semibold transition-all duration-150 min-h-[38px] ${
                 activeCategory === cat.id
                   ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-bold shadow-sm'
-                  : 'bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  : 'bg-white dark:bg-[#111624] border border-slate-200 dark:border-[#1E293B] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               <span>{cat.label}</span>
               <span className={`text-xs font-mono px-1.5 py-0.2 rounded-md ${
-                activeCategory === cat.id ? 'bg-white/20 dark:bg-slate-900/20 text-white dark:text-slate-900' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
+                activeCategory === cat.id ? 'bg-white/20 dark:bg-slate-900/20 text-white dark:text-slate-900' : 'bg-slate-100 dark:bg-[#161D2E] text-slate-500 dark:text-slate-400'
               }`}>
                 {cat.count}
               </span>
@@ -356,13 +348,13 @@ function Projects({ onSelectSandboxTab }) {
       </div>
 
       {filteredProjects.length === 0 && (
-        <div className="p-12 text-center bg-white dark:bg-slate-900/80 border border-dashed border-slate-300 dark:border-slate-700 rounded-2xl mt-6">
+        <div className="p-12 text-center bg-white dark:bg-[#111624] border border-dashed border-slate-300 dark:border-[#1E293B] rounded-2xl mt-6">
           <Search className="w-8 h-8 text-slate-400 mx-auto mb-2 opacity-50" />
           <h4 className="font-space font-bold text-slate-900 dark:text-white text-base mb-1">{t.projects.noMatchTitle}</h4>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">{t.projects.noMatchDesc}</p>
           <button
             onClick={() => { setActiveCategory('all'); setSearchQuery(''); }}
-            className="mt-4 text-xs font-mono font-bold text-blue-600 dark:text-blue-400 hover:underline min-h-[44px] inline-flex items-center"
+            className="mt-4 text-xs font-mono font-bold text-blue-600 dark:text-sky-400 hover:underline min-h-[44px] inline-flex items-center"
           >
             {t.projects.btnReset}
           </button>

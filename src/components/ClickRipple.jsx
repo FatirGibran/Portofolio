@@ -38,7 +38,7 @@ function ClickRipple() {
               top: `${r.y}px`,
               transform: 'translate(-50%, -50%)',
             }}
-            className="absolute w-12 h-12 rounded-full border-2 border-pastel-yellow dark:border-amber-400/80 bg-pastel-blue/20 dark:bg-sky-400/20 animate-ping duration-700 pointer-events-none"
+            className="absolute w-12 h-12 rounded-full border-2 border-blue-500/60 dark:border-sky-400/60 bg-blue-500/10 dark:bg-sky-400/15 animate-ping duration-700 pointer-events-none"
           />
           <span
             style={{
@@ -46,7 +46,7 @@ function ClickRipple() {
               top: `${r.y}px`,
               transform: 'translate(-50%, -50%)',
             }}
-            className="absolute w-6 h-6 rounded-full border border-pastel-blue-dark dark:border-sky-300 bg-transparent animate-ping duration-500 pointer-events-none"
+            className="absolute w-6 h-6 rounded-full border border-blue-600/80 dark:border-sky-300/80 bg-transparent animate-ping duration-500 pointer-events-none"
           />
         </React.Fragment>
       ))}

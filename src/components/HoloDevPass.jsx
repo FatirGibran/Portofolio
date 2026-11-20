@@ -78,10 +78,10 @@ function HoloDevPass({ isModal = false }) {
         <div className="flex items-center gap-2 mb-3 z-10">
           <button
             onClick={toggleFlip}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold font-space bg-white/90 dark:bg-slate-800/90 border border-pastel-peach dark:border-slate-700 text-pastel-navy dark:text-slate-200 shadow-pastel-sm hover:scale-105 active:scale-95 transition-all"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold font-space bg-white/90 dark:bg-[#111624]/90 border border-slate-200 dark:border-[#1E293B] text-slate-800 dark:text-slate-200 shadow-sm hover:scale-105 active:scale-95 transition-all"
             title="Balik Kartu 3D"
           >
-            <RotateCw className={`w-3.5 h-3.5 text-pastel-blue-dark dark:text-sky-400 transition-transform duration-500 ${isFlipped ? 'rotate-180' : ''}`} />
+            <RotateCw className={`w-3.5 h-3.5 text-blue-600 dark:text-sky-400 transition-transform duration-500 ${isFlipped ? 'rotate-180' : ''}`} />
             <span>{isFlipped ? 'Lihat Depan' : 'Balik Kartu (3D)'}</span>
           </button>
 
@@ -91,7 +91,7 @@ function HoloDevPass({ isModal = false }) {
                 playSound('modal');
                 setIsFullscreenOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold font-space bg-white/90 dark:bg-slate-800/90 border border-pastel-yellow dark:border-amber-400/40 text-pastel-navy dark:text-slate-200 shadow-pastel-sm hover:scale-105 active:scale-95 transition-all"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold font-space bg-white/90 dark:bg-[#111624]/90 border border-slate-200 dark:border-[#1E293B] text-slate-800 dark:text-slate-200 shadow-sm hover:scale-105 active:scale-95 transition-all"
               title="Perbesar Tampilan 3D"
             >
               <Maximize2 className="w-3.5 h-3.5 text-amber-500" />
@@ -160,7 +160,7 @@ function HoloDevPass({ isModal = false }) {
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden',
               }}
-              className="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-white via-[#FDFBF7] to-[#F3ECE0] dark:from-slate-800 dark:via-slate-850 dark:to-slate-900 border-2 border-pastel-yellow dark:border-amber-400/40 p-5 flex flex-col justify-between overflow-hidden"
+              className="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-white via-[#FDFBF7] to-[#F3ECE0] dark:from-[#111624] dark:via-[#161D2E] dark:to-[#090D16] border-2 border-slate-200 dark:border-blue-500/40 p-5 flex flex-col justify-between overflow-hidden"
             >
               {/* Top Header & Security Chip */}
               <div>
@@ -275,7 +275,7 @@ function HoloDevPass({ isModal = false }) {
                 WebkitBackfaceVisibility: 'hidden',
                 transform: 'rotateY(180deg)',
               }}
-              className="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-[#FAF6EE] via-white to-[#F0EAE1] dark:from-slate-900 dark:via-slate-850 dark:to-slate-800 border-2 border-pastel-blue dark:border-sky-500/50 p-5 flex flex-col justify-between overflow-hidden"
+              className="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-[#FAF6EE] via-white to-[#F0EAE1] dark:from-[#090D16] dark:via-[#111624] dark:to-[#161D2E] border-2 border-slate-200 dark:border-sky-500/40 p-5 flex flex-col justify-between overflow-hidden"
             >
               <div>
                 {/* Magnetic Stripe */}

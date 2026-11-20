@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
-import { ArrowRight, Play, ShieldCheck, Code2, Sparkles } from 'lucide-react';
+import { ArrowRight, Play, ShieldCheck, Code2 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import HoloDevPass from './HoloDevPass';
 import { STATS_CONFIG } from '../data/statsData';
@@ -39,31 +39,24 @@ function Hero() {
     <header id="hero" className="min-h-screen flex flex-col-reverse md:flex-row justify-center items-center gap-12 md:gap-16 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto pt-28 sm:pt-36 pb-16">
       <div className="flex-1 text-center md:text-left w-full">
         {/* Engineering Identity & Status Badge */}
-        <div className="inline-flex items-center justify-center md:justify-start gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 text-slate-800 dark:text-slate-200 text-xs font-mono font-semibold mb-6 shadow-sm">
-          <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse"></span>
+        <div className="inline-flex items-center justify-center md:justify-start gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-[#111624] border border-slate-200 dark:border-[#1E293B] text-slate-800 dark:text-slate-200 text-xs font-mono font-medium mb-6 shadow-sm">
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-[#0066FF]" />
           <span>{t.hero.statusBadge}</span>
         </div>
         
-        <h1 className="text-4xl sm:text-6xl md:text-6xl lg:text-7xl font-space font-extrabold text-slate-900 dark:text-white leading-[1.08] tracking-tight mb-4">
+        <h1 className="text-4xl sm:text-6xl md:text-6xl lg:text-7xl font-space font-extrabold text-slate-900 dark:text-white leading-[1.06] tracking-tight mb-4">
           {t.hero.greeting} <br />
-          <span className="text-blue-600 dark:text-blue-400">
+          <span className="text-blue-600 dark:text-sky-400">
             {t.hero.name}
           </span>
         </h1>
         
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-6">
+        {/* Editorial Role Typography */}
+        <div className="text-xs sm:text-sm font-mono font-medium tracking-wide text-slate-600 dark:text-slate-300 mb-6 flex flex-wrap items-center gap-x-2.5 gap-y-1 justify-center md:justify-start">
           {roles.slice(0, 3).map((role, rIdx) => (
-            <span
-              key={rIdx}
-              className={`text-xs font-mono font-bold uppercase tracking-wider py-1 px-3 rounded-lg border ${
-                rIdx === 0
-                  ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 border-blue-200 dark:border-blue-900/60'
-                  : rIdx === 1
-                  ? 'text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-950/60 border-sky-200 dark:border-sky-900/60'
-                  : 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-900/60'
-              }`}
-            >
-              {role}
+            <span key={rIdx} className="inline-flex items-center gap-2">
+              {rIdx > 0 && <span className="text-slate-300 dark:text-slate-700">•</span>}
+              <span className="text-slate-800 dark:text-slate-200">{role}</span>
             </span>
           ))}
         </div>
@@ -75,9 +68,9 @@ function Hero() {
         {/* Action CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start mb-10 w-full sm:w-auto">
           <a
-            href="#simulator"
+            href="#the-builders-journey"
             onClick={() => playSound('tab')}
-            className="inline-flex items-center justify-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-6 sm:px-8 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 text-sm sm:text-base group min-h-[48px]"
+            className="inline-flex items-center justify-center gap-2.5 bg-blue-600 hover:bg-blue-700 dark:bg-cobalt dark:hover:bg-cobalt-hover text-white font-bold py-3.5 px-6 sm:px-8 rounded-xl shadow-md hover:shadow-cobalt-glow transition-all duration-200 transform hover:-translate-y-0.5 text-sm sm:text-base group min-h-[48px]"
           >
             <Play className="w-4 h-4 fill-white flex-shrink-0 group-hover:scale-110 transition-transform" />
             <span>{t.hero.ctaDemos}</span>
@@ -85,24 +78,24 @@ function Hero() {
           <a
             href="#proyek"
             onClick={() => playSound('click')}
-            className="inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 font-bold py-3.5 px-6 sm:px-8 rounded-xl shadow-sm hover:border-blue-500 dark:hover:border-blue-500/60 transition-all duration-200 transform hover:-translate-y-0.5 text-sm sm:text-base min-h-[48px]"
+            className="inline-flex items-center justify-center gap-2 bg-white dark:bg-[#111624] border border-slate-200 dark:border-[#1E293B] text-slate-800 dark:text-slate-100 font-bold py-3.5 px-6 sm:px-8 rounded-xl shadow-sm hover:border-blue-500 dark:hover:border-blue-500/60 transition-all duration-200 transform hover:-translate-y-0.5 text-sm sm:text-base min-h-[48px]"
           >
             <span>{t.hero.ctaProjects}</span>
-            <ArrowRight className="w-4 h-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+            <ArrowRight className="w-4 h-4 text-blue-600 dark:text-sky-400 flex-shrink-0" />
           </a>
         </div>
 
         {/* Quick Technical Specs Banner */}
-        <div className="grid grid-cols-3 gap-3 max-w-md mx-auto md:mx-0 pt-6 border-t border-slate-200 dark:border-slate-800/80">
-          <div className="bg-white dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 text-center transition-all hover:border-slate-300 dark:hover:border-slate-700">
-            <span className="block font-space font-extrabold text-xl sm:text-2xl text-blue-600 dark:text-blue-400">{projectCount}</span>
+        <div className="grid grid-cols-3 gap-3 max-w-md mx-auto md:mx-0 pt-6 border-t border-slate-200 dark:border-[#1E293B]">
+          <div className="bg-white dark:bg-[#111624] p-3 rounded-xl border border-slate-200/80 dark:border-[#1E293B] text-center transition-all hover:border-slate-300 dark:hover:border-slate-700">
+            <span className="block font-space font-extrabold text-xl sm:text-2xl text-blue-600 dark:text-sky-400">{projectCount}</span>
             <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">{t.hero.statProjects}</span>
           </div>
-          <div className="bg-white dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 text-center transition-all hover:border-slate-300 dark:hover:border-slate-700">
-            <span className="block font-space font-extrabold text-xl sm:text-2xl text-amber-600 dark:text-amber-400">6 Demo</span>
+          <div className="bg-white dark:bg-[#111624] p-3 rounded-xl border border-slate-200/80 dark:border-[#1E293B] text-center transition-all hover:border-slate-300 dark:hover:border-slate-700">
+            <span className="block font-space font-extrabold text-xl sm:text-2xl text-amber-600 dark:text-amber-400">7 Bab</span>
             <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">{t.hero.statDemos}</span>
           </div>
-          <div className="bg-white dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 text-center transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <div className="bg-white dark:bg-[#111624] p-3 rounded-xl border border-slate-200/80 dark:border-[#1E293B] text-center transition-all hover:border-slate-300 dark:hover:border-slate-700">
             <span className="block font-space font-extrabold text-xl sm:text-2xl text-emerald-600 dark:text-emerald-400">{coverageVal}%</span>
             <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">{t.hero.statCoverage}</span>
           </div>
@@ -112,7 +105,7 @@ function Hero() {
       {/* Profile Area: Interactive Toggle between Photo and 3D Holographic Developer Pass */}
       <div className="flex-1 flex flex-col justify-center items-center w-full">
         {/* Interactive View Switcher Pill */}
-        <div className="inline-flex items-center gap-1 p-1 bg-slate-100 dark:bg-slate-800/80 rounded-full border border-slate-200 dark:border-slate-700 mb-5 shadow-sm">
+        <div className="inline-flex items-center gap-1 p-1 bg-slate-100 dark:bg-[#111624] rounded-full border border-slate-200 dark:border-[#1E293B] mb-5 shadow-sm">
           <button
             onClick={() => {
               playSound('click');
@@ -120,7 +113,7 @@ function Hero() {
             }}
             className={`px-4 py-1.5 rounded-full text-xs font-space font-bold transition-all ${
               heroView === 'photo'
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
+                ? 'bg-white dark:bg-[#161D2E] text-slate-900 dark:text-white shadow-sm border border-slate-200/50 dark:border-slate-700/50'
                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -133,11 +126,10 @@ function Hero() {
             }}
             className={`px-4 py-1.5 rounded-full text-xs font-space font-bold transition-all flex items-center gap-1.5 ${
               heroView === 'badge'
-                ? 'bg-blue-600 text-white shadow-sm'
+                ? 'bg-blue-600 dark:bg-cobalt text-white shadow-sm'
                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
             <span>Dev Pass 3D</span>
           </button>
         </div>
@@ -154,7 +146,7 @@ function Hero() {
                 setHeroView('badge');
               }}
               title="Klik untuk membuka 3D Developer Pass"
-              className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 p-2.5 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200/80 dark:border-slate-800 shadow-xl group cursor-pointer transition-all duration-300 hover:border-blue-500/50"
+              className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 p-2.5 rounded-3xl bg-white dark:bg-[#111624] border-2 border-slate-200/80 dark:border-[#1E293B] shadow-xl group cursor-pointer transition-all duration-300 hover:border-blue-500/50"
             >
               <img
                 src="Image/fotomuka.jpg"
@@ -170,11 +162,11 @@ function Hero() {
                 }}
               />
 
-              <div className="absolute -bottom-2 -left-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 py-1 px-3 rounded-xl shadow-md flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">
+              <div className="absolute -bottom-2 -left-2 bg-white dark:bg-[#161D2E] border border-slate-200 dark:border-[#1E293B] py-1 px-3 rounded-xl shadow-md flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
                 <span>{t.hero.floatingPrivacy}</span>
               </div>
-              <div className="absolute -top-2 -right-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 py-1 px-3 rounded-xl shadow-md flex items-center gap-1.5 text-xs font-mono font-bold text-blue-600 dark:text-blue-400">
+              <div className="absolute -top-2 -right-2 bg-white dark:bg-[#161D2E] border border-slate-200 dark:border-[#1E293B] py-1 px-3 rounded-xl shadow-md flex items-center gap-1.5 text-xs font-mono font-bold text-blue-600 dark:text-sky-400">
                 <Code2 className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>{t.hero.floatingStack}</span>
               </div>
@@ -185,10 +177,9 @@ function Hero() {
                 playSound('tab');
                 setHeroView('badge');
               }}
-              className="mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer group"
+              className="mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-sky-400 transition-colors cursor-pointer group"
             >
-              <Sparkles className="w-3.5 h-3.5 text-amber-500 group-hover:rotate-12 transition-transform" />
-              <span>Buka Dev Pass 3D Interaktif</span>
+              <span>Buka Dev Pass 3D Interaktif &rarr;</span>
             </button>
           </div>
         )}

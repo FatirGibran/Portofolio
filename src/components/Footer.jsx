@@ -36,9 +36,9 @@ function Footer() {
   ];
 
   return (
-    <footer id="kontak" className="bg-white dark:bg-[#0E131F] border-t border-slate-200 dark:border-slate-800 py-16 sm:py-20 px-4 sm:px-8 md:px-12 text-center mt-20 relative z-20 content-auto">
+    <footer id="kontak" className="bg-white dark:bg-[#090D16] border-t border-slate-200 dark:border-[#1E293B] py-16 sm:py-20 px-4 sm:px-8 md:px-12 text-center mt-20 relative z-20 content-auto scroll-reveal">
       <div className="max-w-4xl mx-auto flex flex-col items-center">
-        <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 block mb-2">
+        <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-sky-400 block mb-2">
           Contact & Open Collaborations
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-space font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
@@ -57,7 +57,7 @@ function Footer() {
               href={link.href}
               target={link.label !== 'Email' ? '_blank' : undefined}
               rel={link.label !== 'Email' ? 'noopener noreferrer' : undefined}
-              className="flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 rounded-xl font-bold font-space text-xs sm:text-sm text-slate-800 dark:text-slate-200 shadow-sm transition-all duration-150 transform hover:-translate-y-0.5 min-h-[44px]"
+              className="flex items-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 border border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#111624] hover:bg-slate-100 dark:hover:bg-[#161D2E] hover:border-slate-300 dark:hover:border-slate-700 rounded-xl font-bold font-space text-xs sm:text-sm text-slate-800 dark:text-slate-200 shadow-sm transition-all duration-150 transform hover:-translate-y-0.5 min-h-[44px]"
             >
               {link.icon}
               <span>{link.label}</span>
@@ -66,7 +66,7 @@ function Footer() {
         </div>
 
         {/* Bottom Credits */}
-        <div className="w-full pt-8 border-t border-slate-100 dark:border-slate-800/80 text-xs font-mono text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-3">
+        <div className="w-full pt-8 border-t border-slate-100 dark:border-[#1E293B] text-xs font-mono text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-3">
           <div className="flex items-center gap-1.5 justify-center">
             <span>{t.footer.madeWith}</span>
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />

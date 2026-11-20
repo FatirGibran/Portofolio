@@ -14,7 +14,7 @@ function Keterampilan() {
   };
 
   return (
-    <section id="keterampilan" className="py-20 sm:py-24 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto scroll-mt-12 content-auto">
+    <section id="keterampilan" className="py-20 sm:py-24 px-4 sm:px-8 md:px-12 max-w-6xl mx-auto scroll-mt-12 content-auto scroll-reveal">
       <div className="text-center md:text-left mb-10 sm:mb-14">
         <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 block mb-1">
           Technical Stack & Capability Matrix
@@ -31,21 +31,21 @@ function Keterampilan() {
         {SKILL_ITEMS.map((group, gIdx) => (
           <div
             key={gIdx}
-            className="border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-7 bg-white dark:bg-slate-900/80 shadow-sm hover:border-blue-500/50 dark:hover:border-blue-500/50 transition-all duration-200"
+            className="border border-slate-200 dark:border-[#1E293B] rounded-2xl p-6 sm:p-7 bg-white dark:bg-[#111624] shadow-sm hover:border-blue-500/50 dark:hover:border-blue-500/50 transition-all duration-200"
           >
-            <h3 className="text-base sm:text-lg font-bold font-space text-slate-900 dark:text-white flex items-center gap-2.5 pb-4 mb-5 border-b border-slate-100 dark:border-slate-800">
+            <h3 className="text-base sm:text-lg font-bold font-space text-slate-900 dark:text-white flex items-center gap-2.5 pb-4 mb-5 border-b border-slate-100 dark:border-[#1E293B]">
               {iconMap[group.groupKey]}
               {t.skills[group.groupKey]}
             </h3>
 
             <div className="flex flex-col gap-4">
               {group.skills.map((skill, sIdx) => (
-                <div key={sIdx} className="flex flex-col gap-1 pb-3 border-b border-slate-50 dark:border-slate-800/60 last:border-0 last:pb-0">
+                <div key={sIdx} className="flex flex-col gap-1 pb-3 border-b border-slate-50 dark:border-[#1E293B]/60 last:border-0 last:pb-0">
                   <div className="flex justify-between items-start gap-2">
                     <span className="text-sm font-bold font-space text-slate-900 dark:text-white">
                       {skill.name}
                     </span>
-                    <span className="text-[11px] font-mono font-semibold py-0.5 px-2 rounded bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400 border border-slate-200/80 dark:border-slate-700/80 flex-shrink-0">
+                    <span className="text-[11px] font-mono font-semibold py-0.5 px-2 rounded bg-slate-100 dark:bg-[#161D2E] text-blue-600 dark:text-sky-400 border border-slate-200/80 dark:border-[#1E293B] flex-shrink-0">
                       {skill.badge}
                     </span>
                   </div>
