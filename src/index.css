@@ -45,32 +45,10 @@
     perspective: 1000px;
   }
 
-  .content-auto {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 800px;
-  }
-
-  .cyber-glass {
-    background: rgba(255, 255, 255, 0.78);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-  }
-
-  .dark .cyber-glass {
-    background: rgba(9, 13, 22, 0.78);
-  }
-
-  /* Scroll-reveal: elements start hidden, animate when .is-visible is added */
+  /* Section rendering: always full visibility with natural browser layout */
   .scroll-reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .scroll-reveal.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 
   /* Stagger children: each nth child gets a slight delay */

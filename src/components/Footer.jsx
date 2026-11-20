@@ -36,7 +36,7 @@ function Footer() {
   ];
 
   return (
-    <footer id="kontak" className="bg-white dark:bg-[#090D16] border-t border-slate-200 dark:border-[#1E293B] py-16 sm:py-20 px-4 sm:px-8 md:px-12 text-center mt-20 relative z-20 content-auto scroll-reveal">
+    <footer id="kontak" className="bg-white dark:bg-[#090D16] border-t border-slate-200 dark:border-[#1E293B] py-16 sm:py-20 px-4 sm:px-8 md:px-12 text-center mt-20 relative z-20">
       <div className="max-w-4xl mx-auto flex flex-col items-center">
         <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 dark:text-sky-400 block mb-2">
           Contact & Open Collaborations
